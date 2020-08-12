@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<!--扫描controller下面的所有控制器-->
+    <context:component-scan base-package="com.we.controller"></context:component-scan>
+    <!--    使用注释来配置Springmvc-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+<!--    放行静态资源-->
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"></mvc:resources>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"></mvc:resources>
+    <mvc:resources mapping="/images/**" location="/WEB-INF/images/"></mvc:resources>
+    <mvc:resources mapping="/upload/**" location="/upload/"></mvc:resources>
+    <mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/"></mvc:resources>
+<!--    <mvc:resources mapping="/My97DatePicker/**" location="/WEB-INF/My97DatePicker/"></mvc:resources>-->
+<!--jsp视图解析器，把返回的视图加工-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"></property> <!--前缀-->
+        <property name="suffix" value=".jsp"></property> <!--后缀-->
+        <property name="order" value="1"></property>
+    </bean>
+
+    <!-- html视图解析器 -->
+    <!-- 配置freeMarker的模板路径 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath">
+            <value>/WEB-INF/</value>  <!--前缀-->
+        </property>
+        <property name="defaultEncoding">
+            <value>utf-8</value>
+        </property>
+    </bean>
+    <!-- 配置freeMarker视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="contentType" value="text/html; charset=utf-8"/>
+        <property name="suffix" value=".html" />  <!--后缀-->
+        <property name="order" value="0"/>  <!--解析器的优先级,数字越小优先级越高-->
+    </bean>
+<!--配置文件解析器-->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>
+
+
+</beans>
