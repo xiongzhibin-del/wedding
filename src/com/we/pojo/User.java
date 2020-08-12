@@ -8,7 +8,7 @@ public class User implements Serializable {
     private int u_id;//用户编号
     private String uname;//帐号
     private String upassword;//密码
-    private long phone;//手机号码
+    private String phone;//手机号码
     private String e_mail;//邮箱地址
     private String realname;//用户真实姓名
     private char sex;//用户性别
@@ -45,11 +45,11 @@ public class User implements Serializable {
         this.upassword = upassword;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

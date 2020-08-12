@@ -6,4 +6,5 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
 <!--把service下的所有类交给spring加载-->
     <context:component-scan base-package="com.we.service"></context:component-scan>
+
 </beans>
