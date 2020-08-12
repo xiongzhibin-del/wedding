@@ -14,6 +14,16 @@
     <link href="css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%
+    String msg = (String) request.getAttribute("msg");
+    if(msg!=null){
+%>
+<script>
+    alert("<%=msg%>");
+</script>
+<%
+    }
+%>
 
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
@@ -65,9 +75,9 @@
                         <!--验证码-->
                         <!--验证码end-->
                         <!--报错信息-->
-                        <div class="error-mess" >
-                            <span id="error-message"> <span id="Label1">${msg}</span></span>
-                        </div>
+<%--                        <div class="error-mess" >--%>
+<%--                            <span id="error-message"> <span id="Label1">${msg}</span></span>--%>
+<%--                        </div>--%>
                         <!--报错信息end-->
                         <!--其他选项-->
                         <div class="other_input">
