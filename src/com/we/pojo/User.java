@@ -1,14 +1,14 @@
 package com.we.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class User implements Serializable {
 
     private int u_id;//用户编号
     private String uname;//帐号
     private String upassword;//密码
-    private String phone;//手机号码
+    private String mobile;//手机号码
     private String e_mail;//邮箱地址
     private String realname;//用户真实姓名
     private char sex;//用户性别
@@ -19,6 +19,21 @@ public class User implements Serializable {
     private int landine;//座机
 
     public User() {
+    }
+
+    public User(int u_id, String uname, String upassword, String mobile, String e_mail, String realname, char sex, Date udate, String uregion, String usite, int ucoding, int landine) {
+        this.u_id = u_id;
+        this.uname = uname;
+        this.upassword = upassword;
+        this.mobile = mobile;
+        this.e_mail = e_mail;
+        this.realname = realname;
+        this.sex = sex;
+        this.udate = udate;
+        this.uregion = uregion;
+        this.usite = usite;
+        this.ucoding = ucoding;
+        this.landine = landine;
     }
 
     public int getU_id() {
@@ -45,12 +60,12 @@ public class User implements Serializable {
         this.upassword = upassword;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getE_mail() {
@@ -123,7 +138,7 @@ public class User implements Serializable {
                 "u_id=" + u_id +
                 ", uname='" + uname + '\'' +
                 ", upassword='" + upassword + '\'' +
-                ", phone=" + phone +
+                ", mobile='" + mobile + '\'' +
                 ", e_mail='" + e_mail + '\'' +
                 ", realname='" + realname + '\'' +
                 ", sex=" + sex +

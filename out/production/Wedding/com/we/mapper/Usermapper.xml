@@ -9,8 +9,8 @@
         <if test="uname!=null and uname!=''">
             and uname=#{uname}
         </if>
-        <if test="phone!=null and phone!=''">
-            and phone=#{phone}
+        <if test="mobile!=null and mobile!=''">
+            and mobile=#{mobile}
         </if>
         <if test="e_mail!=null and e_mail!=''">
             and  e_mail=#{e_mail}

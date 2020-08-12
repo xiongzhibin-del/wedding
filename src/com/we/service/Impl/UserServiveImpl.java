@@ -13,7 +13,7 @@ public class UserServiveImpl implements UserService {
     @Override
     public User loginUser(User user) {
         //测试代码
-        System.out.println(user.getPhone());
+
         System.out.println(user.getUname());
         System.out.println(user.getE_mail());
         System.out.println(user.getUpassword());

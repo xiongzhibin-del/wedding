@@ -32,7 +32,7 @@ public class UserController {
         if(uname.matches(ph)){//手机号登录
             /*如果匹配上则将用户名置空，并将username中的值写到setPhone()方法中*/
             user.setUname(null);
-            user.setPhone(uname);
+            user.setMobile(uname);
             //测试是否更改
 //            System.out.println("phone"+user.getPhone());
         }else if(uname.matches(em)){
