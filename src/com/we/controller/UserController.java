@@ -20,7 +20,7 @@ public class UserController {
 
 @RequestMapping(value = "/loginUser",method = RequestMethod.POST)
     public String loginUser( User user, Model model,HttpServletRequest request){
-    System.out.println("添加了一些数据123");
+    System.out.println("添加了一些数据1234");
         HttpSession session = request.getSession();
         String uname = user.getUname();
         String upassword = user.getUpassword();
