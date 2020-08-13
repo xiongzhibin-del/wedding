@@ -3,418 +3,21 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-    <base href="<%=basePath%>">
 <html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
 <head>
+    <base href="<%=basePath%>">
     <meta charset="utf-8"/>
-    <!--/*技术支持，小庄602842076     验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*https://shop116998991.taobao.com/*/
-    /*https://shop116998991.taobao.com/*/
-    /*https://shop116998991.taobao.com/*/-->
     <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
+
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
-    <title>个人中心 - 修改资料</title>
-    <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
+    <title>个人中心 - 首页</title>
+    <link href="css/dr.css?v=1.3.5.0" type="text/css" rel="stylesheet" />
     <link href="css/member.css?v=1.3.6.0" type="text/css" rel="stylesheet" />
-    <script src="js/year_month_day.js" type="text/javascript"></script>
-    <script type="text/javascript" language="javascript">
-        //市数据加载事件
-        var CityDataLoadEvent = function () { };
-        var DistrictDataLoadEvent = function () { };
-        $(function () {
-            //省下拉框ID
-            var province = "#province";
-            var city = "#city";
-            var district = "#district";
-            //加载省信息
-//            $.get("/nAPI/AddressInfo.ashx?action=province", function (data) {
-//                $(data).each(function () {
-//                    bindDdlData(province, this);
-//                });
-//                var str = "";
-//                setAddress(str);
-//            });
-            //省下拉框onchange事件
-            $(province).change(function () {
-                var dataLoad = function (data) {
-                    $(city + " option:not(:first)").remove();
-                    $(data).each(function () {
-                        bindDdlData(city, this);
-                    });
-                    CityDataLoadEvent();
-                };
-
-                $.get("/nAPI/AddressInfo.ashx?action=city&code=" + $(this).val(), function (data) {
-                    dataLoad(data);
-
-                });
-            });
-            //市下拉框onchange事件
-            $(city).change(function () {
-                var dataLoad = function (data) {
-                    $(district + " option:not(:first)").remove();
-                    $(data).each(function () {
-                        bindDdlData(district, this);
-                    });
-                    DistrictDataLoadEvent();
-                };
-
-                $.get("/nAPI/AddressInfo.ashx?action=district&code=" + $(this).val(), function (data) {
-                    dataLoad(data);
-
-                });
-
-            });
-
-            $("#nicname").focus(function () {
-                $("#shrid").hide();
-                $("#shry").hide();
-            });
-            $("#telephone").focus(function () {
-                $("#zjid").hide();
-                $("#zjy").hide();
-            });
-            $("#mobile").focus(function () {
-                $("#sjid").hide();
-                $("#sjy").hide();
-            });
-            $("#postcode").focus(function () {
-                $("#postid").hide();
-                $("#posty").hide();
-            });
-            $("#realName").focus(function () {
-                $("#realId").hide();
-                $("#realy").hide();
-            });
-            $("#street").focus(function () {
-                $("#streid").hide();
-                $("#strey").hide();
-            });
-
-            var temail = $("#sp_email").html();
-            if (temail == "") {
-                $("#div_email").show();
-            }
-            else {
-                $("#div_email").hide();
-            }
-
-            $("#txtEmail").blur(function () {
-                var nickname = $("#txtEmail").val();
-                if (nickname == "") {
-                    $("#shrwrong1").show();
-                    $("#shrwrong1").text("请输入邮箱！");
-                    $("#shrid1").show();
-                    $("#shry1").hide();
-                    return false;
-                } else {
-                    $("#shrwrong1").hide();
-                    $("#shrid1").hide();
-                    $("#shry1").show();
-                }
-            });
-
-            $("#nicname").blur(function () {
-                var nickname = $("#nicname").val();
-                if (nickname == "") {
-                    $("#shrwrong").text("请输入昵称！");
-                    $("#shrid").show();
-                    return false;
-                } else {
-                    $("#shry").show();
-
-                }
-            });
-
-            function isEmail(strEmail) {
-                if (strEmail.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
-                    return true;
-                else {
-                    return false;
-                }
-            }
-
-            $("#mobile").blur(function () {
-                var tel = $("#mobile").val();
-                if (tel == "") {
-                    $("#sjwrong").text("请输入手机号！");
-                    $("#sjid").show();
-                    return false;
-                } else {
-                    if (!checkTel(tel)) {
-                        $("#sjwrong").text("手机号格式不正确！");
-                        $("#sjid").show();
-                    } else {
-                        $("#sjy").show();
-                    }
-
-
-                }
-            });
-            $("#postcode").blur(function () {
-                var post = $("#postcode").val();
-                if (!checkcode(post)) {
-                    $("#postwrong").text("请输入正确的邮编！");
-                    $("#postid").show();
-                    return false;
-                } else {
-                    $("#posty").show();
-
-                }
-            });
-            $("#street").blur(function () {
-                var stree = $("#street").val();
-                if (stree == "") {
-                    $("#strewrong").text("请输入内容！");
-                    $("#streid").show();
-                    $("#strey").hide();
-                    return false;
-                }
-                if (stree.length > 250) {
-                    $("#strewrong").text("输入内容过长！");
-                    $("#streid").show();
-                    $("#strey").hide();
-                } else {
-                    $("#strey").show();
-                }
-            });
-            $("#realName").blur(function () {
-                var realName = $("#realName").val();
-                if (realName == "") {
-                    $("#realwrong").text("请输入姓名！");
-                    $("#realId").show();
-                    return false;
-                } else {
-                    $("#realy").show();
-
-                }
-            });
-            $("#btnsave").click(function () {
-                var email = $("#sp_email").html();
-                var IsUpemail = "0";
-                if (email == "") {
-                    email = $("#txtEmail").val();
-                    if (!isEmail($("#txtEmail").val())) {
-                        alert("邮箱不正确!");
-                        return false;
-                    }
-                    var IsUpemail = "1";
-                }
-                var realName = $("#realName").val();
-                var gender = $("input:checked").val();
-                var year = $("#selYear option:selected").text();
-                var month = $("#selMonth option:selected").text();
-                var day = $("#selDay option:selected").text();
-                var pro = $("#province option:selected").text();
-                var city = $("#city option:selected").text();
-                var district = $("#district option:selected").text();
-                var address = $("#street").val();
-                var post = $("#postcode").val();
-                var tel = $("#mobile").val();
-                var photo = $("#telephone").val();
-                var nickname = $("#nicname").val();
-
-                if (email == "") {
-                    $("#shrwrong1").text("请输入邮箱！");
-                    $("#shrid1").show();
-                    return false;
-                }
-                else {
-                    $("#shry1").show();
-                }
-
-                if (nickname == "") {
-                    $("#shrwrong").text("请输入昵称！");
-                    $("#shrid").show();
-                    return false;
-                } else {
-                    $("#shry").show();
-
-                }
-                if (realName == "") {
-                    $("#realwrong").text("请输入姓名！");
-                    $("#realId").show();
-                    return false;
-                } else {
-                    $("#realy").show();
-
-                }
-                if (!checkcode(post)) {
-                    $("#postwrong").text("请输入正确的邮编！");
-                    $("#postid").show();
-                    return false;
-                } else {
-                    $("#postid").hide();
-                    $("#posty").show();
-
-                }
-                if (address == "") {
-                    $("#strewrong").text("请输入内容！");
-                    $("#streid").show();
-                    return false;
-                }
-                if (district == "请选择区县") {
-                    $("#strewrong").text("请选择区县！");
-                    $("#strey").hide();
-                    $("#streid").show();
-                    return false;
-                }
-                if (address.length > 250) {
-                    $("#strewrong").text("输入内容过长！");
-                    $("#streid").show();
-                    return false;
-                } else {
-                    $("#strey").show();
-                }
-                if (tel == "") {
-                    $("#sjwrong").text("请输入手机号！");
-                    $("#sjid").show();
-                    return false;
-                } else {
-                    if (!checkTel(tel)) {
-                        $("#sjwrong").text("手机号格式不正确！");
-                        $("#sjid").show();
-                    } else {
-                        $("#sjy").show();
-                    }
-                }
-
-                $.post("/API/MemberAPI.ashx", {
-                    action: 'update',
-                    email: email,
-                    IsUpemail: IsUpemail,
-                    nickname: nickname,
-                    realName: realName,
-                    gender: gender,
-                    year: year,
-                    month: month,
-                    day: day,
-                    pro: pro,
-                    city: city,
-                    dis: district,
-                    address: address,
-                    post: post,
-                    tel: tel,
-                    photo: photo
-                }, function (data) {
-                    if (data == "ok") {
-                        alert("保存成功！");
-                        window.location.reload();
-                        return false;
-                    }
-                    if (data == "false") {
-                        alert("保存失败！");
-                        return false;
-                    }
-                    if (data == "repeat") {
-                        alert("手机号已注册过!");
-                        return false;
-                    }
-                    if (data == "erepeat") {
-                        alert("邮箱已注册过!");
-                        return false;
-                    }
-                });
-            });
-
-
-        });
-
-        function bindDdlData(cid, data) {
-            $(cid).append($("<option value=\"" + data.code + "\">" + data.name + "</option>"));
-        }
-        CityDataLoadEvent = function () {
-            $("#city option").each(function () {
-                if (data.city.indexOf($(this).text()) != -1) {
-                    $("#city").val($(this).val());
-                    $("#city").change();
-                }
-            });
-        };
-        DistrictDataLoadEvent = function () {
-            $("#district option").each(function () {
-                if (data.city.indexOf($(this).text()) != -1) {
-                    $("#district").val($(this).val());
-                }
-            });
-        };
-
-
-
-
-
-        $(function () {
-            var selYear = window.document.getElementById("selYear");
-            var selMonth = window.document.getElementById("selMonth");
-            var selDay = window.document.getElementById("selDay");
-            // 新建一个DateSelector类的实例，将三个select对象传进去
-            var date = '';
-            var year = '';
-            var mon = '';
-            var day = '';
-            if (date != '') {
-                var d = date.split("-");
-                year = d[0];
-                mon = d[1];
-                day = d[2];
-            } else {
-                year = 2014;
-                mon = 12;
-                day = 12;
-            }
-
-            new DateSelector(selYear, selMonth, selDay, year, mon, day);
-        });
-        function setAddress(data) {
-
-            $("#province option").each(function () {
-                if (data.indexOf($(this).text()) != -1) {
-                    $("#province").val($(this).val());
-                    $("#province").change();
-                }
-            });
-            CityDataLoadEvent = function () {
-                $("#city option").each(function () {
-                    if (data.indexOf($(this).text()) != -1) {
-                        $("#city").val($(this).val());
-                        $("#city").change();
-                    }
-                });
-            };
-            DistrictDataLoadEvent = function () {
-                $("#district option").each(function () {
-                    if (data.indexOf($(this).text()) != -1) {
-                        $("#district").val($(this).val());
-                        var address = "";
-                        $("#street").val(address.substr(address.lastIndexOf($(this).text())).replace($(this).text(),""));
-                    }
-                });
-            };
-        }
-        //
-        function checkTel(tel) {
-            var mobile = /^1[3-8]+\d{9}$/;
-            return mobile.test(tel);
-        }
-        //
-        function checkcode(zipcode) {
-            var MyNumber = /^[0-9]{1}[0-9]{5}$/;
-            return MyNumber.test(zipcode);
-
-        }
-        function checkphone(tel) {
-            var mobile = /^(\d{3,4}-?)?\d{7,9}$/;
-            return mobile.test(tel);
-        }
-    </script>
+    <script type="text/javascript" src="js/member.js"></script>
 </head>
 <body>
-<form id="aspnetForm" action="member_info.html" method="post" name="aspnetForm">
+<form id="aspnetForm" action="member_index.html" method="post" name="aspnetForm">
 
     <div>
 
@@ -529,7 +132,7 @@
                 <!--导航的右边-->
                 <ul class="nav-right fr">
                     <li class="lipos"><em></em><a href="active.html">最新活动</a> <i class="icon"></i>
-                        <div class="theright_div">
+                        <div class="theright_div" style="display: none;">
                             <div class="navdiv_top">
                                 <div class="navright_div fl">
                                     <h3> 小时代4陆烧林萧求婚钻戒， </h3>
@@ -553,160 +156,218 @@
                 if (window.confirm('确定退出吗？')) {
 
                     $.get("/nAPI/QuitExit.ashx", function (data) {
-                        window.location.href = "/";
+                        window.location.href = "login";
                     });
                 }
             }
         </script>
         <div class="cort">
-            <!--中间-->
             <div class="cort">
-                <!--内容-->
-                <div class="cmain mb_back">
-                    <div class="zbk_top spalid">
-                        <span>您当前的位置：</span>
-                        <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">Darry Ring</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="member_index.html">我的DR</a> </span><span> <em>&gt;</em> </span><span> <span>个人信息</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
-                    </div>
-                    <!--中间内容-->
-                    <div class="member_cort">
-                        <!--左边树-->
-                        <div class="member_cort-left fl">
-                            <!--我的DR-->
-                            <div class="member_cortleft-tittle">
-                                <i class="mb_home"></i>
-                                <a rel="nofollow" href="member_index.html">我的DR</a>
-                            </div>
-                            <!--我的DR end-->
-                            <ul class="member_cort-ul">
-                                <li> <h3> -订单中心-</h3>
-                                    <ul class="member_ul-dr">
-                                        <li id="ctl00_content_treeId_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
-                                        <li id="ctl00_content_treeId_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
-                                        <li id="ctl00_content_treeId_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
-                                        <li id="ctl00_content_treeId_collect"><a rel="nofollow" href="member_collect.html">我的收藏</a></li>
-                                        <li class="no_border" id="ctl00_content_treeId_yuyue"><a rel="nofollow" href="/member/myappointment.html">我的预约</a></li>
-                                    </ul> </li>
-                                <li> <h3> -售后服务-</h3>
-                                    <ul class="member_ul-dr">
-                                        <li id="ctl00_content_treeId_salAfter"><a rel="nofollow" href="/member/aftersale.html">售后办理</a></li>
-                                    </ul> </li>
-                                <li> <h3> -帐户管理-</h3>
-                                    <ul class="member_ul-dr">
-                                        <li class="speacil_color" id="ctl00_content_treeId_myinfo"><a rel="nofollow" href="member_info.html">个人信息</a></li>
-                                        <li id="ctl00_content_treeId_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
-                                        <li id="ctl00_content_treeId_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
-                                        <li id="ctl00_content_treeId_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
-                                        <li id="ctl00_content_treeId_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>
-                                        <li class="no_border" id="ctl00_content_treeId_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
-                                    </ul> </li>
-                            </ul>
+                <div class="tobuy cmain">
+                    <div class="cmain mb_back">
+                        <div class="zbk_top spalid">
+                            <span>您当前的位置：</span>
+                            <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">Darry Ring</a> </span><span> <em>&gt;</em> </span><span> <span>我的DR</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
                         </div>
-                        <!--左边树end-->
-                        <!--右边的主要内容-->
-                        <div class="member_cort-right fr">
-                            <!--我的个人信息-->
-                            <div class="member_person">
-                                <div class="member_ask-tittle">
-                                    <h4> 我的个人信息</h4>
-                                    <p> 为了能给您提供个性化服务，请完善您的基本资料。</p>
+                        <div class="member_cort">
+                            <div class="member_cort-left fl">
+                                <!--我的DR-->
+                                <div class="member_cortleft-tittle">
+                                    <i class="mb_home"></i>
+                                    <a rel="nofollow" href="member_index.html">我的DR</a>
                                 </div>
-                                <!--个人信息填写-->
-                                <div class="member_person-cort">
-                                    <!--左边-->
-                                    <div class="member_person-cort_left">
-                                        <div class="person-cort_left-word">
-                                            <span>用户名：</span>
-                                            <span id="sp_email"></span>
-                                        </div>
-                                        <div class="person-cort_left-word person-cort_left-spword">
-                                            <span>可享受更多DarryRing为您提供的贴心服务与提醒通知。</span>
-                                        </div>
-                                        <div class="person-cort_left-write" id="div_email">
-                                            <span>邮&nbsp;&nbsp;箱：</span>
-                                            <input type="text" value="" class="write_text" id="txtEmail" />
-                                            <span style="display: none" id="shrid1"><i class="writer_wrong"></i><em id="shrwrong1" class="writer_word"></em></span>
-                                            <span id="shry1" style="display: none"><i class="writer_right"> </i></span>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span>昵&nbsp;&nbsp;称：</span>
-                                            <input type="text" value="KLNgOk" class="write_text" id="nicname" />
-                                            <span style="display: none" id="shrid"><i class="writer_wrong"></i><em id="shrwrong" class="writer_word"></em></span>
-                                            <span id="shry" style="display: none"><i class="writer_right"> </i></span>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span>真实姓名：</span>
-                                            <input type="text" value="" class="write_text" id="realName" />
-                                            <span style="display: none" id="realId"><i class="writer_wrong"></i><em id="realwrong" class="writer_word"></em></span>
-                                            <span id="realy" style="display: none"><i class="writer_right"> </i></span>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span>性&nbsp;&nbsp;别：</span>
-                                            <input type="radio" id="ctl00_content_nan" name="ctl00$content$sex" value="男" />
-                                            <label for="nan"> 男</label>
-                                            <input type="radio" checked="checked" id="ctl00_content_nv" name="ctl00$content$sex" value="女" />
-                                            <label for="nv"> 女</label>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span>出生日期：</span>
-                                            <select id="selYear"> <option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option><option value="1979">1979</option><option value="1978">1978</option><option value="1977">1977</option><option value="1976">1976</option><option value="1975">1975</option><option value="1974">1974</option><option value="1973">1973</option><option value="1972">1972</option><option value="1971">1971</option><option value="1970">1970</option><option value="1969">1969</option><option value="1968">1968</option><option value="1967">1967</option><option value="1966">1966</option><option value="1965">1965</option><option value="1964">1964</option><option value="1963">1963</option><option value="1962">1962</option><option value="1961">1961</option><option value="1960">1960</option><option value="1959">1959</option><option value="1958">1958</option><option value="1957">1957</option><option value="1956">1956</option><option value="1955">1955</option><option value="1954">1954</option><option value="1953">1953</option><option value="1952">1952</option><option value="1951">1951</option><option value="1950">1950</option><option value="1949">1949</option><option value="1948">1948</option><option value="1947">1947</option><option value="1946">1946</option><option value="1945">1945</option><option value="1944">1944</option><option value="1943">1943</option><option value="1942">1942</option><option value="1941">1941</option><option value="1940">1940</option><option value="1939">1939</option><option value="1938">1938</option><option value="1937">1937</option><option value="1936">1936</option><option value="1935">1935</option><option value="1934">1934</option><option value="1933">1933</option><option value="1932">1932</option><option value="1931">1931</option><option value="1930">1930</option><option value="1929">1929</option><option value="1928">1928</option><option value="1927">1927</option><option value="1926">1926</option><option value="1925">1925</option><option value="1924">1924</option><option value="1923">1923</option><option value="1922">1922</option><option value="1921">1921</option><option value="1920">1920</option><option value="1919">1919</option><option value="1918">1918</option><option value="1917">1917</option><option value="1916">1916</option><option value="1915">1915</option><option value="1914">1914</option><option value="1913">1913</option><option value="1912">1912</option><option value="1911">1911</option><option value="1910">1910</option><option value="1909">1909</option><option value="1908">1908</option><option value="1907">1907</option><option value="1906">1906</option><option value="1905">1905</option><option value="1904">1904</option><option value="1903">1903</option><option value="1902">1902</option><option value="1901">1901</option><option value="1900">1900</option></select>
-                                            <select id="selMonth"> <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
-                                            <select id="selDay"> <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span>地&nbsp;&nbsp;区：</span>
-                                            <select id="province"> <option value="-1">请选择省份</option> <option value="340000">安徽省</option><option value="110000">北京市</option><option value="350000">福建省</option><option value="620000">甘肃省</option><option value="440000">广东省</option><option value="450000">广西壮族自治区</option><option value="520000">贵州省</option><option value="460000">海南省</option><option value="130000">河北省</option><option value="410000">河南省</option><option value="230000">黑龙江省</option><option value="420000">湖北省</option><option value="430000">湖南省</option><option value="220000">吉林省</option><option value="320000">江苏省</option><option value="360000">江西省</option><option value="210000">辽宁省</option><option value="150000">内蒙古自治区</option><option value="640000">宁夏回族自治区</option><option value="630000">青海省</option><option value="370000">山东省</option><option value="140000">山西省</option><option value="610000">陕西省</option><option value="310000">上海市</option><option value="510000">四川省</option><option value="120000">天津市</option><option value="540000">西藏自治区</option><option value="650000">新疆维吾尔自治区</option><option value="530000">云南省</option><option value="330000">浙江省</option><option value="500000">重庆市</option></select>
-                                            <label> 市：</label>
-                                            <select id="city"> <option value="-1">请选择城市</option> </select>
-                                            <label> 县：</label>
-                                            <select id="district"> <option value="-1">请选择区县</option> </select>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span class="write_vtop">详细地址：</span>
-                                            <textarea id="street" cols="20" rows="2" name="ctl00$content$street"></textarea>
-                                            <span id="streid" style="display: none"><i class="writer_wrong"></i><em id="strewrong" class="writer_word"></em></span>
-                                            <span id="strey" style="display: none"><i class="writer_right"> </i></span>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span>邮政编码：</span>
-                                            <input type="text" value="" class="write_text" id="postcode" />
-                                            <span id="postid" style="display: none"><i class="writer_wrong"></i><em id="postwrong" class="writer_word"></em></span>
-                                            <span id="posty" style="display: none"><i class="writer_right"> </i></span>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span class="fl">手&nbsp;&nbsp;机：</span>
-                                            <input type="text" value="18005151538" class="write_text fl" id="mobile" />
-                                            <span id="sjid" style="display: none"><i class="writer_wrong"></i><em id="sjwrong" class="writer_word"></em></span>
-                                            <span id="sjy" style="display: none"><i class="writer_right"> </i></span>
-                                        </div>
-                                        <div class="person-cort_left-write">
-                                            <span>座&nbsp;&nbsp;机：</span>
-                                            <input type="text" value="" class="write_text" id="telephone" />
-                                            <span id="zjid" style="display: none"><i class="writer_wrong"></i><em id="zjwrong" class="writer_word"></em></span>
-                                            <span id="zjy" style="display: none"><i class="writer_right"> </i></span>
-                                        </div>
-                                        <div id="btnsave" class="bt1 person-cort_left-button">
-                                            &gt; 保存
-                                        </div>
-                                    </div>
-                                    <!--左边end-->
-                                    <!--右边-->
-                                    <div class="member_person-cort_right">
-                                        <a href="#"> <img width="90" height="90" src="images/mem.jpg" /> </a>
-                                        <p> <a href="dr_personuploadtx.aspx">更换头像</a> </p>
-                                    </div>
-                                    <!--右边end-->
-                                </div>
-                                <!--个人信息填写end-->
+                                <!--我的DR end-->
+                                <ul class="member_cort-ul">
+                                    <li> <h3> -订单中心-</h3>
+                                        <ul class="member_ul-dr">
+                                            <li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
+                                            <li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
+                                            <li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
+                                            <li id="ctl00_content_ucmemberleft_collect"><a rel="nofollow" href="member_collect.html">我的收藏</a></li>
+                                            <li class="no_border" id="ctl00_content_ucmemberleft_yuyue"><a rel="nofollow" href="/member/myappointment.html">我的预约</a></li>
+                                        </ul> </li>
+                                    <li> <h3> -售后服务-</h3>
+                                        <ul class="member_ul-dr">
+                                            <li id="ctl00_content_ucmemberleft_salAfter"><a rel="nofollow" href="/member/aftersale.html">售后办理</a></li>
+                                        </ul> </li>
+                                    <li> <h3> -帐户管理-</h3>
+                                        <ul class="member_ul-dr">
+                                            <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="member_info">个人信息</a></li>
+                                            <li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd">修改密码</a></li>
+                                            <li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
+                                            <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
+                                            <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>
+                                            <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
+                                        </ul> </li>
+                                </ul>
                             </div>
-                            <!--我的个人信息end-->
+                            <!--右边的主要内容-->
+                            <div class="member_cort-right fr">
+                                <!--我的dr首页-->
+                                <div class="member_my_index">
+                                    <!--第一块-->
+                                    <div class="member_cortr-first">
+                                        <!--左边-->
+                                        <div class="member_cortr-first-left fl">
+                                            <!--名字-->
+                                            <div class="member_first-left-top">
+                                                <div class="mb_theleft fl">
+                                                    <span>您好！</span>
+                                                    <a href="member_info.html">（个人信息完善）</a>
+                                                </div>
+                                                <div class="mb_theright fl">
+                                                    <i class="mb_email"></i>
+                                                    <a href="/member/mynews.html"><span class="vtop">系统消息</span>（0）</a>
+                                                </div>
+                                            </div>
+                                            <!--名字end-->
+                                            <!--订单提醒-->
+                                            <div class="member_first-left-sec">
+                                                <div class="mb_theright-sec fl">
+                                                    <p> <span>订单提醒：</span> <a href="member_order.html"><span class="vtop">待处理订单</span>（1）</a> <a href="/member/myevaluate.html"><span class="vtop">待评价</span>（0）</a> </p>
+                                                </div>
+                                                <div class="mb_theright fl">
+                                                    <p> <span>安全级别：</span> <em class="mb_red-color" id="rou">弱</em> <em id="zhong" class="mb_red-color">中</em> <em id="strong">强</em> </p>
+                                                    <span style="display:none" id="span_pwd">hjl7233163</span>
+                                                    <script type="text/javascript" language="javascript">
+                                                        $(function () {
+                                                            var pwd = document.getElementById("span_pwd").innerHTML;
+
+                                                            if (pwd.length >= 5 && pwd.length < 9) {
+                                                                $("#rou").addClass('mb_red-color');
+                                                                $("#zhong").removeClass('mb_red-color');
+                                                                $("#strong").removeClass('mb_red-color');
+                                                            }
+                                                            if (pwd.length >= 9 && pwd.length < 12) {
+                                                                $("#rou").addClass('mb_red-color');
+                                                                $("#zhong").addClass('mb_red-color');
+                                                                $("#strong").removeClass('mb_red-color');
+
+                                                            }
+                                                            if (pwd.length >= 12 && pwd.length < 20) {
+                                                                $("#rou").addClass('mb_red-color');
+                                                                $("#zhong").addClass('mb_red-color');
+                                                                $("#strong").addClass('mb_red-color');
+                                                            }
+
+                                                        });
+                                                    </script>
+                                                    <p class="oth_span"> <span>为了您帐户安全，建议进行</span> <a href="member_pwd.html">设置</a> </p>
+                                                </div>
+                                            </div>
+                                            <!--订单提醒end-->
+                                        </div>
+                                        <!--左边end-->
+                                        <!--右边-->
+                                        <div class="member_cortr-first-right fr">
+                                            <img width="90" height="90" src="images/mem.jpg" />
+                                            <p><a href="member_avatar.html">编辑个人资料</a></p>
+                                        </div>
+                                        <!--右边end-->
+                                    </div>
+                                    <!--第一块end-->
+                                    <!--第二块-->
+                                    <h3>快捷通道</h3>
+                                    <!--快捷通道-->
+                                    <ul class="member_cortr-sec">
+                                        <li class="mb_border">
+                                            <div class="member_cortr-sec-left fl"></div>
+                                            <div class="member_cortr-sec-right fl">
+                                                <h4><a href="myorder.html">订单查询</a></h4>
+                                                <p>-修改订单</p>
+                                                <p>-订单详情</p>
+                                            </div> </li>
+                                        <li>
+                                            <div class="member_cortr-sec-left member_secimg_2 fl"></div>
+                                            <div class="member_cortr-sec-right fl">
+                                                <h4><a href="aftersale.html">办理售后</a></h4>
+                                                <p>-更换手寸</p>
+                                                <p>-终身保养</p>
+                                            </div> </li>
+                                        <li>
+                                            <div class="member_cortr-sec-left member_secimg_3 fl"></div>
+                                            <div class="member_cortr-sec-right fl">
+                                                <h4><a href="mypwd.html">修改密码</a></h4>
+                                                <p>-手机修改</p>
+                                                <p>-邮箱修改</p>
+                                            </div> </li>
+                                        <li>
+                                            <div class="member_cortr-sec-left member_secimg_4 fl"></div>
+                                            <div class="member_cortr-sec-right fl">
+                                                <h4><a href="DarryHome.aspx">专属空间</a></h4>
+                                                <p>-记录幸福</p>
+                                                <p>-分享幸福</p>
+                                            </div> </li>
+                                    </ul>
+                                    <!--快捷通道end-->
+                                    <!--第二块end-->
+                                    <!--第三块-->
+                                    <!--我的足迹-->
+                                    <div class="">
+                                        <div class="read_it">
+                                            <ul class="themb_cp">
+                                                <li onClick="getPro(1)" class="themb_cp-click">浏览过的产品</li>
+                                                <li onClick="getPro(2)">热销产品</li>
+                                            </ul>
+                                            <ul id="u_history" class="read_ul">
+                                                <li>
+                                                    <div class="read_top">
+                                                        <a target="_blank" href="/darry_ring/87.html" rel="nofollow"> <img src="images/201409011932585de1c2f2a9.jpg" alt="Forever系列 经典款 40分D色" /> </a>
+                                                    </div> <p><a target="_blank" href="/darry_ring/87.html"> Forever系列 经典款 40分D色 </a></p> <p><span>￥15,800</span></p> </li>
+                                                <li>
+                                                    <div class="read_top">
+                                                        <a target="_blank" href="/jewelry/404.html" rel="nofollow"> <img src="images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.6分G-I色" /> </a>
+                                                    </div> <p><a target="_blank" href="/jewelry/404.html"> 锁住一生 LOCK套链 0.6分G-I色 </a></p> <p><span>￥5,920</span></p> </li>
+                                            </ul>
+                                            <ul style="display:none;" id="u_rx" class="read_ul">
+                                                <li>
+                                                    <div class="read_top">
+                                                        <a target="_blank" href="/darry_ring/78.html" rel="nofollow"> <img src="images/2014090119350717386d7a1e.jpg" alt="Forever系列 经典款" /> </a>
+                                                    </div> <p><a target="_blank" href="/darry_ring/78.html"> Forever系列 经典款 </a></p> <p><span>￥25,700</span></p> </li>
+                                                <li>
+                                                    <div class="read_top">
+                                                        <a target="_blank" href="/darry_ring/137.html" rel="nofollow"> <img src="images/20140901192917179d1ae386.jpg" alt="Forever系列 经典款" /> </a>
+                                                    </div> <p><a target="_blank" href="/darry_ring/137.html"> Forever系列 经典款 </a></p> <p><span>￥10,200</span></p> </li>
+                                                <li>
+                                                    <div class="read_top">
+                                                        <a target="_blank" href="/darry_ring/92.html" rel="nofollow"> <img src="images/20140901195507683ad84477.jpg" alt="Just you系列 经典款" /> </a>
+                                                    </div> <p><a target="_blank" href="/darry_ring/92.html"> Just you系列 经典款 </a></p> <p><span>￥3,689</span></p> </li>
+                                                <li>
+                                                    <div class="read_top">
+                                                        <a target="_blank" href="/darry_ring/168.html" rel="nofollow"> <img src="images/201502031541470f549eecb4.jpg" alt="My heart系列 奢华款" /> </a>
+                                                    </div> <p><a target="_blank" href="/darry_ring/168.html"> My heart系列 奢华款 </a></p> <p><span>￥38,636</span></p> </li>
+                                                <li>
+                                                    <div class="read_top">
+                                                        <a target="_blank" href="/darry_ring/387.html" rel="nofollow"> <img src="images/201412081512070b82d519cb.jpg" alt="True Love系列 典雅" /> </a>
+                                                    </div> <p><a target="_blank" href="/darry_ring/387.html"> True Love系列 典雅 </a></p> <p><span>￥19,150</span></p> </li>
+                                            </ul>
+                                        </div>
+                                        <!--向左-->
+                                        <div style="display:none" class="read_pre"></div>
+                                        <div style="display:none" class="read_next"></div>
+                                    </div>
+                                    <!--我的足迹end-->
+                                    <!--第三块end-->
+                                    <script type="text/javascript" language="javascript">
+                                        function getPro(id) {
+                                            if (id == 1) {//历史记录
+                                                document.getElementById("u_history").style.display = "block";
+                                                document.getElementById("u_rx").style.display = "none";
+                                            }
+                                            else { //热销
+                                                document.getElementById("u_history").style.display = "none";
+                                                document.getElementById("u_rx").style.display = "block";
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                                <!--我的dr首页end-->
+                            </div>
+                            <!--右边的主要内容end-->
                         </div>
-                        <!--右边的主要内容end-->
                     </div>
-                    <!--中间内容end-->
                 </div>
-                <!--内容end-->
             </div>
-            <!--中间end-->
         </div>
         <!--底部-->
         <div class="footer">

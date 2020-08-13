@@ -41,9 +41,10 @@
                 <!--登录注册-->
                 <ul class="tright-ul fl">
                     <div id="ucheader1_pllogin1">
-                        <li><a rel="nofollow" href="login.html">登录</a><em>|</em></li>
-                        <li><a rel="nofollow" href="reg.html">注册</a></li>
+                        <li><a rel="nofollow" href="member_index">我的DR</a><em>|</em></li>
+
                         <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
+                        <li><a rel="nofollow" href="login">退出</a></li>
                     </div>
                 </ul>
                 <!--语言选择-->
