@@ -4,13 +4,24 @@ import java.io.Serializable;
 
 public class Shipping implements Serializable {
     private int sid;//收货地址编号
-    private int oid;//订单编号
     private String sname;//收货人姓名
     private String site;//收货人地址
-    private  String sphone;//收货人手机号码
-    private  long scoding;//邮政编码
+    private String sphone;//收货人手机号码
+    private String scoding;//邮政编码
+    private int u_id;//用户编号
+    private User user;//拥有一个用户
 
     public Shipping() {
+    }
+
+    public Shipping(int sid, String sname, String site, String sphone, String scoding, int u_id, User user) {
+        this.sid = sid;
+        this.sname = sname;
+        this.site = site;
+        this.sphone = sphone;
+        this.scoding = scoding;
+        this.u_id = u_id;
+        this.user = user;
     }
 
     public int getSid() {
@@ -19,14 +30,6 @@ public class Shipping implements Serializable {
 
     public void setSid(int sid) {
         this.sid = sid;
-    }
-
-    public int getOid() {
-        return oid;
-    }
-
-    public void setOid(int oid) {
-        this.oid = oid;
     }
 
     public String getSname() {
@@ -53,23 +56,40 @@ public class Shipping implements Serializable {
         this.sphone = sphone;
     }
 
-    public long getScoding() {
+    public String getScoding() {
         return scoding;
     }
 
-    public void setScoding(long scoding) {
+    public void setScoding(String scoding) {
         this.scoding = scoding;
+    }
+
+    public int getU_id() {
+        return u_id;
+    }
+
+    public void setU_id(int u_id) {
+        this.u_id = u_id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
         return "Shipping{" +
                 "sid=" + sid +
-                ", oid=" + oid +
                 ", sname='" + sname + '\'' +
                 ", site='" + site + '\'' +
                 ", sphone='" + sphone + '\'' +
-                ", scoding=" + scoding +
+                ", scoding='" + scoding + '\'' +
+                ", u_id=" + u_id +
+                ", user=" + user +
                 '}';
     }
 }

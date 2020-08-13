@@ -353,13 +353,12 @@
                                         <h3>
                                             -帐户管理-</h3>
                                         <ul class="member_ul-dr">
-                                            <li id="ctl00_content_treeId_myinfo"><a rel="nofollow" href="member_info.html">个人信息</a></li>
-                                            <li class="speacil_color" id="ctl00_content_treeId_password"><a rel="nofollow" href="member_pwd.html">修改密码</a></li>
-                                            <li id="ctl00_content_treeId_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
-                                            <li id="ctl00_content_treeId_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
-                                            <li id="ctl00_content_treeId_zhuanshu">
-                                                <a href="/member/DarryHome.aspx"> 专属空间</a></li>
-                                            <li class="no_border" id="ctl00_content_treeId_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
+                                            <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="pro/selectPro">个人信息</a></li>
+                                            <li class="speacil_color" id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd">修改密码</a></li>
+                                            <li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="ship/selectByUid">收货地址</a></li>
+                                            <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
+                                            <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>
+                                            <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
                                         </ul>
                                     </li>
                                 </ul>

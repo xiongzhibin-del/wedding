@@ -2,26 +2,287 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";//basePath是当前项目的根目录
 %>
+
 <html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8"/>
     <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
-
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
-    <title>个人中心 - 首页</title>
-    <link href="css/dr.css?v=1.3.5.0" type="text/css" rel="stylesheet" />
+    <title>个人中心 - 地址管理</title>
+    <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
     <link href="css/member.css?v=1.3.6.0" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="js/member.js"></script>
+    <script src="js/member.js" type="text/javascript"></script>
+    <script>
+        //市数据加载事件
+        var CityDataLoadEvent = function () { };
+        var DistrictDataLoadEvent = function () { };
+        $(function () {
+            //省下拉框ID
+            var province = "#province";
+            var city = "#city";
+            var district = "#district";
+            //加载省信息
+            //省下拉框onchange事件
+            $(province).change(function () {
+                var dataLoad = function (data) {
+                    $(city + " option:not(:first)").remove();
+                    $(data).each(function () {
+                        bindDdlData(city, this);
+                    });
+                    CityDataLoadEvent();
+                };
+
+
+            });
+            //市下拉框onchange事件
+            $(city).change(function () {
+                var dataLoad = function (data) {
+                    $(district + " option:not(:first)").remove();
+                    $(data).each(function () {
+                        bindDdlData(district, this);
+                    });
+                    DistrictDataLoadEvent();
+                };
+
+            });
+            $("#addressName").blur(function () {
+                var name = $("#addressName").val();
+                if (name == "") {
+                    $("#shrwrong").text("请输入姓名！");
+                    $("#shrid").show();
+                    return false;
+                } else {
+                    $("#shry").show();
+                    $("#shrid").hide();
+
+                }
+            });
+            $("#street").blur(function () {
+                var street = $("#street").val();
+                if (street == "") {
+                    $("#strwrong").text("请输入详细地址！");
+                    $("#streeid").show();
+                    $("#streey").hide();
+                    return false;
+                }
+                if (street.length>500) {
+                    $("#strwrong").text("输入内容过长！");
+                    $("#streeid").show();
+                    $("#streey").hide();
+                    return false;
+                }
+                else {
+                    $("#streeid").hide();
+                    $("#streey").show();
+
+                }
+            });
+            $("#postcode").blur(function () {
+                var post = $("#postcode").val();
+                if (post == "") {
+                    $("#postwrong").text("请输入详细地址！");
+                    $("#postid").show();
+                    return false;
+                } else {
+                    $("#postid").hide();
+                    $("#posty").show();
+
+                }
+            });
+            $("#postcode").blur(function () {
+
+            });
+            $("#telephone").blur(function () {
+
+                var tel = $("#telephone").val();
+                if (tel == "") {
+                    $("#telwrong").text("请输入手机号或者固定电话！");
+                    $("#telid").show();
+                    return false;
+                } else {
+                    $("#telid").hide();
+                    if (!checkphone(tel)) {
+                        $("#telwrong").text("座机号格式不正确！");
+                        $("#telid").show();
+
+                        return false;
+                    } else {
+                        $("#telid").hide();
+                        $("#tely").show();
+                    }
+
+                }
+            });
+            $("#mobile").blur(function () { });
+            //保存地址按钮事件
+            $(".add_adress-save").click(function () {
+
+                var name = $("#addressName").val();
+                var pro = $("#province option:selected").text();
+                var city = $("#city option:selected").text();
+                var dis = $("#district option:selected").text();
+                var street = $("#street").val();
+                var post = $("#postcode").val();
+                var mobile = $("#mobile").val();
+                var tel = $("#telephone").val();
+                if (dis == "请选择区县") {
+                    $("#addwrong").text("请选择区县！");
+                    $("#addy").hide();
+                    $("#addid").show();
+                    return false;
+                }
+                if (name == "") {
+                    $("#shrwrong").text("请输入姓名！");
+                    $("#shrid").show();
+                    return false;
+                } else {
+                    $("#shry").show();
+
+                }
+                if (street == "") {
+                    $("#strwrong").text("请输入详细地址！");
+                    $("#streeid").show();
+                    return false;
+                } else {
+                    $("#streey").show();
+
+                }
+                if (post == "") {
+                    $("#postwrong").text("请输入邮编！");
+                    $("#postid").show();
+                    return false;
+                } else {
+                    $("#posty").show();
+
+                }
+                if (mobile == "" || tel == "") {
+                    $("#telwrong").text("请输入手机号或者固定电话！");
+                    $("#telid").show();
+                    return false;
+                } else {
+                    $("#tely").show();
+                }
+                if (mobile != "") {
+                    if (!checkTel(mobile)) {
+                        $("#telwrong").text("手机号格式不正确！");
+                        $("#telid").show();
+                        $("#tely").hide();
+                        return false;
+                    } else {
+                        $("#telid").hide();
+                        $("#tely").show();
+                    }
+                }
+
+
+                var data = getData();
+                var action = "save";
+                if (isNaN(data.ID)) {
+                    action = "add";
+                }
+            });
+        });
+        function getData() {
+            var id = $(".shop_adress-add").attr("id");
+            id = id ? id.replace("address_", "") : undefined;
+            return {
+                "ID": id,
+                "name": $("#addressName").val(),
+                "province": $("#province option:selected").text(),
+                "city": $("#city option:selected").text(),
+                "district": $("#district option:selected").text(),
+                "street": $("#street").val(),
+                "postcode": $("#postcode").val(),
+                "mobile": $("#mobile").val(),
+                "telephone": $("#telephone").val(),
+                "IsDefault": $("#cbDefaultAddress").attr("checked")
+            };
+        }
+        function showAddress(id) {
+            //地址标题，新增还是修改
+            $(".member_adress-addtop span").text("修改地址");
+            $(".shop_adress-add").show();
+            $(".shop_adress-add").attr("id", "address_" + id);
+        }
+        function setAddress(data) {
+            $("#addressName").val(data.name);
+            $("#province option").each(function () {
+                if (data.city.indexOf($(this).text()) != -1) {
+                    $("#province").val($(this).val());
+                    $("#province").change();
+                }
+            });
+            CityDataLoadEvent = function () {
+                $("#city option").each(function () {
+                    if (data.city.indexOf($(this).text()) != -1) {
+                        $("#city").val($(this).val());
+                        $("#city").change();
+                    }
+                });
+            };
+            DistrictDataLoadEvent = function () {
+                $("#district option").each(function () {
+                    if (data.city.indexOf($(this).text()) != -1) {
+                        $("#district").val($(this).val());
+                    }
+                });
+            };
+
+            $("#street").val(data.street);
+            $("#postcode").val(data.code);
+            $("#mobile").val(data.mobile);
+            $("#telephone").val(data.phone);
+            $("#cbDefaultAddress").attr("checked", data.IsDefault);
+        }
+        function deleteAddress(id) {
+            if (confirm("确认是否删除？")) {
+            }
+        }
+        function bindDdlData(cid, data) {
+            $(cid).append($("<option value=\"" + data.code + "\">" + data.name + "</option>"));
+        }
+        CityDataLoadEvent = function () {
+            $("#city option").each(function () {
+                if (data.city.indexOf($(this).text()) != -1) {
+                    $("#city").val($(this).val());
+                    $("#city").change();
+                }
+            });
+        };
+        DistrictDataLoadEvent = function () {
+            $("#district option").each(function () {
+                if (data.city.indexOf($(this).text()) != -1) {
+                    $("#district").val($(this).val());
+                }
+            });
+        };
+        //
+        function checkTel(tel) {
+            var mobile = /^1[3-8]+\d{9}$/;
+            return mobile.test(tel);
+        }
+        //
+        function checkcode(zipcode) {
+            var MyNumber = /^[0-9]{1}[0-9]{5}$/;
+            return MyNumber.test(zipcode);
+
+        }
+        function checkphone(tel) {
+            var mobile = /^0\d{2,3}-?\d{7,8}$/;
+            return mobile.test(tel);
+        }
+
+    </script>
 </head>
 <body>
-<form id="aspnetForm" action="member_index.html" method="post" name="aspnetForm">
+
+<form id="aspnetForm" action="member_addr.html" method="post" name="aspnetForm">
 
     <div>
-
         <!--头部-->
         <div class="cmain">
             <div class="headtop">
@@ -36,14 +297,7 @@
                     <!--登录注册-->
                     <ul class="tright-ul fl">
                         <div id="ctl00_ucheader_pllogin2">
-                            <c:choose>
-                                <c:when test="${login.petname eq null}">
-                                    <li><a><span id="ctl00_ucheader_lit">${login.uname}</span></a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
-                                </c:otherwise>
-                            </c:choose>
+                            <li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
                             <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
                             <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
@@ -140,7 +394,7 @@
                 <!--导航的右边-->
                 <ul class="nav-right fr">
                     <li class="lipos"><em></em><a href="active.html">最新活动</a> <i class="icon"></i>
-                        <div class="theright_div" style="display: none;">
+                        <div class="theright_div">
                             <div class="navdiv_top">
                                 <div class="navright_div fl">
                                     <h3> 小时代4陆烧林萧求婚钻戒， </h3>
@@ -164,219 +418,163 @@
                 if (window.confirm('确定退出吗？')) {
 
                     $.get("/nAPI/QuitExit.ashx", function (data) {
-                        window.location.href = "login";
+                        window.location.href = "/";
                     });
                 }
             }
         </script>
         <div class="cort">
+            <!--中间-->
             <div class="cort">
-                <div class="tobuy cmain">
-                    <div class="cmain mb_back">
+                <!--内容-->
+                <div class="cmain mb_back">
+                    <div class="zbk_top spalid">
                         <div class="zbk_top spalid">
                             <span>您当前的位置：</span>
-                            <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">Darry Ring</a> </span><span> <em>&gt;</em> </span><span> <span>我的DR</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
-                        </div>
-                        <div class="member_cort">
-                            <div class="member_cort-left fl">
-                                <!--我的DR-->
-                                <div class="member_cortleft-tittle">
-                                    <i class="mb_home"></i>
-                                    <a rel="nofollow" href="member_index.html">我的DR</a>
-                                </div>
-                                <!--我的DR end-->
-                                <ul class="member_cort-ul">
-                                    <li> <h3> -订单中心-</h3>
-                                        <ul class="member_ul-dr">
-                                            <li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
-                                            <li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
-                                            <li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
-                                            <li id="ctl00_content_ucmemberleft_collect"><a rel="nofollow" href="member_collect.html">我的收藏</a></li>
-                                            <li class="no_border" id="ctl00_content_ucmemberleft_yuyue"><a rel="nofollow" href="/member/myappointment.html">我的预约</a></li>
-                                        </ul> </li>
-                                    <li> <h3> -售后服务-</h3>
-                                        <ul class="member_ul-dr">
-                                            <li id="ctl00_content_ucmemberleft_salAfter"><a rel="nofollow" href="/member/aftersale.html">售后办理</a></li>
-                                        </ul> </li>
-                                    <li> <h3> -帐户管理-</h3>
-                                        <ul class="member_ul-dr">
-                                            <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="pro/selectPro">个人信息</a></li>
-                                            <li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd">修改密码</a></li>
-                                            <li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="ship/selectByUid">收货地址</a></li>
-                                            <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
-                                            <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>
-                                            <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!--右边的主要内容-->
-                            <div class="member_cort-right fr">
-                                <!--我的dr首页-->
-                                <div class="member_my_index">
-                                    <!--第一块-->
-                                    <div class="member_cortr-first">
-                                        <!--左边-->
-                                        <div class="member_cortr-first-left fl">
-                                            <!--名字-->
-                                            <div class="member_first-left-top">
-                                                <div class="mb_theleft fl">
-                                                    <span>您好！</span>
-                                                    <a href="member_info.html">（个人信息完善）</a>
-                                                </div>
-                                                <div class="mb_theright fl">
-                                                    <i class="mb_email"></i>
-                                                    <a href="/member/mynews.html"><span class="vtop">系统消息</span>（0）</a>
-                                                </div>
-                                            </div>
-                                            <!--名字end-->
-                                            <!--订单提醒-->
-                                            <div class="member_first-left-sec">
-                                                <div class="mb_theright-sec fl">
-                                                    <p> <span>订单提醒：</span> <a href="member_order.html"><span class="vtop">待处理订单</span>（1）</a> <a href="/member/myevaluate.html"><span class="vtop">待评价</span>（0）</a> </p>
-                                                </div>
-                                                <div class="mb_theright fl">
-                                                    <p> <span>安全级别：</span> <em class="mb_red-color" id="rou">弱</em> <em id="zhong" class="mb_red-color">中</em> <em id="strong">强</em> </p>
-                                                    <span style="display:none" id="span_pwd">hjl7233163</span>
-                                                    <script type="text/javascript" language="javascript">
-                                                        $(function () {
-                                                            var pwd = document.getElementById("span_pwd").innerHTML;
-
-                                                            if (pwd.length >= 5 && pwd.length < 9) {
-                                                                $("#rou").addClass('mb_red-color');
-                                                                $("#zhong").removeClass('mb_red-color');
-                                                                $("#strong").removeClass('mb_red-color');
-                                                            }
-                                                            if (pwd.length >= 9 && pwd.length < 12) {
-                                                                $("#rou").addClass('mb_red-color');
-                                                                $("#zhong").addClass('mb_red-color');
-                                                                $("#strong").removeClass('mb_red-color');
-
-                                                            }
-                                                            if (pwd.length >= 12 && pwd.length < 20) {
-                                                                $("#rou").addClass('mb_red-color');
-                                                                $("#zhong").addClass('mb_red-color');
-                                                                $("#strong").addClass('mb_red-color');
-                                                            }
-
-                                                        });
-                                                    </script>
-                                                    <p class="oth_span"> <span>为了您帐户安全，建议进行</span> <a href="member_pwd.html">设置</a> </p>
-                                                </div>
-                                            </div>
-                                            <!--订单提醒end-->
-                                        </div>
-                                        <!--左边end-->
-                                        <!--右边-->
-                                        <div class="member_cortr-first-right fr">
-                                            <img width="90" height="90" src="images/mem.jpg" />
-                                            <p><a href="member_avatar.html">编辑个人资料</a></p>
-                                        </div>
-                                        <!--右边end-->
-                                    </div>
-                                    <!--第一块end-->
-                                    <!--第二块-->
-                                    <h3>快捷通道</h3>
-                                    <!--快捷通道-->
-                                    <ul class="member_cortr-sec">
-                                        <li class="mb_border">
-                                            <div class="member_cortr-sec-left fl"></div>
-                                            <div class="member_cortr-sec-right fl">
-                                                <h4><a href="myorder.html">订单查询</a></h4>
-                                                <p>-修改订单</p>
-                                                <p>-订单详情</p>
-                                            </div> </li>
-                                        <li>
-                                            <div class="member_cortr-sec-left member_secimg_2 fl"></div>
-                                            <div class="member_cortr-sec-right fl">
-                                                <h4><a href="aftersale.html">办理售后</a></h4>
-                                                <p>-更换手寸</p>
-                                                <p>-终身保养</p>
-                                            </div> </li>
-                                        <li>
-                                            <div class="member_cortr-sec-left member_secimg_3 fl"></div>
-                                            <div class="member_cortr-sec-right fl">
-                                                <h4><a href="mypwd.html">修改密码</a></h4>
-                                                <p>-手机修改</p>
-                                                <p>-邮箱修改</p>
-                                            </div> </li>
-                                        <li>
-                                            <div class="member_cortr-sec-left member_secimg_4 fl"></div>
-                                            <div class="member_cortr-sec-right fl">
-                                                <h4><a href="DarryHome.aspx">专属空间</a></h4>
-                                                <p>-记录幸福</p>
-                                                <p>-分享幸福</p>
-                                            </div> </li>
-                                    </ul>
-                                    <!--快捷通道end-->
-                                    <!--第二块end-->
-                                    <!--第三块-->
-                                    <!--我的足迹-->
-                                    <div class="">
-                                        <div class="read_it">
-                                            <ul class="themb_cp">
-                                                <li onClick="getPro(1)" class="themb_cp-click">浏览过的产品</li>
-                                                <li onClick="getPro(2)">热销产品</li>
-                                            </ul>
-                                            <ul id="u_history" class="read_ul">
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/darry_ring/87.html" rel="nofollow"> <img src="images/201409011932585de1c2f2a9.jpg" alt="Forever系列 经典款 40分D色" /> </a>
-                                                    </div> <p><a target="_blank" href="/darry_ring/87.html"> Forever系列 经典款 40分D色 </a></p> <p><span>￥15,800</span></p> </li>
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/jewelry/404.html" rel="nofollow"> <img src="images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.6分G-I色" /> </a>
-                                                    </div> <p><a target="_blank" href="/jewelry/404.html"> 锁住一生 LOCK套链 0.6分G-I色 </a></p> <p><span>￥5,920</span></p> </li>
-                                            </ul>
-                                            <ul style="display:none;" id="u_rx" class="read_ul">
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/darry_ring/78.html" rel="nofollow"> <img src="images/2014090119350717386d7a1e.jpg" alt="Forever系列 经典款" /> </a>
-                                                    </div> <p><a target="_blank" href="/darry_ring/78.html"> Forever系列 经典款 </a></p> <p><span>￥25,700</span></p> </li>
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/darry_ring/137.html" rel="nofollow"> <img src="images/20140901192917179d1ae386.jpg" alt="Forever系列 经典款" /> </a>
-                                                    </div> <p><a target="_blank" href="/darry_ring/137.html"> Forever系列 经典款 </a></p> <p><span>￥10,200</span></p> </li>
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/darry_ring/92.html" rel="nofollow"> <img src="images/20140901195507683ad84477.jpg" alt="Just you系列 经典款" /> </a>
-                                                    </div> <p><a target="_blank" href="/darry_ring/92.html"> Just you系列 经典款 </a></p> <p><span>￥3,689</span></p> </li>
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/darry_ring/168.html" rel="nofollow"> <img src="images/201502031541470f549eecb4.jpg" alt="My heart系列 奢华款" /> </a>
-                                                    </div> <p><a target="_blank" href="/darry_ring/168.html"> My heart系列 奢华款 </a></p> <p><span>￥38,636</span></p> </li>
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/darry_ring/387.html" rel="nofollow"> <img src="images/201412081512070b82d519cb.jpg" alt="True Love系列 典雅" /> </a>
-                                                    </div> <p><a target="_blank" href="/darry_ring/387.html"> True Love系列 典雅 </a></p> <p><span>￥19,150</span></p> </li>
-                                            </ul>
-                                        </div>
-                                        <!--向左-->
-                                        <div style="display:none" class="read_pre"></div>
-                                        <div style="display:none" class="read_next"></div>
-                                    </div>
-                                    <!--我的足迹end-->
-                                    <!--第三块end-->
-                                    <script type="text/javascript" language="javascript">
-                                        function getPro(id) {
-                                            if (id == 1) {//历史记录
-                                                document.getElementById("u_history").style.display = "block";
-                                                document.getElementById("u_rx").style.display = "none";
-                                            }
-                                            else { //热销
-                                                document.getElementById("u_history").style.display = "none";
-                                                document.getElementById("u_rx").style.display = "block";
-                                            }
-                                        }
-                                    </script>
-                                </div>
-                                <!--我的dr首页end-->
-                            </div>
-                            <!--右边的主要内容end-->
+                            <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">Darry Ring</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="member_index.html">我的DR</a> </span><span> <em>&gt;</em> </span><span> <span>收货地址</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
                         </div>
                     </div>
+                    <!--中间内容-->
+                    <div class="member_cort">
+                        <!--左边树-->
+                        <div class="member_cort-left fl">
+                            <!--我的DR-->
+                            <div class="member_cortleft-tittle">
+                                <i class="mb_home"></i>
+                                <a rel="nofollow" href="member_index.html">我的DR</a>
+                            </div>
+                            <!--我的DR end-->
+                            <ul class="member_cort-ul">
+                                <li> <h3> -订单中心-</h3>
+                                    <ul class="member_ul-dr">
+                                        <li id="ctl00_content_treeId_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
+                                        <li id="ctl00_content_treeId_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
+                                        <li id="ctl00_content_treeId_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
+                                        <li id="ctl00_content_treeId_collect"><a rel="nofollow" href="member_collect.html">我的收藏</a></li>
+                                        <li class="no_border" id="ctl00_content_treeId_yuyue"><a rel="nofollow" href="/member/myappointment.html">我的预约</a></li>
+                                    </ul> </li>
+                                <li> <h3> -售后服务-</h3>
+                                    <ul class="member_ul-dr">
+                                        <li id="ctl00_content_treeId_salAfter"><a rel="nofollow" href="/member/aftersale.html">售后办理</a></li>
+                                    </ul> </li>
+                                <li> <h3> -帐户管理-</h3>
+                                    <ul class="member_ul-dr">
+                                        <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="pro/selectPro">个人信息</a></li>
+                                        <li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd">修改密码</a></li>
+                                        <li class="speacil_color" id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="ship/selectByUid">收货地址</a></li>
+                                        <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
+                                        <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>
+                                        <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--左边树end-->
+                        <!--右边的主要内容-->
+                        <div class="member_cort-right fr">
+                            <!--收货地址-->
+                            <div class="member_adress">
+                                <div class="myorder-xq-news_top">
+                                    <p> 收货地址</p>
+                                </div>
+                                <!--收货地址选择-->
+                                <table cellspacing="0" cellpadding="0" border="0" class="member_adress-top">
+                                    <tbody>
+                                    <tr class="member_adress-trfirst">
+                                        <td class="member_adress-td1"> 收件人姓名 </td>
+                                        <td class="member_adress-td2"> 详细地址 </td>
+                                        <td class="member_adress-td3"> 联系方式 </td>
+                                        <td class="member_adress-td4"> 邮政编码 </td>
+                                        <td class="member_adress-td5"> 操作 </td>
+                                    </tr>
+                                    <c:forEach items="${shippings}" var="ship">
+                                        <tr class="member_adress-trsec">
+                                            <td class="member_adress-td1"> <label for="61921"> ${ship.sname}</label> </td>
+                                            <td class="member_adress-td2"> <label> ${ship.site}</label> </td>
+                                            <td class="member_adress-td3"> <p> ${ship.sphone}</p> <p> </p> </td>
+                                            <td class="member_adress-td4"> ${ship.scoding} </td>
+                                            <td class="member_adress-td5"> <input type="radio" checked="checked" name="adress" id="61921" value="61921" onClick="szdefault(61921);" /> <label for="61921"> 设为常用地址 </label> <a href="javascript:showAddress(61921);">修改</a><i>|</i><a href="javascript:deleteAddress(61921);">删除</a> </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                                <!--收货地址选择end-->
+                                <div class="member_adress-addtop">
+                                    <span>添加新地址</span>
+                                    <i></i>
+                                </div>
+                                <!--新加地址-->
+                                <div class="shop_adress-add">
+                                    <div id="addresses" class="shop_adress-Toadd">
+                                        <label> <em>*</em>地&nbsp;&nbsp;&nbsp;&nbsp;区：</label>
+                                        <select id="province"> <option value="-1">请选择省份</option> <option value="340000">安徽省</option><option value="110000">北京市</option><option value="350000">福建省</option><option value="620000">甘肃省</option><option value="440000">广东省</option><option value="450000">广西壮族自治区</option><option value="520000">贵州省</option><option value="460000">海南省</option><option value="130000">河北省</option><option value="410000">河南省</option><option value="230000">黑龙江省</option><option value="420000">湖北省</option><option value="430000">湖南省</option><option value="220000">吉林省</option><option value="320000">江苏省</option><option value="360000">江西省</option><option value="210000">辽宁省</option><option value="150000">内蒙古自治区</option><option value="640000">宁夏回族自治区</option><option value="630000">青海省</option><option value="370000">山东省</option><option value="140000">山西省</option><option value="610000">陕西省</option><option value="310000">上海市</option><option value="510000">四川省</option><option value="120000">天津市</option><option value="540000">西藏自治区</option><option value="650000">新疆维吾尔自治区</option><option value="530000">云南省</option><option value="330000">浙江省</option><option value="500000">重庆市</option></select>
+                                        <span>市：</span>
+                                        <select id="city"> <option value="-1">请选择城市</option> </select>
+                                        <span>县：</span>
+                                        <select id="district"> <option value="-1">请选择区县</option> </select>
+                                        <span id="addid" style="display: none"><i class="writer_wrong"></i><em id="addwrong" class="writer_word">信息报错样式显示！</em></span>
+                                        <span id="addy" style="display: none"><i class="writer_right"> </i></span>
+                                    </div>
+                                    <div id="detailadd" class="shop_adress-Toadd">
+                                        <label class="adress-Toadd_label"> <em>*</em>详细地址：</label>
+                                        <textarea id="street"></textarea>
+                                        <span id="streeid" style="display: none"><i class="writer_wrong"></i><em id="strwrong" class="writer_word">信息报错样式显示！</em></span>
+                                        <span id="streey" style="display: none"><i class="writer_right"> </i></span>
+                                    </div>
+                                    <div id="pname" class="shop_adress-Toadd">
+                                        <label> <em>*</em>收货人：</label>
+                                        <input type="text" class="true_name" id="addressName" />
+                                        <span id="shrid" style="display: none"><i class="writer_wrong"></i><em id="shrwrong" class="writer_word"></em></span>
+                                        <span id="shry" style="display: none"><i class="writer_right"> </i></span>
+                                    </div>
+                                    <div id="post" class="shop_adress-Toadd">
+                                        <label> <em>*</em>邮政编码：</label>
+                                        <input type="text" class="true_number" id="postcode" />
+                                        <span id="postid" style="display: none"><i class="writer_wrong"></i><em id="postwrong" class="writer_word">信息报错样式显示！</em></span>
+                                        <span id="posty" style="display: none"><i class="writer_right"> </i></span>
+                                    </div>
+                                    <div id="lx" class="shop_adress-Toadd">
+                                        <label> <em>*</em>手机号码：</label>
+                                        <input type="text" id="mobile" />
+                                        <span class="oth_color">或</span>
+                                        <span>固定电话：</span>
+                                        <input type="text" />
+                                        <span id="telid" style="display: none"><i class="writer_wrong"></i><em id="telwrong" class="writer_word">信息报错样式显示！</em></span>
+                                        <span id="tely" style="display: none"><i class="writer_right"> </i></span>
+                                    </div>
+                                    <div class="shop_adress-sp">
+                                        <input type="checkbox" id="cbDefaultAddress" />
+                                        <label for="cbDefaultAddress" class="add_adress-splabel"> 设为默认地址</label>
+                                    </div>
+                                    <div class="add_adress-save">
+                                        <div class="bt1">
+                                            <span>保存此地址</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--新加地址end-->
+                            </div>
+                            <!--收货地址end-->
+                        </div>
+                        <!--右边的主要内容end-->
+                    </div>
+                    <!--中间内容end-->
                 </div>
+                <!--内容end-->
             </div>
+            <!--中间end-->
+            <script>
+                function szdefault(id) {
+                    $.get("/API/MemberAPI.ashx", { action:'default',id: id }, function(data) {
+                        if (data=="ok") {
+                            alert("设置成功！");
+                        }
+                        if (data=="false") {
+                            alert("设置失败！");
+                        }
+                    });
+                }
+            </script>
         </div>
         <!--底部-->
         <div class="footer">
