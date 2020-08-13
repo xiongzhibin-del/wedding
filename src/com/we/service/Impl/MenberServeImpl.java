@@ -11,8 +11,11 @@ public class MenberServeImpl implements MenberService {
     @Autowired
    private   MenberMapper menberMapper;
 
+
     @Override
-    public int menberUpdate(String uname) {
-        return menberMapper.MenberMapper(uname);
+    public int menberUpdate( String newpassword ,int id) {
+        return menberMapper.MenberMapper(newpassword,id);
     }
+
+
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -98,7 +99,18 @@
             }
         </script>
     <body>
-    <form id="aspnetForm" action="member_pwd.html" method="post" name="aspnetForm">
+    <%
+        String msg = (String) request.getAttribute("msg");
+        if(msg!=null){
+    %>
+    <script>
+        alert("<%=msg%>");
+    </script>
+    <%
+        }
+    %>
+
+    <form id="aspnetForm" action="menber/menberUpdate" method="post" name="aspnetForm">
 
         <div>
 
@@ -365,11 +377,11 @@
                                             为保障账户安全，建议避免使用与其他网站相同密码。</p>
                                     </div>
                                     <!--找回密码-->
-                                    <form action="menber/menberUpdate" method="post">
+
                                     <div class="member_password-find">
                                         <div class="person-cort_left-write">
                                             <span>原始密码：</span>
-                                            <input type="password" class="write_text" id="ctl00_content_pwd" name="upassword">
+                                            <input type="password" class="write_text" id="ctl00_content_pwd" name="oldpassword">
                                             <a href="http://passport.darryring.comforget.html">忘记密码>></a>
                                         </div>
                                         <div style="float: left" class="person-cort_left-write person-cort_left-password">
@@ -383,15 +395,17 @@
                                         </div>
                                         <div style="clear: both" class="person-cort_left-write">
                                             <span>确认新密码：</span>
-                                            <input type="password" class="write_text" id="ctl00_content_pwd2" name="upassword">
+                                            <input type="password" class="write_text" id="ctl00_content_pwd2" name="newpassword">
                                             <i id="wrong" style="display: none" class="writer_wrong againpwd"></i><em style="display: none" class="againpwd" id="txtwrong"></em>
                                         </div>
 
                                     </div>
                                     <div style="margin-left: 90px">
-                                        <input type="submit" style="border-style:None;" class="bt1 person-sp-button" id="btnsubmit" onClick="return check();" value="立即提交" name="ctl00$content$btnsubmit"></div>
+                                        <input type="submit" style="border-style:None;" class="bt1 person-sp-button" id="btnsubmit" onClick="return check();" value="立即提交" name="ctl00$content$btnsubmit">
+                                    </div>
                                     <!--找回密码end-->
-                                     </form>
+
+
                                 </div>
                                 <!--找回密码end-->
                             </div>
@@ -402,7 +416,6 @@
                     <!--内容end-->
                 </div>
                 <!--中间end-->
-
             </div>
 
 
@@ -921,4 +934,6 @@
 
 
 
-    </body></html>
+
+    </body>
+        </html>
