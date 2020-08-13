@@ -11,17 +11,18 @@ public class User implements Serializable {
     private String mobile;//手机号码
     private String e_mail;//邮箱地址
     private String realname;//用户真实姓名
-    private char sex;//用户性别
+    private String sex;//用户性别
     private Date udate;//出生日期
     private String uregion;//地区
-    private String usite ;//用户详细地址
-    private int ucoding;//邮政编码
-    private int landine;//座机
+    private String usite;//用户详细地址
+    private String ucoding;//邮政编码
+    private String landine;//座机
+    private String petname;//昵称
 
     public User() {
     }
 
-    public User(int u_id, String uname, String upassword, String mobile, String e_mail, String realname, char sex, Date udate, String uregion, String usite, int ucoding, int landine) {
+    public User(int u_id, String uname, String upassword, String mobile, String e_mail, String realname, String sex, Date udate, String uregion, String usite, String ucoding, String landine, String petname) {
         this.u_id = u_id;
         this.uname = uname;
         this.upassword = upassword;
@@ -34,6 +35,7 @@ public class User implements Serializable {
         this.usite = usite;
         this.ucoding = ucoding;
         this.landine = landine;
+        this.petname = petname;
     }
 
     public int getU_id() {
@@ -84,11 +86,11 @@ public class User implements Serializable {
         this.realname = realname;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -116,20 +118,28 @@ public class User implements Serializable {
         this.usite = usite;
     }
 
-    public int getUcoding() {
+    public String getUcoding() {
         return ucoding;
     }
 
-    public void setUcoding(int ucoding) {
+    public void setUcoding(String ucoding) {
         this.ucoding = ucoding;
     }
 
-    public int getLandine() {
+    public String getLandine() {
         return landine;
     }
 
-    public void setLandine(int landine) {
+    public void setLandine(String landine) {
         this.landine = landine;
+    }
+
+    public String getPetname() {
+        return petname;
+    }
+
+    public void setPetname(String petname) {
+        this.petname = petname;
     }
 
     @Override
@@ -141,12 +151,13 @@ public class User implements Serializable {
                 ", mobile='" + mobile + '\'' +
                 ", e_mail='" + e_mail + '\'' +
                 ", realname='" + realname + '\'' +
-                ", sex=" + sex +
+                ", sex='" + sex + '\'' +
                 ", udate=" + udate +
                 ", uregion='" + uregion + '\'' +
                 ", usite='" + usite + '\'' +
-                ", ucoding=" + ucoding +
-                ", landine=" + landine +
+                ", ucoding='" + ucoding + '\'' +
+                ", landine='" + landine + '\'' +
+                ", petname='" + petname + '\'' +
                 '}';
     }
 }

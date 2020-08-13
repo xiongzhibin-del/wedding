@@ -16,6 +16,11 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
+    public User selByEmail(String email) {
+        return registerMapper.selByEmail(email);
+    }
+
+    @Override
     public int addUser(User user) {
         return registerMapper.addUser(user);
     }

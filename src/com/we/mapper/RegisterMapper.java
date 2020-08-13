@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface RegisterMapper {
     @Select("select * from u_ser where mobile = #{mobile}")
     public User selByMobile(String mobile);
-    @Insert("insert into u_ser(u_id,uname,mobile,upassword) values(seq_user_uid.nextval,#{uname},#{mobile},#{upassword})")
+    @Select("select * from u_ser where e_mail = #{email}")
+    public User selByEmail(String email);
     public int addUser(User user);
 }

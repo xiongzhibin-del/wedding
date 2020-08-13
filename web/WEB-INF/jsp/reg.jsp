@@ -101,7 +101,7 @@
                     <!--手机注册end-->
 
                     <!--邮箱注册-->
-                    <form method="post" action="/sign" class="form_second">
+                    <form method="post" action="register/email" class="form_second">
                         <input type="hidden" value="2" name="type">
                         <input type="hidden" value="login.html" name="forward">
                         <div style="display:none" class="photo_show">
@@ -126,11 +126,11 @@
                             <!--密码end-->
 
                             <!--验证-->
-                            <div style="border:none" class="the_input">
-                                <span class="password"></span>
-                                <input type="text" style="width:93px;" placeholder="请输入验证码" class="al_Input ls" value="" name="email_code">
-                                <div class="action_code"><a title="点击刷新验证码" href="javascript:void(0)"><img onClick="javascript:this.src = '/code?' + Math.random();" src="/code"></a></div>
-                            </div>
+<%--                            <div style="border:none" class="the_input">--%>
+<%--                                <span class="password"></span>--%>
+<%--                                <input type="text" style="width:93px;" placeholder="请输入验证码" class="al_Input ls" value="" name="email_code">--%>
+<%--                                <div class="action_code"><a title="点击刷新验证码" href="javascript:void(0)"><img onClick="javascript:this.src = '/code?' + Math.random();" src="/code"></a></div>--%>
+<%--                            </div>--%>
                             <!--验证码end-->
 
                             <div class="other_input">
@@ -235,13 +235,13 @@
                         return false;
                     }
 
-                    var code = $('input[name="email_code"]').val();
-                    if(isNull(code)){
-                        var notice = '<div class="ts_wrong"><span id="wrong">请输入验证码！</span></div>';
-                        $('input[name="email_code"]').parent().after(notice);
-                        $('input[name="email_code"]').addClass('error');
-                        return false;
-                    }
+                    // var code = $('input[name="email_code"]').val();
+                    // if(isNull(code)){
+                    //     var notice = '<div class="ts_wrong"><span id="wrong">请输入验证码！</span></div>';
+                    //     $('input[name="email_code"]').parent().after(notice);
+                    //     $('input[name="email_code"]').addClass('error');
+                    //     return false;
+                    // }
 
 
                     if(!$('input[name="email_check"]').is(':checked')){
@@ -252,12 +252,12 @@
 
                     // $('#mobile_reg').click(ag_Reg_click_Mobile);
                     // 注册统计
-                    ag_Reg_click_Email();
+                    // ag_Reg_click_Email();
 
                     //检测邮箱是否使用过
                     $.ajax({
                         type: "POST",
-                        url: "/sign/validEmail",
+                        url: "sign/validEmail",
                         data: "email="+email,
                         success: function(msg){
                             if(msg == 1){
@@ -266,22 +266,7 @@
                                 $('input[name="email"]').addClass('error');
                                 return false;
                             }else{
-                                $.ajax({
-                                    type: "POST",
-                                    url: "/sign/validEmailCode",
-                                    data: "code="+code,
-                                    success: function(msg){
-                                        if(msg == 1){
-                                            var notice = '<div class="ts_wrong"><span id="wrong">验证码错误！</span></div>';
-                                            $('.ts_wrong').remove();
-                                            $('input[name="email_code"]').parent().after(notice);
-                                            $('input[name="email_code"]').addClass('error');
-                                            return false;
-                                        }else{
-                                            $('.form_second').submit();
-                                        }
-                                    }
-                                });
+                                $('.form_second').submit();
                             }
                         }
                     });
@@ -493,9 +478,15 @@
             }
             return false;
         };
+
         function checkMobile(mobile) {
             var pattern = /^1[34578]\d{9}$/;
             return pattern.test(mobile);
+        };
+
+        function isEmail(email) {
+            var pattern = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            return(pattern.test(email));
         }
 
 

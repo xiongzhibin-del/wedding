@@ -31,4 +31,21 @@ public class RegisterController {
             return "reg";
         }
     }
+
+    @RequestMapping(value = "/email",produces = "text/html;charset=utf-8")
+    public String email(String email,String email_pwd, Model model){
+        User user = new User();
+        String name = Rename.getName();
+        user.setUname(name);
+        user.setE_mail(email);
+        user.setUpassword(email_pwd);
+        int n = registerService.addUser(user);
+        if(n==1){
+            model.addAttribute("msg","注册成功");
+            return "login";
+        }else{
+            model.addAttribute("msg","注册失败");
+            return "reg";
+        }
+    }
 }

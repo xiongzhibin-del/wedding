@@ -47,4 +47,16 @@ public class SignController {
             return "0";
         }
     }
+
+    //验证邮箱是否可用
+    @RequestMapping(value = "/validEmail",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String validEmail(String email){
+        User user = registerService.selByEmail(email);
+        if(user!=null) {
+            return "1";
+        }else{
+            return "0";
+        }
+    }
 }
