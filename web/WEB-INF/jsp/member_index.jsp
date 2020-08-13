@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -35,7 +36,14 @@
                     <!--登录注册-->
                     <ul class="tright-ul fl">
                         <div id="ctl00_ucheader_pllogin2">
-                            <li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
+                            <c:choose>
+                                <c:when test="${login.petname eq null}">
+                                    <li><a><span id="ctl00_ucheader_lit">${login.uname}</span></a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
+                                </c:otherwise>
+                            </c:choose>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
                             <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
                             <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
@@ -192,7 +200,7 @@
                                         </ul> </li>
                                     <li> <h3> -帐户管理-</h3>
                                         <ul class="member_ul-dr">
-                                            <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="member_info">个人信息</a></li>
+                                            <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="pro/selectPro">个人信息</a></li>
                                             <li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd">修改密码</a></li>
                                             <li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="member_addr.html">收货地址</a></li>
                                             <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>

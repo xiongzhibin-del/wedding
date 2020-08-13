@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.we.mapper.UserMapper">
+
+    <select id="loginUser" parameterType="com.we.pojo.User" resultType="com.we.pojo.User">
+        select * from  u_ser where 1=1
+        <if test="uname!=null and uname!=''">
+            and uname=#{uname}
+        </if>
+        <if test="mobile!=null and mobile!=''">
+            and mobile=#{mobile}
+        </if>
+        <if test="e_mail!=null and e_mail!=''">
+            and  e_mail=#{e_mail}
+        </if>
+        <if test="upassword!=null and upassword!=''">
+            and upassword=#{upassword}
+        </if>
+
+    </select>
+
+
+<!--    private int u_id;//用户编号-->
+<!--    private String uname;//帐号-->
+<!--    private String upassword;//密码-->
+<!--    private String mobile;//手机号码-->
+<!--    private String e_mail;//邮箱地址-->
+<!--    private String realname;//用户真实姓名-->
+<!--    private String sex;//用户性别-->
+<!--    private Date udate;//出生日期-->
+<!--    private String uregion;//地区-->
+<!--    private String usite;//用户详细地址-->
+<!--    private String ucoding;//邮政编码-->
+<!--    private String landine;//座机-->
+<!--    private String petname;//昵称-->
+    <update id="updateUser">
+        update u_ser
+        <set>
+            <if test="uname != '' and uname !=null">
+                uname = #{uname},
+            </if>
+            <if test="upassword != '' and upassword !=null">
+                upassword = #{upassword},
+            </if>
+            <if test="mobile != '' and mobile !=null">
+                mobile = #{mobile},
+            </if>
+            <if test="e_mail != '' and e_mail !=null">
+                e_mail = #{e_mail},
+            </if>
+            <if test="realname != '' and realname !=null">
+                realname = #{realname},
+            </if>
+            <if test="sex != '' and sex !=null">
+                sex = #{sex},
+            </if>
+            <if test="udate !=null">
+                udate = #{udate},
+            </if>
+            <if test="uregion != '' and uregion !=null">
+                uregion = #{uregion},
+            </if>
+            <if test="usite != '' and usite !=null">
+                usite = #{usite},
+            </if>
+            <if test="ucoding != '' and ucoding !=null">
+                ucoding = #{ucoding},
+            </if>
+            <if test="landine != '' and landine !=null">
+                landine = #{landine},
+            </if>
+            <if test="petname != '' and petname !=null">
+                petname = #{petname},
+            </if>
+        </set>
+        <where>
+            u_id = #{u_id}
+        </where>
+    </update>
+</mapper>

@@ -1,21 +1,14 @@
+<%@ page import="com.we.pojo.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-    <base href="<%=basePath%>">
 <html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
 <head>
+    <base href="<%=basePath%>">
     <meta charset="utf-8"/>
-    <!--/*技术支持，小庄602842076     验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*https://shop116998991.taobao.com/*/
-    /*https://shop116998991.taobao.com/*/
-    /*https://shop116998991.taobao.com/*/-->
     <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
@@ -42,34 +35,41 @@
 //            });
             //省下拉框onchange事件
             $(province).change(function () {
-                var dataLoad = function (data) {
-                    $(city + " option:not(:first)").remove();
-                    $(data).each(function () {
-                        bindDdlData(city, this);
-                    });
-                    CityDataLoadEvent();
-                };
-
-                $.get("/nAPI/AddressInfo.ashx?action=city&code=" + $(this).val(), function (data) {
-                    dataLoad(data);
-
-                });
+                var val = this.value;
+                $(city).empty();
+                $(city).append("<option value='-1'>请选择城市</option>");
+                $.get(
+                    "pro/proChange",
+                    {id:val},
+                    function (data) {
+                        eval("var cities = "+data);
+                        for(i in cities){
+                            $("<option></option>")
+                                .val(cities[i].id)
+                                .text(cities[i].cityname)
+                                .appendTo($(city));
+                        }
+                    }
+                )
             });
             //市下拉框onchange事件
             $(city).change(function () {
-                var dataLoad = function (data) {
-                    $(district + " option:not(:first)").remove();
-                    $(data).each(function () {
-                        bindDdlData(district, this);
-                    });
-                    DistrictDataLoadEvent();
-                };
-
-                $.get("/nAPI/AddressInfo.ashx?action=district&code=" + $(this).val(), function (data) {
-                    dataLoad(data);
-
-                });
-
+                var val = this.value;
+                $(district).empty();
+                $(district).append("<option value='-1'>请选择区县</option>");
+                $.get(
+                    "pro/cityChange",
+                    {id:val},
+                    function (data) {
+                        eval("var districts = "+data);
+                        for(i in districts){
+                            $("<option></option>")
+                                .val(districts[i].id)
+                                .text(districts[i].cityname)
+                                .appendTo($(district));
+                        }
+                    }
+                )
             });
 
             $("#nicname").focus(function () {
@@ -114,9 +114,17 @@
                     $("#shry1").hide();
                     return false;
                 } else {
-                    $("#shrwrong1").hide();
-                    $("#shrid1").hide();
-                    $("#shry1").show();
+                    if (!isEmail(nickname)){
+                        $("#shrwrong1").show();
+                        $("#shrwrong1").text("邮箱格式错误！");
+                        $("#shrid1").show();
+                        $("#shry1").hide();
+                        return false;
+                    }else {
+                        $("#shrwrong1").hide();
+                        $("#shrid1").hide();
+                        $("#shry1").show();
+                    }
                 }
             });
 
@@ -197,20 +205,18 @@
             });
             $("#btnsave").click(function () {
                 var email = $("#sp_email").html();
-                var IsUpemail = "0";
                 if (email == "") {
                     email = $("#txtEmail").val();
                     if (!isEmail($("#txtEmail").val())) {
-                        alert("邮箱不正确!");
+                        // alert("邮箱不正确!");
                         return false;
                     }
-                    var IsUpemail = "1";
                 }
                 var realName = $("#realName").val();
                 var gender = $("input:checked").val();
-                var year = $("#selYear option:selected").text();
-                var month = $("#selMonth option:selected").text();
-                var day = $("#selDay option:selected").text();
+                var year = $("#selYear option:selected").val();
+                var month = $("#selMonth option:selected").val();
+                var day = $("#selDay option:selected").val();
                 var pro = $("#province option:selected").text();
                 var city = $("#city option:selected").text();
                 var district = $("#district option:selected").text();
@@ -259,12 +265,12 @@
                     $("#streid").show();
                     return false;
                 }
-                if (district == "请选择区县") {
-                    $("#strewrong").text("请选择区县！");
-                    $("#strey").hide();
-                    $("#streid").show();
-                    return false;
-                }
+                // if (district == "请选择区县") {
+                //     $("#strewrong").text("请选择区县！");
+                //     $("#strey").hide();
+                //     $("#streid").show();
+                //     return false;
+                // }
                 if (address.length > 250) {
                     $("#strewrong").text("输入内容过长！");
                     $("#streid").show();
@@ -285,27 +291,28 @@
                     }
                 }
 
-                $.post("/API/MemberAPI.ashx", {
-                    action: 'update',
-                    email: email,
-                    IsUpemail: IsUpemail,
-                    nickname: nickname,
-                    realName: realName,
-                    gender: gender,
+                $.post(
+                    "user/updateUser",
+                    {
+                    u_id:${login.u_id},
+                    e_mail: email,
+                    petname: nickname,
+                    realname: realName,
+                    sex: gender,
                     year: year,
                     month: month,
                     day: day,
                     pro: pro,
                     city: city,
                     dis: district,
-                    address: address,
-                    post: post,
-                    tel: tel,
-                    photo: photo
+                    usite: address,
+                    ucoding: post,
+                    mobile: tel,
+                    landine: photo
                 }, function (data) {
-                    if (data == "ok") {
+                    if (data == "success") {
                         alert("保存成功！");
-                        window.location.reload();
+                        window.location.href= "pro/selectPro";
                         return false;
                     }
                     if (data == "false") {
@@ -433,7 +440,14 @@
                     <!--登录注册-->
                     <ul class="tright-ul fl">
                         <div id="ctl00_ucheader_pllogin2">
-                            <li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
+                            <c:choose>
+                                <c:when test="${login.petname eq null}">
+                                    <li><a><span id="ctl00_ucheader_lit">${login.uname}</span></a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
+                                </c:otherwise>
+                            </c:choose>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
                             <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
                             <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
@@ -616,7 +630,7 @@
                                     <!--左边-->
                                     <div class="member_person-cort_left">
                                         <div class="person-cort_left-word">
-                                            <span>用户名：${login.u_id}</span>
+                                            <span>用户名：${login.uname}</span>
                                             <span id="sp_email"></span>
                                         </div>
                                         <div class="person-cort_left-word person-cort_left-spword">
@@ -631,22 +645,32 @@
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span>昵&nbsp;&nbsp;称：</span>
-                                            <input type="text" value="" class="write_text" id="nicname" />
+                                            <input type="text" value="${login.petname}" class="write_text" id="nicname" />
                                             <span style="display: none" id="shrid"><i class="writer_wrong"></i><em id="shrwrong" class="writer_word"></em></span>
                                             <span id="shry" style="display: none"><i class="writer_right"> </i></span>
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span>真实姓名：</span>
-                                            <input type="text" value="" class="write_text" id="realName" />
+                                            <input type="text" value="${login.realname}" class="write_text" id="realName" />
                                             <span style="display: none" id="realId"><i class="writer_wrong"></i><em id="realwrong" class="writer_word"></em></span>
                                             <span id="realy" style="display: none"><i class="writer_right"> </i></span>
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span>性&nbsp;&nbsp;别：</span>
-                                            <input type="radio" checked="checked"  id="ctl00_content_nan" name="ctl00$content$sex" value="男" />
-                                            <label for="nan"> 男</label>
-                                            <input type="radio"  id="ctl00_content_nv" name="ctl00$content$sex" value="女" />
-                                            <label for="nv"> 女</label>
+                                            <c:choose>
+                                                <c:when test="${login.sex eq '女'}">
+                                                    <input type="radio"  id="ctl00_content_nan" name="ctl00$content$sex" value="男" />
+                                                    <label for="nan"> 男</label>
+                                                    <input type="radio" checked="checked" id="ctl00_content_nv" name="ctl00$content$sex" value="女" />
+                                                    <label for="nv"> 女</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="radio"  checked="checked" id="ctl00_content_nan" name="ctl00$content$sex" value="男" />
+                                                    <label for="nan"> 男</label>
+                                                    <input type="radio"  id="ctl00_content_nv" name="ctl00$content$sex" value="女" />
+                                                    <label for="nv"> 女</label>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span>出生日期：</span>
@@ -656,7 +680,12 @@
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span>地&nbsp;&nbsp;区：</span>
-                                            <select id="province"> <option value="-1">请选择省份</option> <option value="340000">安徽省</option><option value="110000">北京市</option><option value="350000">福建省</option><option value="620000">甘肃省</option><option value="440000">广东省</option><option value="450000">广西壮族自治区</option><option value="520000">贵州省</option><option value="460000">海南省</option><option value="130000">河北省</option><option value="410000">河南省</option><option value="230000">黑龙江省</option><option value="420000">湖北省</option><option value="430000">湖南省</option><option value="220000">吉林省</option><option value="320000">江苏省</option><option value="360000">江西省</option><option value="210000">辽宁省</option><option value="150000">内蒙古自治区</option><option value="640000">宁夏回族自治区</option><option value="630000">青海省</option><option value="370000">山东省</option><option value="140000">山西省</option><option value="610000">陕西省</option><option value="310000">上海市</option><option value="510000">四川省</option><option value="120000">天津市</option><option value="540000">西藏自治区</option><option value="650000">新疆维吾尔自治区</option><option value="530000">云南省</option><option value="330000">浙江省</option><option value="500000">重庆市</option></select>
+                                            <select id="province">
+                                                <option value="-1">请选择省份</option>
+                                                <c:forEach items="${pros}" var="pro">
+                                                     <option value="${pro.id}">${pro.cityname}</option>
+                                                </c:forEach>
+                                            </select>
                                             <label> 市：</label>
                                             <select id="city"> <option value="-1">请选择城市</option> </select>
                                             <label> 县：</label>
@@ -664,13 +693,13 @@
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span class="write_vtop">详细地址：</span>
-                                            <textarea id="street" cols="20" rows="2" name="ctl00$content$street"></textarea>
+                                            <textarea id="street" cols="20" rows="2" name="ctl00$content$street">${login.usite}</textarea>
                                             <span id="streid" style="display: none"><i class="writer_wrong"></i><em id="strewrong" class="writer_word"></em></span>
                                             <span id="strey" style="display: none"><i class="writer_right"> </i></span>
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span>邮政编码：</span>
-                                            <input type="text" value="" class="write_text" id="postcode" />
+                                            <input type="text" value="${login.ucoding}" class="write_text" id="postcode"/>
                                             <span id="postid" style="display: none"><i class="writer_wrong"></i><em id="postwrong" class="writer_word"></em></span>
                                             <span id="posty" style="display: none"><i class="writer_right"> </i></span>
                                         </div>
@@ -682,7 +711,7 @@
                                         </div>
                                         <div class="person-cort_left-write">
                                             <span>座&nbsp;&nbsp;机：</span>
-                                            <input type="text" value="" class="write_text" id="telephone" />
+                                            <input type="text" value="${login.landine}" class="write_text" id="telephone" />
                                             <span id="zjid" style="display: none"><i class="writer_wrong"></i><em id="zjwrong" class="writer_word"></em></span>
                                             <span id="zjy" style="display: none"><i class="writer_right"> </i></span>
                                         </div>
