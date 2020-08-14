@@ -4,22 +4,13 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<html>
-    <title>Title</title>
-    <base href="<%=basePath%>">
-    <html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded"><head>
-        <meta charset="utf-8"/><!--/*技术支持，小庄602842076     验证：官网技术支持*/
-/*技术支持，小庄602842076    验证：官网技术支持*/
-/*技术支持，小庄602842076    验证：官网技术支持*/
-/*技术支持，小庄602842076    验证：官网技术支持*/
-/*技术支持，小庄602842076    验证：官网技术支持*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/
-/*https://shop116998991.taobao.com/*/-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
+    <head>
+        <base href="<%=basePath%>">
+        <meta charset="utf-8"/>
         <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet"/>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
-
         <title>个人中心 - 修改密码</title>
         <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet"><link href="css/member.css?v=1.3.6.0" type="text/css" rel="stylesheet">
         <script src="js/member.js" type="text/javascript"></script>
@@ -371,9 +362,9 @@
                                             <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="pro/selectPro">个人信息</a></li>
                                             <li class="speacil_color" id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd">修改密码</a></li>
                                             <li id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="ship/selectByUid">收货地址</a></li>
-                                            <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
-                                            <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>
-                                            <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
+<%--                                            <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>--%>
+<%--                                            <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>--%>
+<%--                                            <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>--%>
                                         </ul>
                                     </li>
                                 </ul>
@@ -950,4 +941,4 @@
 
 
     </body>
-        </html>
+</html>

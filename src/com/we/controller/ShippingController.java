@@ -65,4 +65,17 @@ public class ShippingController {
             return "删除失败";
         }
     }
+
+    @RequestMapping(value = "/setTarget",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String setTarget(int sid,HttpSession session){
+        System.out.println(sid);
+        User login = (User)session.getAttribute("login");
+        int n = shippingService.updateTarget(login.getU_id(), sid);
+        if(n==1) {
+            return "success";
+        }else {
+            return "false";
+        }
+    }
 }

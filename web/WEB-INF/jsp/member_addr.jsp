@@ -346,7 +346,14 @@
                     <!--登录注册-->
                     <ul class="tright-ul fl">
                         <div id="ctl00_ucheader_pllogin2">
-                            <li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
+                            <c:choose>
+                                <c:when test="${login.petname eq null}">
+                                    <li><a><span id="ctl00_ucheader_lit">${login.uname}</span></a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
+                                </c:otherwise>
+                            </c:choose>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
                             <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
                             <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
@@ -519,9 +526,9 @@
                                         <li id="ctl00_content_ucmemberleft_myinfo"><a rel="nofollow" href="pro/selectPro">个人信息</a></li>
                                         <li id="ctl00_content_ucmemberleft_password"><a rel="nofollow" href="member_pwd">修改密码</a></li>
                                         <li class="speacil_color" id="ctl00_content_ucmemberleft_address"><a rel="nofollow" href="ship/selectByUid">收货地址</a></li>
-                                        <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>
-                                        <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>
-                                        <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>
+<%--                                        <li id="ctl00_content_ucmemberleft_li_jnr"><a href="/member/mydr_jnr.html">纪念日维护</a></li>--%>
+<%--                                        <li id="ctl00_content_ucmemberleft_zhuanshu"> <a href="/member/DarryHome.aspx"> 专属空间</a></li>--%>
+<%--                                        <li class="no_border" id="ctl00_content_ucmemberleft_news"><a rel="nofollow" href="/member/mynews.html">系统消息</a></li>--%>
                                     </ul>
                                 </li>
                             </ul>
@@ -555,7 +562,12 @@
                                                 <td class="member_adress-td3"> <p> ${ship.telephone}</p> <p> </p> </td>
                                             </c:if>
                                             <td class="member_adress-td4"> ${ship.scoding} </td>
-                                            <td class="member_adress-td5"> <input type="radio" checked="checked" name="adress" id="61921" value="61921" onClick="szdefault(61921);" /> <label for="61921"> 设为常用地址 </label> <a href="javascript:showAddress(${ship.sid});">修改</a><i>|</i><a href="javascript:deleteAddress(${ship.sid});">删除</a> </td>
+                                            <c:if test="${ship.target == 1}">
+                                            <td class="member_adress-td5"> <input type="radio" checked="checked" name="adress" id="61921" value="61921" onClick="szdefault(${ship.sid});" /> <label for="61921"> 设为常用地址 </label> <a href="javascript:showAddress(${ship.sid});">修改</a><i>|</i><a href="javascript:deleteAddress(${ship.sid});">删除</a> </td>
+                                            </c:if>
+                                            <c:if test="${ship.target == 0}">
+                                                <td class="member_adress-td5"> <input type="radio" name="adress" id="61921" value="61921" onClick="szdefault(${ship.sid});" /> <label for="61921"> 设为常用地址 </label> <a href="javascript:showAddress(${ship.sid});">修改</a><i>|</i><a href="javascript:deleteAddress(${ship.sid});">删除</a> </td>
+                                            </c:if>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -632,14 +644,18 @@
             <!--中间end-->
             <script>
                 function szdefault(id) {
-                    $.get("/API/MemberAPI.ashx", { action:'default',id: id }, function(data) {
-                        if (data=="ok") {
-                            alert("设置成功！");
-                        }
-                        if (data=="false") {
-                            alert("设置失败！");
-                        }
-                    });
+                    if (confirm("确认设置为默认地址吗？")) {
+                        $.get("ship/setTarget",
+                        {sid: id},
+                        function (data) {
+                            if (data == "success") {
+                                alert("设置成功！");
+                            }
+                            if (data == "false") {
+                                alert("设置失败！");
+                            }
+                        });
+                    }
                 }
             </script>
         </div>

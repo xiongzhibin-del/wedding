@@ -12,13 +12,14 @@ public class Shipping implements Serializable {
     private String sphone;//收货人手机号码
     private String scoding;//邮政编码
     private String telephone;//座机
+    private int target;//是否是默认地址
     private int u_id;//用户编号
     private User user;//拥有一个用户
 
     public Shipping() {
     }
 
-    public Shipping(int sid, String sname, String province, String city, String district, String street, String sphone, String scoding, String telephone, int u_id, User user) {
+    public Shipping(int sid, String sname, String province, String city, String district, String street, String sphone, String scoding, String telephone, int target, int u_id, User user) {
         this.sid = sid;
         this.sname = sname;
         this.province = province;
@@ -28,6 +29,7 @@ public class Shipping implements Serializable {
         this.sphone = sphone;
         this.scoding = scoding;
         this.telephone = telephone;
+        this.target = target;
         this.u_id = u_id;
         this.user = user;
     }
@@ -104,6 +106,14 @@ public class Shipping implements Serializable {
         this.telephone = telephone;
     }
 
+    public int getTarget() {
+        return target;
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
+    }
+
     public int getU_id() {
         return u_id;
     }
@@ -132,6 +142,7 @@ public class Shipping implements Serializable {
                 ", sphone='" + sphone + '\'' +
                 ", scoding='" + scoding + '\'' +
                 ", telephone='" + telephone + '\'' +
+                ", target=" + target +
                 ", u_id=" + u_id +
                 ", user=" + user +
                 '}';
