@@ -160,13 +160,21 @@
         </div>
         <!--导航end-->
         <script type="text/javascript">
-            function logout() {
-                if (window.confirm('确定退出吗？')) {
+                    function logout() {
+                        var r = window.confirm('确定退出吗？')
+                        if (r == true) {
+                                x = "您按了确认！";
+                                $.get(
+                                    "user/exitUser",
+                                    function (data) {
+                                        if (data == "1") {
+                                            window.location.href = "login";
+                                        } else {
+                                            x = "您按了取消！";
 
-                    $.get("/nAPI/QuitExit.ashx", function (data) {
-                        window.location.href = "login";
-                    });
-                }
+                                        }
+                        });
+                    }
             }
         </script>
         <div class="cort">

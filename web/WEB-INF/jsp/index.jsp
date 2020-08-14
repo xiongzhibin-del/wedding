@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -41,10 +42,17 @@
                 <!--登录注册-->
                 <ul class="tright-ul fl">
                     <div id="ucheader1_pllogin1">
+                        <c:choose>
+                            <c:when test="${login.petname eq null}">
+                                <li><a><span id="ctl00_ucheader_lit">${login.uname}</span></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
+                            </c:otherwise>
+                        </c:choose>
                         <li><a rel="nofollow" href="member_index">我的DR</a><em>|</em></li>
-
                         <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
-                        <li><a rel="nofollow" href="login">退出</a></li>
+                        <li><a rel="nofollow" href="javascript:logout()">退出</a></li>
                     </div>
                 </ul>
                 <!--语言选择-->
@@ -159,11 +167,19 @@
     <!--导航end-->
     <script type="text/javascript">
         function logout() {
-            if (window.confirm('确定退出吗？')) {
+            var r = window.confirm('确定退出吗？')
+            if (r == true) {
+                x = "您按了确认！";
+                $.get(
+                    "user/exitUser",
+                    function (data) {
+                        if (data == "1") {
+                            window.location.href = "login";
+                        } else {
+                            x = "您按了取消！";
 
-                $.get("/nAPI/QuitExit.ashx", function (data) {
-                    window.location.href = "/";
-                });
+                        }
+                    });
             }
         }
     </script>

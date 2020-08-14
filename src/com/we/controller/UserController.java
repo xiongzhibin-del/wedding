@@ -106,5 +106,12 @@ public class UserController {
             }
         }
     }
-
+//用户退出登录，清除session
+    @RequestMapping("/exitUser")
+    @ResponseBody
+    public String exitUser(HttpSession session){
+        System.out.println("我进来了");
+            session.invalidate();//强制失效session
+        return "1";
+    }
 }
