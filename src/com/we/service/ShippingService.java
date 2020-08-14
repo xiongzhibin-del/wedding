@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface ShippingService {
     public List<Shipping> selectByUid(int u_id);
+    public int addShipping(Shipping shipping);
+    public int saveShipping(Shipping shipping);
+    public int deleteShip(int sid);
 }

@@ -28,26 +28,41 @@
             //加载省信息
             //省下拉框onchange事件
             $(province).change(function () {
-                var dataLoad = function (data) {
-                    $(city + " option:not(:first)").remove();
-                    $(data).each(function () {
-                        bindDdlData(city, this);
-                    });
-                    CityDataLoadEvent();
-                };
-
-
+                var val = this.value;
+                $(city).empty();
+                $(city).append("<option value='-1'>请选择城市</option>");
+                $.get(
+                    "pro/proChange",
+                    {id:val},
+                    function (data) {
+                        eval("var cities = "+data);
+                        for(i in cities){
+                            $("<option></option>")
+                                .val(cities[i].id)
+                                .text(cities[i].cityname)
+                                .appendTo($(city));
+                        }
+                    }
+                )
             });
             //市下拉框onchange事件
             $(city).change(function () {
-                var dataLoad = function (data) {
-                    $(district + " option:not(:first)").remove();
-                    $(data).each(function () {
-                        bindDdlData(district, this);
-                    });
-                    DistrictDataLoadEvent();
-                };
-
+                var val = this.value;
+                $(district).empty();
+                $(district).append("<option value='-1'>请选择区县</option>");
+                $.get(
+                    "pro/cityChange",
+                    {id:val},
+                    function (data) {
+                        eval("var districts = "+data);
+                        for(i in districts){
+                            $("<option></option>")
+                                .val(districts[i].id)
+                                .text(districts[i].cityname)
+                                .appendTo($(district));
+                        }
+                    }
+                )
             });
             $("#addressName").blur(function () {
                 var name = $("#addressName").val();
@@ -84,7 +99,7 @@
             $("#postcode").blur(function () {
                 var post = $("#postcode").val();
                 if (post == "") {
-                    $("#postwrong").text("请输入详细地址！");
+                    $("#postwrong").text("请输入详细邮编！");
                     $("#postid").show();
                     return false;
                 } else {
@@ -93,31 +108,47 @@
 
                 }
             });
-            $("#postcode").blur(function () {
-
-            });
+            // $("#postcode").blur(function () {
+            //
+            // });
             $("#telephone").blur(function () {
 
                 var tel = $("#telephone").val();
-                if (tel == "") {
+                var mobile = $("#mobile").val();
+                if (tel == "" && mobile=="") {
                     $("#telwrong").text("请输入手机号或者固定电话！");
                     $("#telid").show();
                     return false;
-                } else {
+                } else if(mobile == ""){
                     $("#telid").hide();
                     if (!checkphone(tel)) {
                         $("#telwrong").text("座机号格式不正确！");
                         $("#telid").show();
-
                         return false;
                     } else {
                         $("#telid").hide();
                         $("#tely").show();
                     }
-
+                }else if(mobile != "" && tel != ""){
+                    $("#telid").hide();
+                    if (!checkphone(tel)) {
+                        $("#telwrong").text("座机号格式不正确！");
+                        $("#telid").show();
+                        return false;
+                    } else {
+                        $("#telid").hide();
+                        $("#tely").show();
+                    }
+                }else if(mobile != "" && tel ==""){
+                    $("#telid").hide();
                 }
             });
-            $("#mobile").blur(function () { });
+            $("#mobile").blur(function () {
+                var mobile = $("#mobile").val();
+                if(mobile !=""){
+                    $("#telid").hide();
+                }
+            });
             //保存地址按钮事件
             $(".add_adress-save").click(function () {
 
@@ -159,7 +190,7 @@
                     $("#posty").show();
 
                 }
-                if (mobile == "" || tel == "") {
+                if (mobile == "" && tel == "") {
                     $("#telwrong").text("请输入手机号或者固定电话！");
                     $("#telid").show();
                     return false;
@@ -179,25 +210,35 @@
                 }
 
 
-                var data = getData();
+                var getdata = getData();
                 var action = "save";
-                if (isNaN(data.ID)) {
+                if (isNaN(getdata.sid)) {
+                    //如果有id就是修改，没有就是增加
                     action = "add";
                 }
+                $.get(
+                    "ship/"+action,
+                    getdata,
+                    function (data) {
+                        alert(data);
+                        location.href = "ship/selectByUid";
+                    }
+                )
             });
         });
         function getData() {
             var id = $(".shop_adress-add").attr("id");
+            //存在id的话就是修改，存在的话把id的前缀清空
             id = id ? id.replace("address_", "") : undefined;
             return {
-                "ID": id,
-                "name": $("#addressName").val(),
+                "sid": id,//订单id，如果没有就是新增，有就是修改
+                "sname": $("#addressName").val(),
                 "province": $("#province option:selected").text(),
                 "city": $("#city option:selected").text(),
                 "district": $("#district option:selected").text(),
                 "street": $("#street").val(),
-                "postcode": $("#postcode").val(),
-                "mobile": $("#mobile").val(),
+                "scoding": $("#postcode").val(),
+                "sphone": $("#mobile").val(),
                 "telephone": $("#telephone").val(),
                 "IsDefault": $("#cbDefaultAddress").attr("checked")
             };
@@ -240,6 +281,14 @@
         }
         function deleteAddress(id) {
             if (confirm("确认是否删除？")) {
+                $.get(
+                    "ship/deleteShip",
+                    {'sid':id},
+                    function (data) {
+                        alert(data);
+                        location.href = "ship/selectByUid";
+                    }
+                )
             }
         }
         function bindDdlData(cid, data) {
@@ -498,10 +547,15 @@
                                     <c:forEach items="${shippings}" var="ship">
                                         <tr class="member_adress-trsec">
                                             <td class="member_adress-td1"> <label for="61921"> ${ship.sname}</label> </td>
-                                            <td class="member_adress-td2"> <label> ${ship.site}</label> </td>
+                                            <td class="member_adress-td2"> <label> ${ship.province}${ship.city}${ship.district}${ship.street}</label> </td>
+                                            <c:if test="${ship.sphone != null}">
                                             <td class="member_adress-td3"> <p> ${ship.sphone}</p> <p> </p> </td>
+                                            </c:if>
+                                            <c:if test="${ship.sphone == null}">
+                                                <td class="member_adress-td3"> <p> ${ship.telephone}</p> <p> </p> </td>
+                                            </c:if>
                                             <td class="member_adress-td4"> ${ship.scoding} </td>
-                                            <td class="member_adress-td5"> <input type="radio" checked="checked" name="adress" id="61921" value="61921" onClick="szdefault(61921);" /> <label for="61921"> 设为常用地址 </label> <a href="javascript:showAddress(61921);">修改</a><i>|</i><a href="javascript:deleteAddress(61921);">删除</a> </td>
+                                            <td class="member_adress-td5"> <input type="radio" checked="checked" name="adress" id="61921" value="61921" onClick="szdefault(61921);" /> <label for="61921"> 设为常用地址 </label> <a href="javascript:showAddress(${ship.sid});">修改</a><i>|</i><a href="javascript:deleteAddress(${ship.sid});">删除</a> </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -515,7 +569,12 @@
                                 <div class="shop_adress-add">
                                     <div id="addresses" class="shop_adress-Toadd">
                                         <label> <em>*</em>地&nbsp;&nbsp;&nbsp;&nbsp;区：</label>
-                                        <select id="province"> <option value="-1">请选择省份</option> <option value="340000">安徽省</option><option value="110000">北京市</option><option value="350000">福建省</option><option value="620000">甘肃省</option><option value="440000">广东省</option><option value="450000">广西壮族自治区</option><option value="520000">贵州省</option><option value="460000">海南省</option><option value="130000">河北省</option><option value="410000">河南省</option><option value="230000">黑龙江省</option><option value="420000">湖北省</option><option value="430000">湖南省</option><option value="220000">吉林省</option><option value="320000">江苏省</option><option value="360000">江西省</option><option value="210000">辽宁省</option><option value="150000">内蒙古自治区</option><option value="640000">宁夏回族自治区</option><option value="630000">青海省</option><option value="370000">山东省</option><option value="140000">山西省</option><option value="610000">陕西省</option><option value="310000">上海市</option><option value="510000">四川省</option><option value="120000">天津市</option><option value="540000">西藏自治区</option><option value="650000">新疆维吾尔自治区</option><option value="530000">云南省</option><option value="330000">浙江省</option><option value="500000">重庆市</option></select>
+                                        <select id="province">
+                                            <option value="-1">请选择省份</option>
+                                            <c:forEach items="${pros}" var="pro">
+                                                <option value="${pro.id}">${pro.cityname}</option>
+                                            </c:forEach>
+                                        </select>
                                         <span>市：</span>
                                         <select id="city"> <option value="-1">请选择城市</option> </select>
                                         <span>县：</span>
@@ -546,7 +605,7 @@
                                         <input type="text" id="mobile" />
                                         <span class="oth_color">或</span>
                                         <span>固定电话：</span>
-                                        <input type="text" />
+                                        <input type="text" id="telephone"/>
                                         <span id="telid" style="display: none"><i class="writer_wrong"></i><em id="telwrong" class="writer_word">信息报错样式显示！</em></span>
                                         <span id="tely" style="display: none"><i class="writer_right"> </i></span>
                                     </div>

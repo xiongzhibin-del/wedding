@@ -15,4 +15,19 @@ public class ShippingServiceImpl implements ShippingService {
     public List<Shipping> selectByUid(int u_id) {
         return shippingMapper.selectByUid(u_id);
     }
+
+    @Override
+    public int addShipping(Shipping shipping) {
+        return shippingMapper.addShipping(shipping);
+    }
+
+    @Override
+    public int saveShipping(Shipping shipping) {
+        return shippingMapper.saveShipping(shipping);
+    }
+
+    @Override
+    public int deleteShip(int sid) {
+        return shippingMapper.deleteShip(sid);
+    }
 }

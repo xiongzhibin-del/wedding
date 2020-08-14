@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.we.mapper.ShippingMapper">
+<!--    sid       NUMBER(3) not null,-->
+<!--    sname     VARCHAR2(10),-->
+<!--    sphone    VARCHAR2(11),-->
+<!--    scoding   VARCHAR2(10),-->
+<!--    u_id      NUMBER(3),-->
+<!--    telephone VARCHAR2(15),-->
+<!--    province  VARCHAR2(30),-->
+<!--    city      VARCHAR2(30),-->
+<!--    district  VARCHAR2(30),-->
+<!--    street    VARCHAR2(225)-->
+    <insert id="addShipping">
+        insert into shipping values(
+            seq_shipping_sid.nextval,
+            #{sname,jdbcType=VARCHAR},
+            #{sphone,jdbcType=VARCHAR},
+            #{scoding,jdbcType=VARCHAR},
+            #{u_id,jdbcType=INTEGER},
+            #{telephone,jdbcType=VARCHAR},
+            #{province,jdbcType=VARCHAR},
+            #{city,jdbcType=VARCHAR},
+            #{district,jdbcType=VARCHAR},
+            #{street,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="saveShipping">
+        update shipping
+        <set>
+            <if test="sname != '' and sname !=null">
+                sname = #{sname},
+            </if>
+            <if test="sphone != '' and sphone !=null">
+                sphone = #{sphone},
+            </if>
+            <if test="scoding != '' and scoding !=null">
+                scoding = #{scoding},
+            </if>
+            <if test="telephone != '' and telephone !=null">
+                telephone = #{telephone},
+            </if>
+            <if test="province != '' and province !=null">
+                province = #{province},
+            </if>
+            <if test="city != '' and city !=null">
+                city = #{city},
+            </if>
+            <if test="district != '' and district !=null">
+                district = #{district},
+            </if>
+            <if test="street != '' and street !=null">
+                street = #{street},
+            </if>
+        </set>
+        <where>
+            sid = #{sid}
+        </where>
+    </update>
+</mapper>
