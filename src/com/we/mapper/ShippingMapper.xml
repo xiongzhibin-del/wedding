@@ -14,7 +14,19 @@
 <!--    district  VARCHAR2(30),-->
 <!--    street    VARCHAR2(225)-->
     <insert id="addShipping">
-        insert into shipping values(
+        insert into shipping(
+            sid,
+            sname,
+            sphone,
+            scoding,
+            u_id,
+            telephone,
+            province,
+            city,
+            district,
+            street,
+            target
+        ) values(
             seq_shipping_sid.nextval,
             #{sname,jdbcType=VARCHAR},
             #{sphone,jdbcType=VARCHAR},
@@ -24,7 +36,8 @@
             #{province,jdbcType=VARCHAR},
             #{city,jdbcType=VARCHAR},
             #{district,jdbcType=VARCHAR},
-            #{street,jdbcType=VARCHAR}
+            #{street,jdbcType=VARCHAR},
+            0
         )
     </insert>
 

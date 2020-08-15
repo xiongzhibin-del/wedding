@@ -230,6 +230,7 @@
             var id = $(".shop_adress-add").attr("id");
             //存在id的话就是修改，存在的话把id的前缀清空
             id = id ? id.replace("address_", "") : undefined;
+            target = $("#cbDefaultAddress").attr("checked")==="checked" ? 1 :0;
             return {
                 "sid": id,//订单id，如果没有就是新增，有就是修改
                 "sname": $("#addressName").val(),
@@ -240,12 +241,14 @@
                 "scoding": $("#postcode").val(),
                 "sphone": $("#mobile").val(),
                 "telephone": $("#telephone").val(),
-                "IsDefault": $("#cbDefaultAddress").attr("checked")
+                "target": target
             };
         }
         function showAddress(id) {
             //地址标题，新增还是修改
             $(".member_adress-addtop span").text("修改地址");
+            $("#cbDefaultAddress").show();
+            $(".add_adress-splabel").show();
             $(".shop_adress-add").show();
             $(".shop_adress-add").attr("id", "address_" + id);
         }
@@ -622,8 +625,8 @@
                                         <span id="tely" style="display: none"><i class="writer_right"> </i></span>
                                     </div>
                                     <div class="shop_adress-sp">
-                                        <input type="checkbox" id="cbDefaultAddress" />
-                                        <label for="cbDefaultAddress" class="add_adress-splabel"> 设为默认地址</label>
+                                        <input type="checkbox" id="cbDefaultAddress"style="display: none"/>
+                                        <label for="cbDefaultAddress" class="add_adress-splabel" style="display: none"> 设为默认地址</label>
                                     </div>
                                     <div class="add_adress-save">
                                         <div class="bt1">

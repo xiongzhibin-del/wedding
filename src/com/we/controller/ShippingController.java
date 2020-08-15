@@ -34,6 +34,8 @@ public class ShippingController {
     @RequestMapping(value = "/save",produces = "text/html;charset=utf-8")
     @ResponseBody
     public String save(Shipping shipping,HttpSession session){
+        User login = (User)session.getAttribute("login");
+        shipping.setU_id(login.getU_id());
         int n = shippingService.saveShipping(shipping);
         if(n==1) {
             return "修改成功";
@@ -69,7 +71,6 @@ public class ShippingController {
     @RequestMapping(value = "/setTarget",produces = "text/html;charset=utf-8")
     @ResponseBody
     public String setTarget(int sid,HttpSession session){
-        System.out.println(sid);
         User login = (User)session.getAttribute("login");
         int n = shippingService.updateTarget(login.getU_id(), sid);
         if(n==1) {
