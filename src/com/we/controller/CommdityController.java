@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
@@ -32,7 +33,6 @@ public class CommdityController {
     @RequestMapping(value = "/selectPage/{pageNum}",produces = "text/html;charset=utf-8")
     public String selectPage(@PathVariable Integer pageNum, @RequestParam(defaultValue = "16") Integer pageSize,HttpSession session,Model model){
         List<Commdity> commdities = commdityService.selectAll(pageNum, pageSize);
-        System.out.println(commdities);
         int num = Page.getPageNum();
         long total = Page.getTotal();
         session.setAttribute("commdities",commdities);
@@ -42,7 +42,47 @@ public class CommdityController {
     }
 
     @RequestMapping(value = "/pagePre",produces = "text/html;charset=utf-8")
-    public String pagePre(){
-        return "null";
+    public String pagePre(HttpSession session,Model model){
+        Integer pageNum = Page.getPageNum() - 1;
+        if(Page.getPageNum()==1){
+            pageNum = 1;
+        }
+        List<Commdity> commdities = commdityService.selectAll(pageNum, 16);
+        int num = Page.getPageNum();
+        long total = Page.getTotal();
+        session.setAttribute("commdities",commdities);
+        model.addAttribute("num",num);
+        model.addAttribute("total",total);
+        return "lists";
+    }
+
+    @RequestMapping(value = "/pageNext",produces = "text/html;charset=utf-8")
+    public String pageNext(HttpSession session,Model model){
+        Integer pageNum = Page.getPageNum() + 1;
+        List<Commdity> commdities = commdityService.selectAll(pageNum, 16);
+        int num = Page.getPageNum();
+        long total = Page.getTotal();
+        session.setAttribute("commdities",commdities);
+        model.addAttribute("num",num);
+        model.addAttribute("total",total);
+        return "lists";
+    }
+    @RequestMapping(value = "/selectBytype/{seres}/{pageNum}",produces = "text/html;charset=utf-8")
+    public String selectBytype(@PathVariable String seres,@PathVariable Integer pageNum,@RequestParam(defaultValue = "16")Integer pageSize,HttpSession session,Model model){
+        List<Commdity> commdities = commdityService.selectBytype(pageNum,pageSize,seres);
+        int num = Page.getPageNum();
+        long total = Page.getTotal();
+        session.setAttribute("commdities",commdities);
+        model.addAttribute("num",num);
+        model.addAttribute("total",total);
+        model.addAttribute("seres",seres);
+        return "lists";
+    }
+
+    @RequestMapping(value = "/select/{ckeyword}/{priceList}/{zctList}/{czList}",produces = "text/html;charset=utf-8")
+    public String select(@PathVariable String ckeyword,@PathVariable int priceList,@PathVariable int zctList,@PathVariable int czList,HttpSession session){
+        List<Commdity> commdities = commdityService.select(ckeyword, priceList, zctList, czList);
+        session.setAttribute("commdities",commdities);
+        return "lists";
     }
 }

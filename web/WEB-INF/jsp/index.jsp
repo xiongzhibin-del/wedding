@@ -466,7 +466,7 @@
                             <div class="by_top">
                                 <a target="_blank" href="detail?index=${status.index}" rel="nofollow"></a>
                                 <div style="opacity:1" class="bything-one">
-                                    <img width="236px" height="236px" alt="${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}&nbsp;${comm.colour}" src="images/${comm.image.filename}" />
+                                    <img width="236px" height="236px" alt="${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}分&nbsp;${comm.colour}" src="images/${comm.image.filename}" />
                                 </div>
                                 <div style="opacity:0" class="bything-two">
                                     <img width="236px" height="236px" src="images/20141208151207e3fa9cdc9e.jpg" />
@@ -474,7 +474,7 @@
                             </div>
                             <div class="by_center"></div>
                             <div class="by_bottom">
-                                <p><a target="_blank" href="detail.html">${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}&nbsp;${comm.colour}</a></p>
+                                <p><a target="_blank" href="detail.html">${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}分&nbsp;${comm.colour}</a></p>
                                 <p> <span>￥${comm.price}</span><i>销量：${comm.sales.total}</i></p>
                             </div></li>
                         </c:forEach>

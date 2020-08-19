@@ -33,7 +33,8 @@ public class MyAspect {
 
     @Autowired
     private CommdityService commdityService;
-    @Around("execution(* com.we.service.Impl.CommdityServiceImpl.selectAll(..))")
+    @Around("execution(* com.we.service.Impl.CommdityServiceImpl.selectAll(..)) ||"+
+    "execution(* com.we.service.Impl.CommdityServiceImpl.selectBytype())")
     public Object pageHelper(ProceedingJoinPoint point) throws Throwable {
         Object[] args = point.getArgs();
         Integer pageNum = (Integer) args[0];

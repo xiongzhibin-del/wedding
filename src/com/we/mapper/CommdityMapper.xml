@@ -12,4 +12,35 @@
     <select id="selectAll" resultMap="map1">
         select * from commdity
     </select>
+
+    <select id="selectBytype" resultMap="map1">
+        select * from commdity
+        <where>
+            seres = #{param1}
+        </where>
+    </select>
+
+    <select id="select" resultMap="map1">
+        select * from commdity
+        <where>
+            <if test="param2 !=-1">
+                and price &gt; #{param2}
+            </if>
+            <if test="param3 !=-1">
+                and price &lt;= #{param3}
+            </if>
+            <if test="param4 !=-1">
+                and minute &gt; #{param4}
+            </if>
+            <if test="param5 !=-1">
+                and minute &lt;= #{param5}
+            </if>
+            <if test="param1 !='' and param1 !=null">
+                and cname like '%'||#{param1}||'%'
+            </if>
+            <if test="param6 !='' and param6 !=null">
+                and texture = #{param6}
+            </if>
+        </where>
+    </select>
 </mapper>

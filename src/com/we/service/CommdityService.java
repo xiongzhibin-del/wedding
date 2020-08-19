@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface CommdityService {
     public List<Commdity> selectFour();
-    public List<Commdity> selectAll(Integer pageNUm,Integer pageSize);
+    public List<Commdity> selectAll(Integer pageNum,Integer pageSize);
+    public List<Commdity> selectBytype(Integer pageNum, Integer pageSize ,String seres);
+    public List<Commdity> select(String ckeyword,int priceList,int zctList,int czList);
 }

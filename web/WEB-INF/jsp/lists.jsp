@@ -204,14 +204,68 @@
                 <div class="dr_choose">
                     <!--选项nav-->
                     <div class="drcho_top">
-                        <ul class="drchoose_ul">
-                            <li class="choose_hover" id="ucser_all"><span>所有</span> </li>
-                            <li id="ucser_forever"><span>Forever 系列</span> </li>
-                            <li id="ucser_myheart"><span>My Heart 系列</span> </li>
-                            <li id="ucser_swear"><span>I Swear系列</span> </li>
-                            <li id="ucser_justyou"><span>Just You 系列</span> </li>
-                            <li style="background-image:none" id="ucser_truelove"><span>True Love系列</span> </li>
-                        </ul>
+                        <c:choose>
+                            <c:when test="${seres eq 'Forever'}">
+                                <ul class="drchoose_ul">
+                                    <li id="ucser_all"><span>所有</span> </li>
+                                    <li class="choose_hover" id="ucser_forever"><span>Forever 系列</span> </li>
+                                    <li id="ucser_myheart"><span>My Heart 系列</span> </li>
+                                    <li id="ucser_swear"><span>I Swear系列</span> </li>
+                                    <li id="ucser_justyou"><span>Just You 系列</span> </li>
+                                    <li style="background-image:none" id="ucser_truelove"><span>True Love系列</span> </li>
+                                </ul>
+                            </c:when>
+                            <c:when test="${seres eq 'My heart'}">
+                                <ul class="drchoose_ul">
+                                    <li id="ucser_all"><span>所有</span> </li>
+                                    <li id="ucser_forever"><span>Forever 系列</span> </li>
+                                    <li class="choose_hover" id="ucser_myheart"><span>My Heart 系列</span> </li>
+                                    <li id="ucser_swear"><span>I Swear系列</span> </li>
+                                    <li id="ucser_justyou"><span>Just You 系列</span> </li>
+                                    <li style="background-image:none" id="ucser_truelove"><span>True Love系列</span> </li>
+                                </ul>
+                            </c:when>
+                            <c:when test="${seres eq 'I Swear'}">
+                                <ul class="drchoose_ul">
+                                    <li id="ucser_all"><span>所有</span> </li>
+                                    <li id="ucser_forever"><span>Forever 系列</span> </li>
+                                    <li id="ucser_myheart"><span>My Heart 系列</span> </li>
+                                    <li class="choose_hover" id="ucser_swear"><span>I Swear系列</span> </li>
+                                    <li id="ucser_justyou"><span>Just You 系列</span> </li>
+                                    <li style="background-image:none" id="ucser_truelove"><span>True Love系列</span> </li>
+                                </ul>
+                            </c:when>
+                            <c:when test="${seres eq 'Just you'}">
+                                <ul class="drchoose_ul">
+                                    <li id="ucser_all"><span>所有</span> </li>
+                                    <li id="ucser_forever"><span>Forever 系列</span> </li>
+                                    <li id="ucser_myheart"><span>My Heart 系列</span> </li>
+                                    <li id="ucser_swear"><span>I Swear系列</span> </li>
+                                    <li class="choose_hover" id="ucser_justyou"><span>Just You 系列</span> </li>
+                                    <li style="background-image:none" id="ucser_truelove"><span>True Love系列</span> </li>
+                                </ul>
+                            </c:when>
+                            <c:when test="${seres eq 'True Love'}">
+                                <ul class="drchoose_ul">
+                                    <li id="ucser_all"><span>所有</span> </li>
+                                    <li id="ucser_forever"><span>Forever 系列</span> </li>
+                                    <li id="ucser_myheart"><span>My Heart 系列</span> </li>
+                                    <li id="ucser_swear"><span>I Swear系列</span> </li>
+                                    <li id="ucser_justyou"><span>Just You 系列</span> </li>
+                                    <li class="choose_hover" style="background-image:none" id="ucser_truelove"><span>True Love系列</span> </li>
+                                </ul>
+                            </c:when>
+                            <c:otherwise>
+                                <ul class="drchoose_ul">
+                                    <li class="choose_hover" id="ucser_all"><span>所有</span> </li>
+                                    <li id="ucser_forever"><span>Forever 系列</span> </li>
+                                    <li id="ucser_myheart"><span>My Heart 系列</span> </li>
+                                    <li id="ucser_swear"><span>I Swear系列</span> </li>
+                                    <li id="ucser_justyou"><span>Just You 系列</span> </li>
+                                    <li style="background-image:none" id="ucser_truelove"><span>True Love系列</span> </li>
+                                </ul>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="drcho_bto"></div>
                 </div>
@@ -219,22 +273,22 @@
                 <script type="text/javascript" language="javascript">
                     $(function () {
                         $("#ucser_all").click(function () {
-                            window.location.href = "/darry_ring";
+                            window.location.href = "commdity/selectPage/1";
                         });
                         $("#ucser_forever").click(function () {
-                            window.location.href = "/dr_series/12_22.html";
+                            window.location.href = "commdity/selectBytype/Forever/1";
                         });
                         $("#ucser_myheart").click(function () {
-                            window.location.href = "/dr_series/11_20.html";
+                            window.location.href = "commdity/selectBytype/My heart/1";
                         });
                         $("#ucser_swear").click(function () {
-                            window.location.href = "/dr_series/15_28.html";
+                            window.location.href = "commdity/selectBytype/I Swear/1";
                         });
                         $("#ucser_justyou").click(function () {
-                            window.location.href = "/dr_series/13_24.html";
+                            window.location.href = "commdity/selectBytype/Just you/1";
                         });
                         $("#ucser_truelove").click(function () {
-                            window.location.href = "/dr_series/16_30.html";
+                            window.location.href = "commdity/selectBytype/True Love/1";
                         });
                     });
                 </script>
@@ -242,8 +296,8 @@
                 <div class="select_choose">
                     <div class="thefirst_it">
                         <div class="search2 search_other fr">
-                            <input type="text" placeholder="产品名称/关键字" class="txt2" id="txtTitle" name="txtTitle" />
-                            <div id="prosearch" class="icon toser2"></div>
+                            <input type="text" placeholder="产品名称/关键字" class="txt2" id="txtTitle" name="txtTitle" value=""/>
+                            <div id="prosearch" class="icon toser2" onclick="prosearch()"></div>
                         </div>
                         <div class="fl">
                             <span>价格：</span>
@@ -269,21 +323,34 @@
                     <div class="thesec_it">
                         <div class="thesec_word fr">
                             <span>共<i>${total}</i>件商品</span>
-                            <span> <i class="thered_color">1</i>/5 </span>
-                            <em onClick="getPage('up')" class="no_paget" id="em_up">上一页</em>
-                            <em class="" onClick="getPage('down')" id="em_down">下一页</em>
+                            <span> <i class="thered_color">${num}</i>/5 </span>
+                            <em onclick="location.href='commdity/pagePre'" class="no_paget" id="em_up">上一页</em>
+                            <em onclick="location.href='commdity/pageNext'" id="em_down">下一页</em>
                             <span style="display:none" id="lbCurrent">1</span>
                             <span style="display:none" id="lbTot">5</span>
                             <input type="submit" style="display:none" id="btnUp" value="上一页" name="btnUp" />
                             <input type="submit" style="display:none" id="btnNext" value="下一页" name="btnNext" />
                         </div>
-                        <div class="thesec_word-left fl">
-                            <span>排序：</span>
-                            <b> <i id="i_rq">按人气</i> <i id="i_xl">按销量</i> <i id="i_jg">按价格</i> </b>
-                        </div>
+<%--                        <div class="thesec_word-left fl">--%>
+<%--                            <span>排序：</span>--%>
+<%--                            <b> <i id="i_rq">按人气</i> <i id="i_xl">按销量</i> <i id="i_jg">按价格</i> </b>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
                 <!--参数选项end-->
+<%--                搜索的js--%>
+                <script>
+                    function prosearch() {
+                        var ckeyword = $("#txtTitle").val();
+                        if(ckeyword==null || ckeyword==""){
+                            ckeyword=-1;
+                        }
+                        var priceList = $("#drpListPrice").val();
+                        var zctList = $("#drplistzct").val();
+                        var czList = $("#drpListCZ").val();
+                        location.href = "commdity/select/"+ckeyword+"/"+priceList+"/"+zctList+"/"+czList;
+                    }
+                </script>
             </div>
             <!--小导航end-->
             <!--高级搜索-->
@@ -297,7 +364,7 @@
                             <div class="by_top">
                                 <a target="_blank" href="detail?index=${status.index}" rel="nofollow"></a>
                                 <div style="opacity:1" class="bything-one">
-                                    <img width="236px" height="236px" alt="${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}&nbsp;${comm.colour}" src="images/${comm.image.filename}" />
+                                    <img width="236px" height="236px" alt="${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}分&nbsp;${comm.colour}" src="images/${comm.image.filename}" />
                                 </div>
                                 <div style="opacity:0" class="bything-two">
                                     <img width="236px" height="236px" src="images/20141208151207e3fa9cdc9e.jpg" />
@@ -305,7 +372,7 @@
                             </div>
                             <div class="by_center"></div>
                             <div class="by_bottom">
-                                <p><a target="_blank" href="detail.html">${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}&nbsp;${comm.colour}</a></p>
+                                <p><a target="_blank" href="detail?index=${status.index}">${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}分&nbsp;${comm.colour}</a></p>
                                 <p> <span>￥${comm.price}</span><i>销量：${comm.sales.total}</i></p>
                             </div></li>
                     </c:forEach>
@@ -324,7 +391,7 @@
                         <li onclick="location.href='commdity/selectPage/5'">5</li>
                         <li class="pli2" onclick="location.href='commdity/pageNext'">下一页&gt;&gt;</li>
                     </ul>
-                    <p class="pag_p fl"> <span>共5页，到第</span> <input type="text" class="pag_txt" id="pageing_pag_txt" name="pageing$pag_txt" />页 <input type="button" class="pag_bt" onClick="__CurrentPaging.PageIndexChaned($('#pageing_pag_txt').val());$('#pageing_pag_txt').val('');" value="确定" /> </p>
+                    <p class="pag_p fl"> <span>共5页，到第</span> <input type="text" class="pag_txt" id="pageing_pag_txt" name="pageing$pag_txt" />页 <input type="button" class="pag_bt" onClick="location.href = 'commdity/selectPage/'+($('#pageing_pag_txt').val())" value="确定" /> </p>
                 </div>
             </div>
             <!--分页end-->
