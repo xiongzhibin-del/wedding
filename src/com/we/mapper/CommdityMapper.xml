@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.we.mapper.CommdityMapper">
+    <resultMap id="map1" type="com.we.pojo.Commdity">
+        <id property="c_id" column="c_id"></id>
+        <association property="image" column="c_id" javaType="com.we.pojo.Image" select="com.we.mapper.ImageMaper.selectImg"></association>
+        <association property="sales" column="c_id" javaType="com.we.pojo.Sales" select="com.we.mapper.SalesMapper.selectSale"></association>
+        <collection property="comments" column="c_id" select="com.we.mapper.CommentsMapper.selectComments"></collection>
+    </resultMap>
+    <select id="selectAll" resultMap="map1">
+        select * from commdity
+    </select>
+</mapper>

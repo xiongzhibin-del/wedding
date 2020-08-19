@@ -1,6 +1,8 @@
 package com.we.pojo;
 
-public class Commdity {
+import java.util.List;
+
+public class Commdity implements Comparable{
     // c_id      NUMBER(3) not null,
     //  cname     VARCHAR2(30),
     //  seres     VARCHAR2(30),
@@ -33,13 +35,14 @@ public class Commdity {
     private String cut;//切工
     private String minute;//分，克拉数
     private String newcid;//产品编号
-    private int imgid;//图片的编号
     private Image image;//图片
+    private Sales sales;//销量
+    private List<Comments> comments;//评论
 
     public Commdity() {
     }
 
-    public Commdity(int c_id, String cname, String seres, String style, String weight, String colour, int price, String texture, String csize, String certi, String witone, int quantity, String neatness, String cut, String minute, String newcid, int imgid, Image image) {
+    public Commdity(int c_id, String cname, String seres, String style, String weight, String colour, int price, String texture, String csize, String certi, String witone, int quantity, String neatness, String cut, String minute, String newcid, Image image, Sales sales, List<Comments> comments) {
         this.c_id = c_id;
         this.cname = cname;
         this.seres = seres;
@@ -56,8 +59,9 @@ public class Commdity {
         this.cut = cut;
         this.minute = minute;
         this.newcid = newcid;
-        this.imgid = imgid;
         this.image = image;
+        this.sales = sales;
+        this.comments = comments;
     }
 
     public int getC_id() {
@@ -188,20 +192,28 @@ public class Commdity {
         this.newcid = newcid;
     }
 
-    public int getImgid() {
-        return imgid;
-    }
-
-    public void setImgid(int imgid) {
-        this.imgid = imgid;
-    }
-
     public Image getImage() {
         return image;
     }
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public Sales getSales() {
+        return sales;
+    }
+
+    public void setSales(Sales sales) {
+        this.sales = sales;
+    }
+
+    public List<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
     }
 
     @Override
@@ -223,8 +235,21 @@ public class Commdity {
                 ", cut='" + cut + '\'' +
                 ", minute='" + minute + '\'' +
                 ", newcid='" + newcid + '\'' +
-                ", imgid=" + imgid +
                 ", image=" + image +
+                ", sales=" + sales +
+                ", comments=" + comments +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Commdity commdity = (Commdity) o;
+        if(commdity.getSales().getTotal()==getSales().getTotal()) {
+            return 0;
+        }else if(commdity.getSales().getTotal()>getSales().getTotal()){
+            return 1;
+        }else {
+            return -1;
+        }
     }
 }

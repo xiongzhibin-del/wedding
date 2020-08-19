@@ -12,7 +12,11 @@ public class CommdityServiceImpl implements CommdityService {
     @Autowired
     private CommdityMapper commdityMapper;
     @Override
-    public List<Commdity> selectAll() {
+    public List<Commdity> selectFour() {
+        return commdityMapper.selectAll();
+    }
+    @Override
+    public List<Commdity> selectAll(Integer pageNUm,Integer pageSize) {
         return commdityMapper.selectAll();
     }
 }

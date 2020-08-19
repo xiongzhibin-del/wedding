@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface CommdityMapper {
-    @Select("select * from commdity")
     public List<Commdity> selectAll();
 }

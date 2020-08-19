@@ -1,3 +1,5 @@
+<%@ page import="com.we.pojo.Commdity" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -9,7 +11,13 @@
 <head></head>
     <base href="<%=basePath%>">
 <body>
-
+<%
+    List<Commdity> comms = (List<Commdity>) session.getAttribute("commdities");
+    System.out.println(Integer.parseInt(request.getParameter("index")));
+    Commdity comm = comms.get(Integer.parseInt(request.getParameter("index")));
+    request.setAttribute("comm",comm);
+    System.out.println(comm);
+%>
 <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
@@ -123,7 +131,7 @@
             <div class="headtop">
                 <!--头部左边-->
                 <div class="top-left fl">
-                    <a title="Darry Ring" href="index.html"> <img width="187" height="42" alt="Darry Ring官网" src="images/logo.png" /> </a>
+                    <a title="Darry Ring" href="index"> <img width="187" height="42" alt="Darry Ring官网" src="images/logo.png" /> </a>
                     <span style="font-weight: normal;">求婚钻戒领导品牌</span>
                 </div>
                 <!--头部左边end-->
@@ -284,7 +292,7 @@
                 <div class="tobuy cmain">
                     <div class="zbk_top spalid">
                         <span>您当前的位置：</span>
-                        <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">Darry Ring</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="lists.html">珠宝饰品</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="/jewelry_4">吊坠</a> </span><span> <em>&gt;</em> </span><span> <span>锁住一生 LOCK套链</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
+                        <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">${comm.seres}</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="lists.html">珠宝饰品</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="/jewelry_4">吊坠</a> </span><span> <em>&gt;</em> </span><span> <span>${comm.cname}</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
                     </div>
                     <!--购买页中间-->
                     <div class="buy_cort">
@@ -329,7 +337,7 @@
                         <!--购买页中间的左边图片-->
                         <div class="buycort_left fl">
                             <ul class="bc_left">
-                                <li class="li_border"> <img src="images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+                                <li class="li_border"> <img src="images/${comm.image.filename}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
                                 <li> <img src="images/20150121105910277b929564.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
                                 <li> <img src="images/2015012018513052f4cdec56.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
                                 <li> <img src="images/2015012018513031daa9bed7.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
@@ -377,11 +385,11 @@
                         <div class="buycort_right fr">
                             <!--钻戒-->
                             <div class="byright_top">
-                                <p>锁住一生 LOCK套链[N04001205]</p>
-                                <p> <span>&yen;5,920</span> </p>
+                                <p>${comm.cname} [${comm.newcid}]</p>
+                                <p> <span>&yen;${comm.price}</span> </p>
                                 <div class="byright_top-xq">
-                                    <i>最近售出：135</i>
-                                    <i>用户评论：6</i>
+                                    <i>最近售出：${comm.sales.lately}</i>
+                                    <i>用户评论：${comm.comments.size()}</i>
                                     <i>收藏人气：25</i>
                                 </div>
                             </div>

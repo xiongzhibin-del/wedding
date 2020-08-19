@@ -23,7 +23,7 @@ public class UserController {
     @Autowired
     private RegisterService registerService;
 
-    @RequestMapping(value = "/loginUser",method = RequestMethod.POST)
+    @RequestMapping(value = "/loginUser")
     public String loginUser( User user, Model model,HttpServletRequest request){
         HttpSession session = request.getSession();
         String uname = user.getUname();
@@ -52,7 +52,7 @@ public class UserController {
         }else {
             session.setAttribute("login",login);
             //请求转发跳转index
-            return "index";
+            return "forward:/commdity/selectFour";
         }
 
 }
