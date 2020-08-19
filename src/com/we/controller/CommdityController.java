@@ -40,4 +40,9 @@ public class CommdityController {
         model.addAttribute("total",total);
         return "lists";
     }
+
+    @RequestMapping(value = "/pagePre",produces = "text/html;charset=utf-8")
+    public String pagePre(){
+        return "null";
+    }
 }

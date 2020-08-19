@@ -316,13 +316,13 @@
             <div class="paging_all" id="pageing_pagingDiv">
                 <div class="paging_all-cort">
                     <ul class="paging fl">
-                        <li class="pli pag_gray">&lt;&lt;上一页</li>
-                        <li class="pag_gray">1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li class="pli2">下一页&gt;&gt;</li>
+                        <li class="pli2" onclick="location.href='commdity/pagePre'">&lt;&lt;上一页</li>
+                        <li onclick="location.href='commdity/selectPage/1'">1</li>
+                        <li onclick="location.href='commdity/selectPage/2'">2</li>
+                        <li onclick="location.href='commdity/selectPage/3'">3</li>
+                        <li onclick="location.href='commdity/selectPage/4'">4</li>
+                        <li onclick="location.href='commdity/selectPage/5'">5</li>
+                        <li class="pli2" onclick="location.href='commdity/pageNext'">下一页&gt;&gt;</li>
                     </ul>
                     <p class="pag_p fl"> <span>共5页，到第</span> <input type="text" class="pag_txt" id="pageing_pag_txt" name="pageing$pag_txt" />页 <input type="button" class="pag_bt" onClick="__CurrentPaging.PageIndexChaned($('#pageing_pag_txt').val());$('#pageing_pag_txt').val('');" value="确定" /> </p>
                 </div>
