@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String landine;//座机
     private String petname;//昵称
 
+
     public User() {
     }
 
@@ -36,6 +37,7 @@ public class User implements Serializable {
         this.ucoding = ucoding;
         this.landine = landine;
         this.petname = petname;
+
     }
 
     public int getU_id() {
@@ -141,6 +143,7 @@ public class User implements Serializable {
     public void setPetname(String petname) {
         this.petname = petname;
     }
+
 
     @Override
     public String toString() {

@@ -245,7 +245,7 @@
                                                 </div>
                                                 <div class="mb_theright fl">
                                                     <p> <span>安全级别：</span> <em class="mb_red-color" id="rou">弱</em> <em id="zhong" class="mb_red-color">中</em> <em id="strong">强</em> </p>
-                                                    <span style="display:none" id="span_pwd">hjl7233163</span>
+                                                    <span style="display:none" id="span_pwd">${login.upassword}</span>
                                                     <script type="text/javascript" language="javascript">
                                                         $(function () {
                                                             var pwd = document.getElementById("span_pwd").innerHTML;

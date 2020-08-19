@@ -98,7 +98,7 @@
 <div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div>
 <div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div>
 <iframe frameborder="0" style="display: none;" src="http://v3.jiathis.com/code_mini/jiathis_utility.html"></iframe>
-<form id="aspnetForm" action="/jewelry/404.html" method="post" name="aspnetForm">
+<form id="aspnetForm" action="" method="post" name="aspnetForm">
     <div>
         <input type="hidden" value="/wEPDwUJOTIyMDg5NDk3D2QWAmYPZBYCAgMQZGQWBgIBD2QWAgIBDw8WAh4HVmlzaWJsZWdkZAIDD2QWCgIBD2QWBGYPFgIeC18hSXRlbUNvdW50AgQWCGYPZBYCZg8VAiHplIHkvY/kuIDnlJ8gTE9DS+Wll+mTviAwLjAwNiBHLUlNaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTUwMTIxMTA1OTA5MTRiMmZlZTRiMi5qcGdkAgEPZBYCZg8VAiHplIHkvY/kuIDnlJ8gTE9DS+Wll+mTviAwLjAwNiBHLUlNaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTUwMTIxMTA1OTEwMjc3YjkyOTU2NC5qcGdkAgIPZBYCZg8VAiHplIHkvY/kuIDnlJ8gTE9DS+Wll+mTviAwLjAwNiBHLUlNaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTUwMTIwMTg1MTMwNTJmNGNkZWM1Ni5qcGdkAgMPZBYCZg8VAiHplIHkvY/kuIDnlJ8gTE9DS+Wll+mTviAwLjAwNiBHLUlNaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTUwMTIwMTg1MTMwMzFkYWE5YmVkNy5qcGdkAgEPFgIfAQIEFghmD2QWAmYPFQMEMjA4MyHplIHkvY/kuIDnlJ8gTE9DS+Wll+mTviAwLjAwNiBHLUlNaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTUwMTIxMTA1OTA5MTRiMmZlZTRiMi5qcGdkAgEPZBYCZg8VAwQyMDg0IemUgeS9j+S4gOeUnyBMT0NL5aWX6ZO+IDAuMDA2IEctSU1odHRwOi8vaW1nLmRhcnJ5cmluZy5jb20vdXNlcmZpbGVzL2ltYWdlL1Byb2R1Y3QvMjAxNTAxMjExMDU5MTAyNzdiOTI5NTY0LmpwZ2QCAg9kFgJmDxUDBDIwODUh6ZSB5L2P5LiA55SfIExPQ0vlpZfpk74gMC4wMDYgRy1JTWh0dHA6Ly9pbWcuZGFycnlyaW5nLmNvbS91c2VyZmlsZXMvaW1hZ2UvUHJvZHVjdC8yMDE1MDEyMDE4NTEzMDUyZjRjZGVjNTYuanBnZAIDD2QWAmYPFQMEMjA4NiHplIHkvY/kuIDnlJ8gTE9DS+Wll+mTviAwLjAwNiBHLUlNaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTUwMTIwMTg1MTMwMzFkYWE5YmVkNy5qcGdkAgIPZBYCAgMPFgIfAGhkAgMPZBYCAgEPFgIfAQIBFgJmD2QWAmYPFQIHNTkyMC4wMAkxOEvnmb3ph5FkAgQPZBYIZg8PFgIfAGhkZAICDw8WAh8AaGRkAgMPDxYCHwBoZGQCBg9kFgJmDxAPFgYeDURhdGFUZXh0RmllbGQFCHNob3BuYW1lHg5EYXRhVmFsdWVGaWVsZAUCaWQeC18hRGF0YUJvdW5kZ2QQFRAY6K+36YCJ5oup6aKE57qm5a6e5L2T5bqXD+a3seWcs+WunuS9k+W6lw/ljJfkuqzlrp7kvZPlupcP5bm/5bee5a6e5L2T5bqXD+mHjeW6huWunuS9k+W6lw/kuIrmtbflrp7kvZPlupcP5q2m5rGJ5a6e5L2T5bqXD+WNl+S6rOWunuS9k+W6lw/plb/mspnlrp7kvZPlupcP5aSp5rSl5a6e5L2T5bqXD+aYhuaYjuWunuS9k+W6lw/oi4/lt57lrp7kvZPlupcP5aSn6L+e5a6e5L2T5bqXD+aXoOmUoeWunuS9k+W6lw/miJDpg73lrp7kvZPlupcP5a6B5rOi5a6e5L2T5bqXFRACLTEBMQEyATMBNAE3ATkCMTACMTECMTICMTMCMTQCMTUCMTYCMTcCMTgUKwMQZ2dnZ2dnZ2dnZ2dnZ2dnZ2RkAgUPZBYEZg8WAh8BAgEWAmYPZBYCZg8VBhBqZXdlbHJ5LzQwNC5odG1sJOmUgeS9j+S4gOeUnyBMT0NL5aWX6ZO+IDAuNuWIhkctSeiJsk1odHRwOi8vaW1nLmRhcnJ5cmluZy5jb20vdXNlcmZpbGVzL2ltYWdlL1Byb2R1Y3QvMjAxNTAxMjExMDU5MDkxNGIyZmVlNGIyLmpwZxBqZXdlbHJ5LzQwNC5odG1sJOmUgeS9j+S4gOeUnyBMT0NL5aWX6ZO+IDAuNuWIhkctSeiJsgU1LDkyMGQCAQ8WAh8BAgUWCmYPZBYCZg8VBhJkYXJyeV9yaW5nLzc4Lmh0bWwXRm9yZXZlcuezu+WIlyDnu4/lhbjmrL5NaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTQwOTAxMTkzNTA3MTczODZkN2ExZS5qcGcSZGFycnlfcmluZy83OC5odG1sF0ZvcmV2ZXLns7vliJcg57uP5YW45qy+BjI1LDcwMGQCAQ9kFgJmDxUGE2RhcnJ5X3JpbmcvMTM3Lmh0bWwXRm9yZXZlcuezu+WIlyDnu4/lhbjmrL5NaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTQwOTAxMTkyOTE3MTc5ZDFhZTM4Ni5qcGcTZGFycnlfcmluZy8xMzcuaHRtbBdGb3JldmVy57O75YiXIOe7j+WFuOasvgYxMCwyMDBkAgIPZBYCZg8VBhJkYXJyeV9yaW5nLzkyLmh0bWwYSnVzdCB5b3Xns7vliJcg57uP5YW45qy+TWh0dHA6Ly9pbWcuZGFycnlyaW5nLmNvbS91c2VyZmlsZXMvaW1hZ2UvUHJvZHVjdC8yMDE0MDkwMTE5NTUwNzY4M2FkODQ0NzcuanBnEmRhcnJ5X3JpbmcvOTIuaHRtbBhKdXN0IHlvdeezu+WIlyDnu4/lhbjmrL4FMyw2ODlkAgMPZBYCZg8VBhNkYXJyeV9yaW5nLzE2OC5odG1sGE15IGhlYXJ057O75YiXIOWlouWNjuasvk1odHRwOi8vaW1nLmRhcnJ5cmluZy5jb20vdXNlcmZpbGVzL2ltYWdlL1Byb2R1Y3QvMjAxNTAyMDMxNTQxNDcwZjU0OWVlY2I0LmpwZxNkYXJyeV9yaW5nLzE2OC5odG1sGE15IGhlYXJ057O75YiXIOWlouWNjuasvgYzOCw2MzZkAgQPZBYCZg8VBhNkYXJyeV9yaW5nLzM4Ny5odG1sFlRydWUgTG92Zeezu+WIlyDlhbjpm4VNaHR0cDovL2ltZy5kYXJyeXJpbmcuY29tL3VzZXJmaWxlcy9pbWFnZS9Qcm9kdWN0LzIwMTQxMjA4MTUxMjA3MGI4MmQ1MTljYi5qcGcTZGFycnlfcmluZy8zODcuaHRtbBZUcnVlIExvdmXns7vliJcg5YW46ZuFBjE5LDE1MGQCBQ9kFgJmDxYCHwECCmRkQTlXYn/HqbRvVStqoFxk/OAQTVI=" id="__VIEWSTATE" name="__VIEWSTATE" />
     </div>
@@ -338,9 +338,9 @@
                         <div class="buycort_left fl">
                             <ul class="bc_left">
                                 <li class="li_border"> <img src="images/${comm.image.filename}" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-                                <li> <img src="images/20150121105910277b929564.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-                                <li> <img src="images/2015012018513052f4cdec56.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-                                <li> <img src="images/2015012018513031daa9bed7.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+                                <li> <img src="images/20141203164814cbaa761ecb.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+                                <li> <img src="images/201409031259093e45b5ecf0.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+                                <li> <img src="images/20150707144116ede2ed910a.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
                             </ul>
                             <!--上下按钮-->
                             <div class="top"></div>
@@ -350,13 +350,13 @@
                         <!--购买页中间的中间图片-->
                         <div class="buycort_center fl">
                             <ul class="ul_center">
-                                <li id="magnifier2083" style="display: list-item;"> <img src="images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> <span style="position: absolute; left: 248px; top: 248px; display: none; width: 150px; height: 150px; background: rgb(153, 153, 153) none repeat scroll 0% 0%; border: 1px solid rgb(0, 0, 0); cursor: move; opacity: 0.4;"></span>
+                                <li id="magnifier2083" style="display: list-item;"> <img src="images/201409031259093e45b5ecf0.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> <span style="position: absolute; left: 248px; top: 248px; display: none; width: 150px; height: 150px; background: rgb(153, 153, 153) none repeat scroll 0% 0%; border: 1px solid rgb(0, 0, 0); cursor: move; opacity: 0.4;"></span>
                                     <div style="position: absolute; overflow: hidden; width: 300px; height: 300px; top: 0px; right: -385px; border: 1px solid rgb(204, 204, 204); z-index: 99998; display: none;">
-                                        <img src="images/2015012110590914b2fee4b2.jpg" style="position: absolute; left: -498px; top: -498px; width: 800px; height: 800px;" />
+                                        <img src="images/201502031541470f549eecb4.jpg" style="position: absolute; left: -498px; top: -498px; width: 800px; height: 800px;" />
                                     </div></li>
-                                <li id="magnifier2084"> <img src="images/20150121105910277b929564.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-                                <li id="magnifier2085"> <img src="images/2015012018513052f4cdec56.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
-                                <li id="magnifier2086"> <img src="images/2015012018513031daa9bed7.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+                                <li id="magnifier2084"> <img src="images/20141203164814cbaa761ecb.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+                                <li id="magnifier2085"> <img src="images/201409031259093e45b5ecf0.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
+                                <li id="magnifier2086"> <img src="images/20150707144116ede2ed910a.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> </li>
                             </ul>
                             <div class="kzyl"></div>
                             <!--右按钮-->
@@ -390,14 +390,14 @@
                                 <div class="byright_top-xq">
                                     <i>最近售出：${comm.sales.lately}</i>
                                     <i>用户评论：${comm.comments.size()}</i>
-                                    <i>收藏人气：25</i>
+                                    <i>收藏人气：${comm.sales.pay}</i>
                                 </div>
                             </div>
                             <!--钻戒end-->
                             <!--参数-->
                             <div class="pho_cs" id="ctl00_content_zbDiv">
-                                <p> <span>尺寸：</span> <i>1*1cm</i> </p>
-                                <p id="ctl00_content_zDiamondDiv"> <span>钻石：</span> <i>主钻45颗</i> <i>0.006克拉/颗</i> </p>
+                                <p> <span>尺寸：</span> <i>${comm.csize}</i> </p>
+                                <p id="ctl00_content_zDiamondDiv"> <span>钻石：</span> <i>主砖${comm.quantity}颗</i> <i>0${comm.weight}克拉/颗</i> </p>
                             </div>
                             <!--参数end-->
                             <!--选择材质刻字等-->
@@ -429,7 +429,7 @@
                                 </script>
                                 <div id="materialDiv" class="thr_first">
                                     <span>材质：</span>
-                                    <i value="5920.00" class="iborder">18K白金</i>
+                                    <i value="5920.00" class="iborder">${comm.texture}</i>
                                 </div>
                                 <!--第二行-->
                                 <div class="thr_secound">
@@ -482,7 +482,7 @@
                     <div class="gd_nav">
                         <ul class="gdnav_ul">
                             <li class="gdnav_sp"> <span>商品详情</span> </li>
-                            <li> <span>最新评论<em id="commentDataCount">(6)</em></span> </li>
+                            <li> <span>最新评论<em id="commentDataCount">${comm.comments.size()}</em></span> </li>
                             <li> <span>如何购买</span> </li>
                             <li> <span>常见问答</span> </li>
                             <li> <span>售后服务</span> </li>
@@ -506,22 +506,22 @@
                                     <tbody>
                                     <tr>
                                         <td class="border_cs-td1">款式信息</td>
-                                        <td class="border_cs-td2"> <span>产品编号：</span> <em>N04001205</em> </td>
-                                        <td class="border_cs-td3"> <span>证书类型：</span> <em>国检</em> </td>
-                                        <td class="border_cs-td5"> <span>材 质：</span> <em>18K白金</em> </td>
+                                        <td class="border_cs-td2"> <span>产品编号：</span> <em>${comm.newcid}</em> </td>
+                                        <td class="border_cs-td3"> <span>证书类型：</span> <em>${comm.certi}</em> </td>
+                                        <td class="border_cs-td5"> <span>材 质：</span> <em>${comm.texture}</em> </td>
                                         <td class="border_cs-td6">&nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td class="border_cs-td1">钻石信息</td>
-                                        <td class="border_cs-td2"> <span>总钻重量：</span> <em>0.27克拉</em> </td>
-                                        <td class="border_cs-td3"> <span>单钻重量：</span> <em>0.006克拉</em> </td>
-                                        <td class="border_cs-td4"> <span>钻石数量：</span> <em>45</em> </td>
+                                        <td class="border_cs-td2"> <span>总钻重量：</span> <em>0${comm.witone}</em> </td>
+                                        <td class="border_cs-td3"> <span>单钻重量：</span> <em>${comm.weight}</em> </td>
+                                        <td class="border_cs-td4"> <span>钻石数量：</span> <em>${comm.quantity}</em> </td>
                                     </tr>
                                     <tr>
                                         <td class="border_cs-td1"></td>
-                                        <td class="border_cs-td4"> <span>净 度：</span> <em>SI</em> </td>
-                                        <td class="border_cs-td5"> <span>颜 色：</span> <em>G-I</em> </td>
-                                        <td class="border_cs-td6"> <span>切 工：</span> <em>GD</em> </td>
+                                        <td class="border_cs-td4"> <span>净 度：</span> <em>${comm.neatness}</em> </td>
+                                        <td class="border_cs-td5"> <span>颜 色：</span> <em>${comm.colour}</em> </td>
+                                        <td class="border_cs-td6"> <span>切 工：</span> <em>${comm.cut}</em> </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -566,6 +566,10 @@
 
 
                             function CommentToNext() {
+                            $.get(
+                                ""
+
+                            )
                                 if (CommentPageCount >= (CommentCurrentNum + 1)) {
                                     __CurrentPagingComment.Next();
                                 }
@@ -581,138 +585,36 @@
                                         最新评论
                                     </div>
                                 </div>
-                                <div id="commentContent">
-                                    <!--每一条评论-->
-                                    <div class="every_talk">
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_right fl">
-                                            <p>好棒，服务好好</p>
-                                            <p></p>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_left fr">
-                                            <!--星星-->
-                                            <p class="star"> </p>
-                                            <div class="name_date">
-                                                <p>3**</p>
-                                                <p>2015/7/7 12:16:02</p>
-                                            </div>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                    </div>
-                                    <!--每一条评论end-->
-                                    <!--每一条评论-->
-                                    <div class="every_talk">
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_right fl">
-                                            <p>很好很有意义</p>
-                                            <p></p>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_left fr">
-                                            <!--星星-->
-                                            <p class="star"> </p>
-                                            <div class="name_date">
-                                                <p>A**</p>
-                                                <p>2015/6/9 13:18:31</p>
-                                            </div>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                    </div>
-                                    <!--每一条评论end-->
-                                    <!--每一条评论-->
-                                    <div class="every_talk">
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_right fl">
-                                            <p>1</p>
-                                            <p></p>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_left fr">
-                                            <!--星星-->
-                                            <p class="star"> </p>
-                                            <div class="name_date">
-                                                <p>匿名**</p>
-                                                <p>2015/5/15 16:42:36</p>
-                                            </div>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                    </div>
-                                    <!--每一条评论end-->
-                                    <!--每一条评论-->
-                                    <div class="every_talk">
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_right fl">
-                                            <p>老婆大人很满意！</p>
-                                            <p></p>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_left fr">
-                                            <!--星星-->
-                                            <p class="star"> </p>
-                                            <div class="name_date">
-                                                <p>晨**</p>
-                                                <p>2015/4/25 10:54:30</p>
-                                            </div>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                    </div>
-                                    <!--每一条评论end-->
-                                    <!--每一条评论-->
-                                    <div class="every_talk">
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_right fl">
-                                            <p>刚去了武汉店回来有点失望，戒指大了半寸打算编个绳子的，结果营业员说不允许编只能改大小，态度真是不想说了，我还是拿着你们的钻戒去其它品牌店编的，还准备买个男戒，结果品种太少只有几款，至于说选购的感受，感觉跟期望中的实体店相差太大。</p>
-                                            <p></p>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_left fr">
-                                            <!--星星-->
-                                            <p class="star"> </p>
-                                            <div class="name_date">
-                                                <p>勺**</p>
-                                                <p>2015/4/19 21:15:33</p>
-                                            </div>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                    </div>
-                                    <!--每一条评论end-->
-                                    <!--每一条评论-->
-                                    <div class="every_talk">
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_right fl">
-                                            <p>赞</p>
-                                            <p></p>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                        <!--每一条评论左边-->
-                                        <div class="evertalk_left fr">
-                                            <!--星星-->
-                                            <p class="star"> </p>
-                                            <div class="name_date">
-                                                <p>匿名**</p>
-                                                <p>2015/2/11 22:51:35</p>
-                                            </div>
-                                        </div>
-                                        <!--每一条评论左边end-->
-                                    </div>
-                                    <!--每一条评论end-->
+                        <!--每一条评论-->
+                            <!--每一条评论左边-->
+                        <c:forEach items="${comm.comments}" var="comment">
+                            <div class="every_talk">
+                            <div class="evertalk_right fl" id="setTab">
+                                <span>${comment.content}</span>
+                            </div>
+                            <!--每一条评论左边end-->
+                            <!--每一条评论左边-->
+                            <div class="evertalk_left fr">
+                                <!--星星-->
+                                <p class="star"> </p>
+                                <div class="name_date">
+                                    <p>${comment.u_id}</p>
+                                    <p>${comment.ctime}</p>
                                 </div>
-                                <!--new评论标题end-->
-                                <!--评论数目-->
-                                <div class="talkit_top">
+                            </div>
+                            <!--每一条评论左边end-->
+                        </div>
+                        </c:forEach>
+                            <div id="commentContent">
+                    </div>
+                        <div class="talkit_top">
                                     <div class="bt2 fl">
                                         <a target="_blank" href="/member/myevaluate.html">我要评论</a>
                                     </div>
                                     <div class="talktop_left fr">
-                                        <span>共<i id="countpl">6</i>条评论</span>
+                                        <span>共<i id="countpl">${comm.comments.size()}</i>条评论</span>
                                         <em>|</em>
-                                        <span id="commentpnum">1/1</span>
+                                        <span id="commentpnum">当前显示第${num}页</span>
                                         <span onClick="CommentToNext();" class="next_page">下一页</span>
                                     </div>
                                 </div>
@@ -747,6 +649,13 @@
                     <!--常见问答-->
                     <div id="wrap" class="xq_it xqbuy_it cmain">
                         <script>
+
+
+
+
+
+
+
                             var ComLoadEvent = function () { };
                             var ComCurrentNum = 1;
                             function ComLoadData(currentPageNum) {

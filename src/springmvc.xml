@@ -45,6 +45,6 @@
     <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
         <property name="defaultEncoding" value="utf-8"></property>
     </bean>
-
+    <!-- 注册文件上传解析器 ,id名字对应DispatcherServlet的源码中的属性multipartResolver-->
 
 </beans>

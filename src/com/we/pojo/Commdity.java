@@ -39,6 +39,7 @@ public class Commdity implements Comparable{
     private Sales sales;//销量
     private List<Comments> comments;//评论
 
+
     public Commdity() {
     }
 

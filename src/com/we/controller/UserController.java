@@ -29,7 +29,6 @@ public class UserController {
         String uname = user.getUname();
         String upassword = user.getUpassword();
 //测试
-//        System.out.println(uname);
         //判断是邮箱还是手机号的正则表达式
         String ph  = "^[1][3578]\\d{9}$";//手机号
         String em = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";//邮箱
@@ -114,4 +113,6 @@ public class UserController {
             session.invalidate();//强制失效session
         return "1";
     }
+    //查询安全等级
+
 }
