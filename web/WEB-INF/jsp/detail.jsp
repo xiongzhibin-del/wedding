@@ -139,7 +139,7 @@
                 <div class="top-right fr">
                     <!--登录注册-->
                     <ul class="tright-ul fl">
-                        <div id="ctl00_ucheader_pllogin1">
+                        <div id="ucheader1_pllogin1">
                             <c:choose>
                                 <c:when test="${login.petname eq null}">
                                     <li><a><span id="ctl00_ucheader_lit">${login.uname}</span></a></li>
@@ -148,10 +148,9 @@
                                     <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
                                 </c:otherwise>
                             </c:choose>
-
-                            <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
-                            <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
-                            <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i id="number">(0)</i></li>
+                            <li><a rel="nofollow" href="member_index">我的DR</a><em>|</em></li>
+                            <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i id="number">(${login.cart.size()})</i></li>
+                            <li><a rel="nofollow" href="javascript:logout()">退出</a></li>
                         </div>
                     </ul>
                     <!--语言选择-->
@@ -493,7 +492,7 @@
                                         $.get(
                                             "cart/flash",
                                             function (data) {
-                                                $("#number").text(data);
+                                                $("#number").text("("+data+")");
                                             }
                                         )
                                     }else if(data==="exist"){

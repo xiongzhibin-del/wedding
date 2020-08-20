@@ -109,7 +109,7 @@ public class UserController {
     @RequestMapping("/exitUser")
     @ResponseBody
     public String exitUser(HttpSession session){
-            session.invalidate();//强制失效session
+        session.invalidate();//强制失效session
         return "1";
     }
     //查询安全等级

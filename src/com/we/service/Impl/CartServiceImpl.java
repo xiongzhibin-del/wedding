@@ -23,6 +23,6 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<Cart> flash(int u_id) {
-        return cartMapper.flash(u_id);
+        return cartMapper.selectCarts(u_id);
     }
 }
