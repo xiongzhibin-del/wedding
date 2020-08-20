@@ -27,11 +27,9 @@ public class AvatarController  {
     @RequestMapping(value = "/avatarAdd",produces = "text/html;charset=utf-8")
 
     public String avatarAdd(@RequestParam MultipartFile flashvars, HttpSession session, Model model){
-
         //查看当前登录用户
         User login =(User) session.getAttribute("login");
         int u_id = login.getU_id();
-
         List<Photo> photos=new ArrayList<>();
         //获取传过来文件的真实名字
         String realname = flashvars.getOriginalFilename();
@@ -57,10 +55,9 @@ public class AvatarController  {
         String[] split = fileNewName.split("\\.");
         photo.setPtype(split[1]);
         photos.add(photo);
-        System.out.println(photos);
+//        System.out.println(photos);
         //取到当前上传的图片
        String filename= photo.getFilename();
-
         Photo p = avatarService.avatarselect(u_id);
         if(p==null){
         int n = avatarService.avatarAdd(photos);
@@ -84,11 +81,11 @@ public class AvatarController  {
     //查询数据库内头像显示出来
     @RequestMapping("/loginphoto")
     public String loginphoto(HttpSession session){
-        String filename =(String) session.getAttribute("filename");
+//        System.out.println("进来了login");
         User login =(User) session.getAttribute("login");
         int u_id = login.getU_id();
         Photo photo1 = avatarService.loginphoto(u_id);
-        System.out.println(photo1);
+//        System.out.println(photo1);
         session.setAttribute("photo1",photo1);
         return "member_index";
     }

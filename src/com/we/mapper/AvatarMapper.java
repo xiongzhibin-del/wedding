@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface AvatarMapper {
-    @Insert("insert into photo values(seq_photo_pid.nextval,#{u_id},#{realname},#{filename},#{ptype})")
+    @Insert("insert into photo values(seq_photo_pid.nextval,#{u_id},#{filename},#{realname},#{ptype})")
     public int addFile(Photo file);
 
 

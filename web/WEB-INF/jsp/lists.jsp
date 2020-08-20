@@ -34,6 +34,7 @@
             <!--头部右边-->
             <div class="top-right fr">
                 <!--登录注册-->
+                <ul class="tright-ul fl">
                 <div id="ctl00_ucheader_pllogin2">
                     <c:choose>
                         <c:when test="${login.petname eq null}">
@@ -47,6 +48,7 @@
                     <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
                     <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
                 </div>
+                </ul>
                 <!--语言选择-->
                 <ul class="langruge-ul fr">
                     <li><a target="_blank" href="index.html/en">English</a></li>

@@ -44,7 +44,7 @@
                                 <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
                             </c:otherwise>
                         </c:choose>
-                        <li><a rel="nofollow" href="member_index">我的DR</a><em>|</em></li>
+                        <li><a rel="nofollow" href="avatar/loginphoto">我的DR</a><em>|</em></li>
                         <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(${login.cart.size()})</i></li>
                         <li><a rel="nofollow" href="javascript:logout()">退出</a></li>
                     </div>
@@ -599,8 +599,8 @@
                         <!--右边ul-->
                         <ul class="bkbook_left-secul bkbook_right-spcul">
                             <li><a href="/news/3870.html"> 一克拉钻戒保值</a> </li>
-                            <li><a href="/news/2452.html"> 女生如何挑选珠宝首饰?</a> </li>
-                            <li><a href="/news/2127.html"> 佩戴珠宝首饰注意事项</a> </li>
+                            <li><a href="https://www.zhihu.com/question/268289759/answer/1274453598"> 女生如何挑选珠宝首饰?</a> </li>
+                            <li><a href="https://zhuanlan.zhihu.com/p/50835993"> 佩戴珠宝首饰注意事项</a> </li>
                         </ul>
                         <!--右边ul end-->
                     </div>
@@ -609,14 +609,14 @@
                     <div class="bkbook_right-allul">
                         <!--左边图片-->
                         <div class="bkbook_right-fimg fl">
-                            <a target="_blank" href="/news/4547.html"> <img width="120" height="72" alt="陆烧林萧求婚戒指是什么" src="images/2015061813430589cb642ca7.jpg" /> </a>
+                            <a target="_blank" href="https://www.darryring.com/news/4547.html"> <img width="120" height="72" alt="陆烧林萧求婚戒指是什么" src="images/2015061813430589cb642ca7.jpg" /> </a>
                         </div>
                         <!--左边图片end-->
                         <!--右边ul-->
                         <ul class="bkbook_left-secul bkbook_right-spcul">
-                            <li><a href="/news/4547.html"> 陆烧林萧求婚戒指是什么</a> </li>
-                            <li><a href="/news/4354.html"> 婚戒一般尺寸</a> </li>
-                            <li><a href="/news/4322.html"> 求婚戒指戴哪个手指比较好</a> </li>
+                            <li><a href="https://www.darryring.com/news/4547.html"> 陆烧林萧求婚戒指是什么</a> </li>
+                            <li><a href="https://www.zhihu.com/question/35818840/answer/64609021"> 婚戒一般尺寸</a> </li>
+                            <li><a href="https://zhuanlan.zhihu.com/p/42200828"> 求婚戒指戴哪个手指比较好</a> </li>
                         </ul>
                         <!--右边ul end-->
                     </div>

@@ -732,8 +732,8 @@
                                     <!--左边end-->
                                     <!--右边-->
                                     <div class="member_person-cort_right">
-                                        <a href="#"> <img width="90" height="90" src="images/mem.jpg" /> </a>
-                                        <p> <a href="dr_personuploadtx.aspx">更换头像</a> </p>
+                                        <a href="#"> <img width="90" height="90" src="upload/${photo1.filename}" /> </a>
+                                        <p> <a href="member_avatar">更换头像</a> </p>
                                     </div>
                                     <!--右边end-->
                                 </div>

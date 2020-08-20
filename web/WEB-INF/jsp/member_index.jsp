@@ -278,7 +278,7 @@
                                         <!--右边-->
 
                                         <div class="member_cortr-first-right fr">
-                                            <img width="90" height="90" src="upload/${photo1.filename}" />
+                                            <img width="90" height="90" src="upload/${photo1.filename}"/>
                                             <p><a href="member_avatar">编辑个人资料</a></p>
                                         </div>
 
