@@ -38,12 +38,13 @@ public class Commdity implements Comparable{
     private Image image;//图片
     private Sales sales;//销量
     private List<Comments> comments;//评论
+    private List<Shoucang> shoucangs;//收藏
 
 
     public Commdity() {
     }
 
-    public Commdity(int c_id, String cname, String seres, String style, String weight, String colour, int price, String texture, String csize, String certi, String witone, int quantity, String neatness, String cut, String minute, String newcid, Image image, Sales sales, List<Comments> comments) {
+    public Commdity(int c_id, String cname, String seres, String style, String weight, String colour, int price, String texture, String csize, String certi, String witone, int quantity, String neatness, String cut, String minute, String newcid, Image image, Sales sales, List<Comments> comments, List<Shoucang> shoucangs) {
         this.c_id = c_id;
         this.cname = cname;
         this.seres = seres;
@@ -63,6 +64,7 @@ public class Commdity implements Comparable{
         this.image = image;
         this.sales = sales;
         this.comments = comments;
+        this.shoucangs = shoucangs;
     }
 
     public int getC_id() {
@@ -217,6 +219,14 @@ public class Commdity implements Comparable{
         this.comments = comments;
     }
 
+    public List<Shoucang> getShoucangs() {
+        return shoucangs;
+    }
+
+    public void setShoucangs(List<Shoucang> shoucangs) {
+        this.shoucangs = shoucangs;
+    }
+
     @Override
     public String toString() {
         return "Commdity{" +
@@ -239,6 +249,7 @@ public class Commdity implements Comparable{
                 ", image=" + image +
                 ", sales=" + sales +
                 ", comments=" + comments +
+                ", shoucangs=" + shoucangs +
                 '}';
     }
 

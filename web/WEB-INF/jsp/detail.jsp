@@ -329,9 +329,9 @@
                                     $.get(
                                         "commdity/shoucang/${comm.c_id}",
                                         function (data) {
-                                            if(data==="1"){
+                                            if(data==="success"){
                                                 alert("收藏成功");
-                                            }else{
+                                            }else if(data==="fail"){
                                                 alert("收藏失败");
                                             }
                                         }
@@ -397,7 +397,7 @@
                                 <div class="byright_top-xq">
                                     <i>最近售出：${comm.sales.lately}</i>
                                     <i>用户评论：${comm.comments.size()}</i>
-                                    <i>收藏人气：${comm.sales.pay}</i>
+                                    <i>收藏人气：${comm.shoucangs.size()}</i>
                                 </div>
                             </div>
                             <!--钻戒end-->

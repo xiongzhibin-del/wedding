@@ -6,17 +6,15 @@ public class Sales {
   private int c_id;
   private int total;
   private int lately;
-  private int pay;
 
   public Sales() {
   }
 
-  public Sales(int said, int c_id, int total, int lately, int pay) {
+  public Sales(int said, int c_id, int total, int lately) {
     this.said = said;
     this.c_id = c_id;
     this.total = total;
     this.lately = lately;
-    this.pay = pay;
   }
 
   public int getSaid() {
@@ -51,14 +49,6 @@ public class Sales {
     this.lately = lately;
   }
 
-  public int getPay() {
-    return pay;
-  }
-
-  public void setPay(int pay) {
-    this.pay = pay;
-  }
-
   @Override
   public String toString() {
     return "Sales{" +
@@ -66,7 +56,6 @@ public class Sales {
             ", c_id=" + c_id +
             ", total=" + total +
             ", lately=" + lately +
-            ", pay=" + pay +
             '}';
   }
 }

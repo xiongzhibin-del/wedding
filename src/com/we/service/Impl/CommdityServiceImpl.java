@@ -93,4 +93,13 @@ public class CommdityServiceImpl implements CommdityService {
         }
         return liulans;
     }
+
+    @Override
+    public int shoucang(int u_id, int c_id) {
+        int n = 0;
+        if(commdityMapper.existShou(u_id, c_id)==null){
+            n = commdityMapper.shoucang(u_id, c_id);
+        }
+        return n;
+    }
 }

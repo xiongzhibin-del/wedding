@@ -100,8 +100,13 @@ public class CommdityController {
 
     @RequestMapping(value = "/shoucang/{c_id}",produces = "text/html;charset=utf-8")
     @ResponseBody
-    public String shoucang(@PathVariable int c_id){
-        System.out.println(c_id);
-        return "1";
+    public String shoucang(@PathVariable int c_id,HttpSession session){
+        User login =(User) session.getAttribute("login");
+        int n = commdityService.shoucang(login.getU_id(), c_id);
+        if(n==1){
+            return "success";
+        }else{
+            return "fail";
+        }
     }
 }
