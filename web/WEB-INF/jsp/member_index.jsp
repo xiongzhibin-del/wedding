@@ -45,7 +45,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
-                            <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
+                            <li><a target="black" rel="nofollow" href="avatar/loginphoto">我的DR</a><em>|</em></li>
                             <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
                         </div>
                     </ul>
@@ -276,10 +276,12 @@
                                         </div>
                                         <!--左边end-->
                                         <!--右边-->
+
                                         <div class="member_cortr-first-right fr">
-                                            <img width="90" height="90" src="images/mem.jpg" />
-                                            <p><a href="member_avatar.html">编辑个人资料</a></p>
+                                            <img width="90" height="90" src="upload/${photo1.filename}" />
+                                            <p><a href="member_avatar">编辑个人资料</a></p>
                                         </div>
+
                                         <!--右边end-->
                                     </div>
                                     <!--第一块end-->

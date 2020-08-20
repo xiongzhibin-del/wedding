@@ -1,21 +1,17 @@
+<%@ page import="com.we.pojo.Photo" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.we.pojo.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-    <base href="<%=basePath%>">
 <html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
 <head>
+    <base href="<%=basePath%>">
     <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
     <meta charset="utf-8"/>
-    <!--/*技术支持，小庄602842076     验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*技术支持，小庄602842076    验证：官网技术支持*/
-    /*https://shop116998991.taobao.com/*/
-    /*https://shop116998991.taobao.com/*/
-    /*https://shop116998991.taobao.com/*/-->
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
     <title>个人中心 - 上传头像</title>
@@ -25,67 +21,16 @@
     <script type="text/javascript" src="js/jquery.uploadify.js"></script>
     <script type="text/javascript" src="js/jquery.Jcrop.js"></script>
     <script type="text/javascript" src="js/Jcrop_photo.js"></script>
-    <script type="text/javascript">
-        $(function () {
+<%--    <script type="text/javascript">--%>
+<%--        function loadimg(url) {--%>
+<%--            $(".member_person-upload img").attr("src", url);--%>
+<%--        }--%>
 
-            $("#uploadimg").uploadify({
-                //指定swf文件
-                'swf': '/uploadify/uploadify.swf',
-                //后台处理的页面
-                'uploader': '/nAPI/imgupload.ashx',
-                //按钮显示的文字
-                'buttonText': '上传图片',
-                //显示的高度和宽度，默认 height 30；width 120
-                //'height': 15,
-                //'width': 80,
-                //大小限制200KB
-                'fileSizeLimit': 200,
-                //上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
-                //在浏览窗口底部的文件类型下拉菜单中显示的文本
-                'fileTypeDesc': 'Image Files',
-                //允许上传的文件后缀
-                'fileTypeExts': '*.gif; *.jpg; *.png; *.jpeg;',
-                'onUploadSuccess': function (file, data, response) {
-                    var msg = jQuery.parseJSON(data);
-                    if (response) {
-                        loadimg(msg.url);
-                    }
-                    else {
-                        alert("文件 " + file.name + " 上传失败。")
-                    }
-                }
-            });
+<%--        $(function () {--%>
+<%--            loadimg("images/mem-big.jpg");--%>
+<%--        });--%>
 
-        });
-
-        function loadimg(url) {
-            $(".member_person-upload img").attr("src", url);
-        }
-
-        $(function () {
-            loadimg("images/mem-big.jpg");
-        });
-
-        function SaveCustomImg() {
-            var c = $(".jcrop-holder div").eq(0);
-            var x = parseInt(parseInt(c.css("left").replace("px", "")) / currentScale);
-            var y = parseInt(parseInt(c.css("top").replace("px", "")) / currentScale);
-            var width = parseInt(c.width() / currentScale);
-            var height = parseInt(c.height() / currentScale);
-            var url = $("#bPic").attr("src");
-            var custom = { "url": url, "x": x, "y": y, "width": width, "height": height };
-            $.post("/nAPI/customimg.ashx", custom, function (data) {
-                var msg = jQuery.parseJSON(data);
-                if (msg.result) {
-                    window.location = "dr_personinfo.aspx";
-                }
-                else {
-                    alert("自定义头像保存失败。");
-                }
-            });
-        }
-
-    </script>
+<%--    </script>--%>
 </head>
 
 
@@ -102,9 +47,16 @@
             <!--登录注册-->
             <ul class="tright-ul fl">
                 <div id="ctl00_ucheader_pllogin2">
-                    <li><a><span id="ctl00_ucheader_lit">KLNgOk</span></a></li>
+                    <c:choose>
+                        <c:when test="${login.petname eq null}">
+                            <li><a><span id="ctl00_ucheader_lit">${login.uname}</span></a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
+                        </c:otherwise>
+                    </c:choose>
                     <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
-                    <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
+                    <li><a target="black" rel="nofollow" href="avatar/loginphoto">我的DR</a><em>|</em></li>
                     <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
                 </div>
             </ul>
@@ -220,11 +172,18 @@
 <!--导航end-->
 <script type="text/javascript">
     function logout() {
-        if (window.confirm('确定退出吗？')) {
-
-            $.get("/nAPI/QuitExit.ashx", function (data) {
-                window.location.href = "/";
-            });
+        var r = window.confirm('确定退出吗？')
+        if (r == true) {
+            x = "您按了确认！";
+            $.get(
+                "user/exitUser",
+                function (data) {
+                    if (data == "1") {
+                        window.location.href = "login";
+                    } else {
+                        x = "您按了取消！";
+                    }
+                });
         }
     }
 </script>
@@ -276,17 +235,27 @@
                                 <h4>设置头像</h4>
                                 <p>为了能给您提供个性化服务，请完善您的基本资料。</p>
                             </div>
+
                             <!--选择文件上传-->
-                            <div class="member_person-upload">
-                                <div id="uploadimg" class="uploadify" style="height: 30px; width: 120px;">
-                                    <object width="120" height="30" class="swfupload" data="/uploadify/uploadify.swf?preventswfcaching=1436277845884" type="application/x-shockwave-flash" id="SWFUpload_0" style="position: absolute; z-index: 1;"><param value="transparent" name="wmode"></param><param value="/uploadify/uploadify.swf?preventswfcaching=1436277845884" name="movie"></param><param value="high" name="quality"></param><param value="false" name="menu"></param><param value="always" name="allowScriptAccess"></param><param value="movieName=SWFUpload_0&amp;uploadURL=%2FnAPI%2Fimgupload.ashx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=30&amp;params=&amp;filePostName=Filedata&amp;fileTypes=*.gif%3B%20*.jpg%3B%20*.png%3B%20*.jpeg%3B&amp;fileTypesDescription=Image%20Files&amp;fileSizeLimit=200&amp;fileUploadLimit=0&amp;fileQueueLimit=999&amp;debugEnabled=false&amp;buttonImageURL=%2Fmember%2F&amp;buttonWidth=120&amp;buttonHeight=30&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=color%3A%20%23000000%3B%20font-size%3A%2016pt%3B&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-2" name="flashvars"></param></object>
-                                    <div id="uploadimg-button" class="uploadify-button " style="height: 30px; line-height: 30px; width: 120px;">
-                                        <span class="uploadify-button-text">上传图片</span>
-                                    </div>
-                                </div>
-                                <div id="uploadimg-queue" class="uploadify-queue"></div>
-                                <span class="fl">请确保文件为大小不超过200k，格式为jpg,png,gif的图片。</span>
-                            </div>
+                            <form action="avatar/avatarAdd" method="POST" enctype="multipart/form-data" >
+
+                                <input type="file" accept="image/jpg,image/png,image/jpeg,image/gif" required = 'required' name="flashvars">
+
+                                <input id="sub" type="submit" value="上传头像">
+
+                            </form>
+
+
+<%--                            <div class="member_person-upload">--%>
+<%--                                <div id="uploadimg" class="uploadify" style="height: 30px; width: 120px;">--%>
+<%--                                    <object width="120" height="30" class="swfupload" data="/uploadify/uploadify.swf?preventswfcaching=1436277845884" type="application/x-shockwave-flash" id="SWFUpload_0" style="position: absolute; z-index: 1;"><param value="transparent" name="wmode"></param><param value="/uploadify/uploadify.swf?preventswfcaching=1436277845884" name="movie"></param><param value="high" name="quality"></param><param value="false" name="menu"></param><param value="always" name="allowScriptAccess"></param><param value="movieName=SWFUpload_0&amp;uploadURL=%2FnAPI%2Fimgupload.ashx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=30&amp;params=&amp;filePostName=Filedata&amp;fileTypes=*.gif%3B%20*.jpg%3B%20*.png%3B%20*.jpeg%3B&amp;fileTypesDescription=Image%20Files&amp;fileSizeLimit=200&amp;fileUploadLimit=0&amp;fileQueueLimit=999&amp;debugEnabled=false&amp;buttonImageURL=%2Fmember%2F&amp;buttonWidth=120&amp;buttonHeight=30&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=color%3A%20%23000000%3B%20font-size%3A%2016pt%3B&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-2" name="flashvars"></param></object>--%>
+<%--                                    <div id="uploadimg-button" class="uploadify-button " style="height: 30px; line-height: 30px; width: 120px;">--%>
+<%--                                        <span class="uploadify-button-text">上传图片</span>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div id="uploadimg-queue" class="uploadify-queue"></div>--%>
+<%--                                <span class="fl">请确保文件为大小不超过200k，格式为jpg,png,gif的图片。</span>--%>
+<%--                            </div>--%>
                             <div class="member_person-upload">
                                 <img id="bPic" style="width: 300px; height: 300px; display: none;" src="images/mem-big.jpg" />
                                 <div style="width: 300px; height: 300px; position: relative; background-color: rgb(205, 205, 205);" class="jcrop-holder">
@@ -314,21 +283,20 @@
                                             <div style="cursor: se-resize; position: absolute; z-index: 381; top: 85px; left: 85px; opacity: 0.5;" class="jcrop-handle"></div>
                                         </div>
                                     </div>
-                                    <div class="jcrop-tracker" style="width: 316px; height: 316px; position: absolute; top: -8px; left: -8px; z-index: 290; cursor: crosshair;"></div>
-                                    <div style="position: absolute; overflow: hidden;">
-                                        <input type="radio" style="position: absolute; left: -30px;" />
-                                    </div>
-                                    <img style="width: 300px; height: 300px; position: absolute; opacity: 0.5;" src="images/mem-big.jpg" />
+                                <div style="position: absolute; overflow: hidden;">
+                                <input type="radio" style="position: absolute; left: -30px;" />
+                                 </div>
+                                <img style="width: 300px; height: 300px; position: absolute; opacity: 0.5;" src="upload/${filename}" />
                                 </div>
                                 <div id="preview_box" class="person-upload-right">
-                                    <img id="crop_preview" src="images/mem-big.jpg" style="width: 300px; height: 300px; margin-left: -10px; margin-top: -10px;" />
+                                <img id="crop_preview" src="upload/${filename}" style="width: 300px; height: 300px; margin-left: -10px; margin-top: -10px;" />
                                 </div>
-                                <div class="person-upload-rightbt">
-                                    <div onClick="SaveCustomImg()" class="person-upload-button">
-                                        保存头像
-                                    </div>
-                                    <p></p>
-                                </div>
+<%--                                <div class="person-upload-rightbt">--%>
+<%--                                    <div onClick="SaveCustomImg()" class="person-upload-button">--%>
+<%--                                        保存头像--%>
+<%--                                    </div>--%>
+<%--                                    <p></p>--%>
+<%--                                </div>--%>
                             </div>
                             <!--选择文件上传end-->
                         </div>
@@ -691,6 +659,11 @@
     </div>
 </div>
 <script type="text/javascript">
+    function x() {
+
+    }
+    
+    
     function showbox(id) {
         getQeestion(id);
         for (var i = 1; i <= 8; i++) {

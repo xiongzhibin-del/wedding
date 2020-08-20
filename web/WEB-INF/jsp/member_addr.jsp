@@ -358,7 +358,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
-                            <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
+                            <li><a target="black" rel="nofollow" href="avatar/loginphoto">我的DR</a><em>|</em></li>
                             <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
                         </div>
                     </ul>
