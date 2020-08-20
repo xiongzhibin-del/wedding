@@ -43,4 +43,11 @@
             </if>
         </where>
     </select>
+
+    <select id="liulans" resultMap="map1">
+        select * from commdity
+        <where>
+            c_id = #{param1}
+        </where>
+    </select>
 </mapper>

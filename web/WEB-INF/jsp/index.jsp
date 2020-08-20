@@ -464,7 +464,7 @@
                         <c:forEach items="${commdities}" var="comm" varStatus="status">
                         <li>
                             <div class="by_top">
-                                <a target="_blank" href="detail?index=${status.index}" rel="nofollow"></a>
+                                <a target="_blank" href="commdity/detail/${status.index}" rel="nofollow"></a>
                                 <div style="opacity:1" class="bything-one">
                                     <img width="236px" height="236px" alt="${comm.seres}系列 ${comm.style}&nbsp;${comm.minute}分&nbsp;${comm.colour}" src="images/${comm.image.filename}" />
                                 </div>

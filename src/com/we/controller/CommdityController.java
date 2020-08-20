@@ -2,6 +2,7 @@ package com.we.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.we.pojo.Commdity;
+import com.we.pojo.User;
 import com.we.service.CommdityService;
 import com.we.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +85,23 @@ public class CommdityController {
         List<Commdity> commdities = commdityService.select(ckeyword, priceList, zctList, czList);
         session.setAttribute("commdities",commdities);
         return "lists";
+    }
+
+    @RequestMapping(value = "/detail/{index}",produces = "text/html;charset=utf-8")
+    public String detail(@PathVariable int index,HttpSession session,Model model){
+        List<Commdity> commdities =(List<Commdity>) session.getAttribute("commdities");
+        Commdity commdity = commdities.get(index);
+        User login =(User) session.getAttribute("login");
+        List<Commdity> liulans = commdityService.liulan(login.getU_id(), commdity.getC_id());
+        model.addAttribute("comm",commdity);
+        model.addAttribute("liulans",liulans);
+        return "detail";
+    }
+
+    @RequestMapping(value = "/shoucang/{c_id}",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String shoucang(@PathVariable int c_id){
+        System.out.println(c_id);
+        return "1";
     }
 }

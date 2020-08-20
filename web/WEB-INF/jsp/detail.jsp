@@ -11,13 +11,13 @@
 <head></head>
     <base href="<%=basePath%>">
 <body>
-<%
-    List<Commdity> comms = (List<Commdity>) session.getAttribute("commdities");
-    System.out.println(Integer.parseInt(request.getParameter("index")));
-    Commdity comm = comms.get(Integer.parseInt(request.getParameter("index")));
-    request.setAttribute("comm",comm);
-    System.out.println(comm);
-%>
+<%--<%--%>
+<%--    List<Commdity> comms = (List<Commdity>) session.getAttribute("commdities");--%>
+<%--    System.out.println(Integer.parseInt(request.getParameter("index")));--%>
+<%--    Commdity comm = comms.get(Integer.parseInt(request.getParameter("index")));--%>
+<%--    request.setAttribute("comm",comm);--%>
+<%--    System.out.println(comm);--%>
+<%--%>--%>
 <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
@@ -39,12 +39,12 @@
         return formatCurrency(CurrentDiamondPrice + FDiamondPrice + CurrentMaterialPrice);
     }
 
-    $(function(){
-        MaterialChoosedEvent = function(m,p){
-            CurrentMaterialPrice = p;
-            $(".byright_top span").text("¥"+getProductPrice());
-        };
-    });
+    // $(function(){
+    //     MaterialChoosedEvent = function(m,p){
+    //         CurrentMaterialPrice = p;
+    //         $(".byright_top span").text("¥"+getProductPrice());
+    //     };
+    // });
 
     function addCart(msg) {
 //            alert(msg);
@@ -325,10 +325,17 @@
                                 }
                                 catch (e) { }
                                 $(".share_sc").click(function () {
-                                    if ('false' == 'false') {
-                                        alert("请登录！");
-                                        window.location.href = 'login.html?forward=index.html/jewelry/404.html';
-                                    }
+                                    //收藏
+                                    $.get(
+                                        "commdity/shoucang/${comm.c_id}",
+                                        function (data) {
+                                            if(data==="1"){
+                                                alert("收藏成功");
+                                            }else{
+                                                alert("收藏失败");
+                                            }
+                                        }
+                                    )
                                 });
 
                             });
@@ -350,7 +357,7 @@
                         <!--购买页中间的中间图片-->
                         <div class="buycort_center fl">
                             <ul class="ul_center">
-                                <li id="magnifier2083" style="display: list-item;"> <img src="images/201409031259093e45b5ecf0.jpg" alt="锁住一生 LOCK套链 0.006 G-I" /> <span style="position: absolute; left: 248px; top: 248px; display: none; width: 150px; height: 150px; background: rgb(153, 153, 153) none repeat scroll 0% 0%; border: 1px solid rgb(0, 0, 0); cursor: move; opacity: 0.4;"></span>
+                                <li id="magnifier2083" style="display: list-item;"> <img src="images/${comm.image.filename}" alt="锁住一生 LOCK套链 0.006 G-I" /> <span style="position: absolute; left: 248px; top: 248px; display: none; width: 150px; height: 150px; background: rgb(153, 153, 153) none repeat scroll 0% 0%; border: 1px solid rgb(0, 0, 0); cursor: move; opacity: 0.4;"></span>
                                     <div style="position: absolute; overflow: hidden; width: 300px; height: 300px; top: 0px; right: -385px; border: 1px solid rgb(204, 204, 204); z-index: 99998; display: none;">
                                         <img src="images/201502031541470f549eecb4.jpg" style="position: absolute; left: -498px; top: -498px; width: 800px; height: 800px;" />
                                     </div></li>
@@ -397,7 +404,7 @@
                             <!--参数-->
                             <div class="pho_cs" id="ctl00_content_zbDiv">
                                 <p> <span>尺寸：</span> <i>${comm.csize}</i> </p>
-                                <p id="ctl00_content_zDiamondDiv"> <span>钻石：</span> <i>主砖${comm.quantity}颗</i> <i>0${comm.weight}克拉/颗</i> </p>
+                                <p id="ctl00_content_zDiamondDiv"> <span>钻石：</span> <i>主钻${comm.quantity}颗</i> <i>0${comm.weight}克拉/颗</i> </p>
                             </div>
                             <!--参数end-->
                             <!--选择材质刻字等-->
@@ -954,10 +961,12 @@
                     <div class="read_it">
                         <p class="read_jl">您的浏览记录</p>
                         <ul id="u_history" class="read_ul" style="width: 1650px;">
+                            <c:forEach items="${liulans}" var="liulan">
                             <li>
                                 <div class="read_top">
-                                    <a target="_blank" href="/jewelry/404.html" rel="nofollow"> <img src="images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.6分G-I色" /> </a>
-                                </div> <p><a target="_blank" href="/jewelry/404.html"> 锁住一生 LOCK套链 0.6分G-I色 </a></p> <p><span>￥5,920</span></p> </li>
+                                    <a target="_blank" href="/jewelry/404.html" rel="nofollow"> <img src="images/${liulan.image.filename}" alt="${liulan.cname} ${liulan.minute}分${liulan.colour}" /> </a>
+                                </div> <p><a target="_blank" href="/jewelry/404.html"> ${liulan.cname} ${liulan.minute}分${liulan.colour} </a></p> <p><span>￥${liulan.price}</span></p> </li>
+                            </c:forEach>
                         </ul>
                         <ul style="display: none; width: 1650px;" id="u_rx" class="read_ul">
                             <li>

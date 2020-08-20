@@ -5,7 +5,10 @@ import com.we.pojo.Commdity;
 import com.we.service.CommdityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class CommdityServiceImpl implements CommdityService {
@@ -74,5 +77,20 @@ public class CommdityServiceImpl implements CommdityService {
             ckeyword="";
         }
         return commdityMapper.select(ckeyword,priceListLow,priceListHigh,zctListLow,zctListHigh,cz);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<Commdity> liulan(int u_id, int c_id) {
+        if(commdityMapper.exist(u_id,c_id)==null){
+            commdityMapper.liulan(u_id, c_id);
+        }
+        List<Integer> c_ids = commdityMapper.chaCid(u_id);
+        List<Commdity> liulans = new ArrayList<>();
+        for(Integer i:c_ids){
+            Commdity liulan = commdityMapper.liulans(i);
+            liulans.add(liulan);
+        }
+        return liulans;
     }
 }
