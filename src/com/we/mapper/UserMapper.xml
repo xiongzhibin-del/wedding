@@ -4,7 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.we.mapper.UserMapper">
 
-    <select id="loginUser" parameterType="com.we.pojo.User" resultType="com.we.pojo.User">
+    <resultMap id="map1" type="com.we.pojo.User">
+        <id property="u_id" column="u_id"></id>
+        <collection property="cart" column="u_id" select="com.we.mapper.CartMapper.selectCarts"></collection>
+    </resultMap>
+    <select id="loginUser" parameterType="com.we.pojo.User" resultMap="map1">
         select * from  u_ser where 1=1
         <if test="uname!=null and uname!=''">
             and uname=#{uname}
@@ -18,7 +22,6 @@
         <if test="upassword!=null and upassword!=''">
             and upassword=#{upassword}
         </if>
-
     </select>
 
 

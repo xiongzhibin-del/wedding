@@ -150,8 +150,8 @@
                             </c:choose>
 
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
-                            <li><a target="black" rel="nofollow" href="avatar/loginphoto">我的DR</a><em>|</em></li>
-                            <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
+                            <li><a target="black" rel="nofollow" href="member_index.html">我的DR</a><em>|</em></li>
+                            <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i id="number">(0)</i></li>
                         </div>
                     </ul>
                     <!--语言选择-->
@@ -441,17 +441,32 @@
                                 <!--第二行-->
                                 <div class="thr_secound">
                                     <span>数量：</span>
-                                    <select> <option>1</option> </select>
+                                    <select> <option>1</option> </select>&nbsp;&nbsp;&nbsp;
+                                    <span>手寸/尺寸：</span>
+                                    <select id="chicun">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select></br>
+                                    <span>刻字：</span>
+                                    <input id="kezi" placeholder="刻字">
                                 </div>
                             </div>
                             <!--选择材质刻字等end-->
                             <p class="thered_word">中国大陆用户付款后15个工作日内可收到货品,其它地区请咨询客服。</p>
                             <!--购买选项-->
                             <div id="addCa" class="button buy_button">
-                                <div title="购买darry ring钻戒" class="bt1">
+                                <div title="购买darry ring钻戒" class="bt1" id="cartAdd">
                                     <span>加入购物车</span>
                                 </div>
-                                <div title="把darry ring加入购物车" class="bt2">
+                                <div title="把darry ring加入购物车" class="bt2" id="buyNow">
                                     <span>立即购买</span>
                                 </div>
                             </div>
@@ -465,6 +480,35 @@
                         CommentLoadEvent = function (datacount) {
                             $(".gdnav_ul #commentDataCount").text("(" + datacount + ")");
                         };
+                        $("#cartAdd").click(function () {
+                            //加入购物车
+                            $.get(
+                                "cart/add",
+                                {c_id:${comm.c_id},
+                                kezi:$("#kezi").val(),
+                                chicun:$("#chicun").val()},
+                                function (data) {
+                                    if(data==="success"){
+                                        alert("加入购物车成功");
+                                        $.get(
+                                            "cart/flash",
+                                            function (data) {
+                                                $("#number").text(data);
+                                            }
+                                        )
+                                    }else if(data==="exist"){
+                                        alert("商品已存在")
+                                    }else{
+                                        alert("加入购物车失败")
+                                    }
+                                }
+                            )
+
+                        });
+                        $("#buyNow").click(function () {
+                            //立刻购买
+                            alert("购买成功");
+                        })
 
                     });
                 </script>
@@ -615,9 +659,9 @@
                             <div id="commentContent">
                     </div>
                         <div class="talkit_top">
-                                    <div class="bt2 fl">
-                                        <a target="_blank" href="/member/myevaluate.html">我要评论</a>
-                                    </div>
+<%--                                    <div class="bt2 fl">--%>
+<%--                                        <a target="_blank" href="/member/myevaluate.html">我要评论</a>--%>
+<%--                                    </div>--%>
                                     <div class="talktop_left fr">
                                         <span>共<i id="countpl">${comm.comments.size()}</i>条评论</span>
                                         <em>|</em>
@@ -1076,111 +1120,111 @@
                         return this.replace(new RegExp(s1, "gm"), s2);
                     }
                     $(function () {
-                        $('#addCa').click(function () {
-                            var manHand = $("#ctl00_content_ddlManHandsize").val();
-                            var womanHand = $("#ctl00_content_ddlWomanHandsize").val();
-                            if (manHand == -1 || womanHand == -1) {
-                                alert("请选择手寸。");
-                                return;
-                            }
-                            if ($(".thr_first .iborder").text() == null || $(".thr_first .iborder").text() == "") {
-                                alert("请选择材质");
-                                return;
-                            }
-                            if ($("#manFont").length > 0) {
-                                var mfontlen = strlength($("#manFont").val());
-                                if (mfontlen > 10) {
-                                    alert("男戒刻字数超过了10个字符。");
-                                }
-                            }
-                            if ($("#womanFont").length > 0) {
-                                var wfontlen = strlength($("#womanFont").val());
-                                if (wfontlen > 10) {
-                                    alert("女戒刻字数超过了10个字符。");
-                                }
-                            }
-                            /****
-                             if ($("#manFont").length > 0) {
-            if (strlength($("#manFont").val().replaceAll("♥", "?")) > 8) {
-            alert("男戒刻字数超过了8个字符，中文为2个字符。");
-            return;
-            }
-            }
-                             if ($("#womanFont").length > 0) {
-            if (strlength($("#womanFont").val().replaceAll("♥", "?")) > 8) {
-            alert("女戒刻字数超过了8个字符，中文为2个字符。");
-            return;
-            }
-            }
-                             ****/
-                            if ($("#ipt_font").length > 0) {
-
-                                if ($("#ctl00_content_ddlHandSize").val() == -1) {
-                                    alert("请选择手寸。");
-                                    return;
-                                }
-
-                                //                if (strlength($("#ipt_font").val().replaceAll("♥", "?")) > 8) {
-                                //                    alert("刻字数超过了8个字符，中文为2个字符。");
-                                //                    return;
-                                //                }
-                            }
-                            //判断是否登录
-                            if ('false' == "true") {
-                                $.get("/API/DarryringYzAPI.ashx", { action: 'darryhome' }, function (data) {
-                                    var json = $.parseJSON(data);
-                                    if (json.Status == "true") {
-
-                                        $(".yz_password").hide();
-                                        addCartFun();
-                                        return false;
-                                    }
-                                    else if (json.MsgCode == "NoPay") {
-                                        $(".notCart").hide();
-                                        $(".haveDarry").hide();
-                                        $(".wgm").hide();
-                                        $('.yz_password').show();
-                                        $('.backall').show();
-                                        $("#noPayOrder").show();
-                                        $("#noPay").text(json.Name);
-                                        return false;
-                                    }
-                                    else {
-
-                                        //未购买
-                                        //判断购物车中是否存在Darry钻戒
-                                        $.get("/API/DarryringYzAPI.ashx", { action: 'cart' }, function (dat) {
-                                            //购物车中不存在Darry钻戒
-
-                                            if (dat == "false") {
-
-                                                $(".notCart").hide();
-                                                $(".haveDarry").hide();
-                                                $(".wgm").show();
-                                                $('.yz_password').show();
-                                                $('.backall').show();
-
-                                                return false;
-                                            } else {
-                                                $(".yz_password").hide();
-                                                addCartFun();
-                                            }
-                                        });
-                                        //                        $(".wgm").show();
-                                        //                        $('.yz_password').show();
-                                        //                        $('.backall').show();
-                                        //                        alert("23");
-                                    }
-                                });
-
-                            } else {
-                                //未登录
-                                $(".wdl").show();
-                                $('.yz_password').show();
-                                $('.backall').show();
-
-                            }
-                        });
+            //             $('#addCa').click(function () {
+            //                 // var manHand = $("#ctl00_content_ddlManHandsize").val();
+            //                 // var womanHand = $("#ctl00_content_ddlWomanHandsize").val();
+            //                 if (manHand == -1 || womanHand == -1) {
+            //                     alert("请选择尺寸");
+            //                     return;
+            //                 }
+            //                 if ($(".thr_first .iborder").text() == null || $(".thr_first .iborder").text() == "") {
+            //                     alert("请选择材质");
+            //                     return;
+            //                 }
+            //                 if ($("#manFont").length > 0) {
+            //                     var mfontlen = strlength($("#manFont").val());
+            //                     if (mfontlen > 10) {
+            //                         alert("男戒刻字数超过了10个字符。");
+            //                     }
+            //                 }
+            //                 if ($("#womanFont").length > 0) {
+            //                     var wfontlen = strlength($("#womanFont").val());
+            //                     if (wfontlen > 10) {
+            //                         alert("女戒刻字数超过了10个字符。");
+            //                     }
+            //                 }
+            //                 /****
+            //                  if ($("#manFont").length > 0) {
+            // if (strlength($("#manFont").val().replaceAll("♥", "?")) > 8) {
+            // alert("男戒刻字数超过了8个字符，中文为2个字符。");
+            // return;
+            // }
+            // }
+            //                  if ($("#womanFont").length > 0) {
+            // if (strlength($("#womanFont").val().replaceAll("♥", "?")) > 8) {
+            // alert("女戒刻字数超过了8个字符，中文为2个字符。");
+            // return;
+            // }
+            // }
+            //                  ****/
+            //                 if ($("#ipt_font").length > 0) {
+            //
+            //                     if ($("#ctl00_content_ddlHandSize").val() == -1) {
+            //                         alert("请选择手寸。");
+            //                         return;
+            //                     }
+            //
+            //                     //                if (strlength($("#ipt_font").val().replaceAll("♥", "?")) > 8) {
+            //                     //                    alert("刻字数超过了8个字符，中文为2个字符。");
+            //                     //                    return;
+            //                     //                }
+            //                 }
+            //                 //判断是否登录
+            //                 if ('false' == "true") {
+            //                     $.get("/API/DarryringYzAPI.ashx", { action: 'darryhome' }, function (data) {
+            //                         var json = $.parseJSON(data);
+            //                         if (json.Status == "true") {
+            //
+            //                             $(".yz_password").hide();
+            //                             addCartFun();
+            //                             return false;
+            //                         }
+            //                         else if (json.MsgCode == "NoPay") {
+            //                             $(".notCart").hide();
+            //                             $(".haveDarry").hide();
+            //                             $(".wgm").hide();
+            //                             $('.yz_password').show();
+            //                             $('.backall').show();
+            //                             $("#noPayOrder").show();
+            //                             $("#noPay").text(json.Name);
+            //                             return false;
+            //                         }
+            //                         else {
+            //
+            //                             //未购买
+            //                             //判断购物车中是否存在Darry钻戒
+            //                             $.get("/API/DarryringYzAPI.ashx", { action: 'cart' }, function (dat) {
+            //                                 //购物车中不存在Darry钻戒
+            //
+            //                                 if (dat == "false") {
+            //
+            //                                     $(".notCart").hide();
+            //                                     $(".haveDarry").hide();
+            //                                     $(".wgm").show();
+            //                                     $('.yz_password').show();
+            //                                     $('.backall').show();
+            //
+            //                                     return false;
+            //                                 } else {
+            //                                     $(".yz_password").hide();
+            //                                     addCartFun();
+            //                                 }
+            //                             });
+            //                             //                        $(".wgm").show();
+            //                             //                        $('.yz_password').show();
+            //                             //                        $('.backall').show();
+            //                             //                        alert("23");
+            //                         }
+            //                     });
+            //
+            //                 } else {
+            //                     //未登录
+            //                     $(".wdl").show();
+            //                     $('.yz_password').show();
+            //                     $('.backall').show();
+            //
+            //                 }
+            //             });
                         $("#btnBuy").click(function () {
                             addCartFun();
                             $(".yz_password").hide();

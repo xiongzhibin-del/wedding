@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.we.mapper.CartMapper">
+    <insert id="addCart">
+        insert into cart values
+        (seq_cart_cid.nextval,
+        #{param1,jdbcType=INTEGER},
+        #{param2,jdbcType=INTEGER},
+        #{param3,jdbcType=VARCHAR},
+        #{param4,jdbcType=INTEGER})
+    </insert>
+
+    <resultMap id="map1" type="com.we.pojo.Cart">
+        <result property="c_id" column="c_id"></result>
+        <association property="commdity" javaType="com.we.pojo.Commdity" column="c_id" select="com.we.mapper.CommdityMapper.liulans"></association>
+    </resultMap>
+    <select id="selectCarts" resultMap="map1">
+        select * from cart
+        <where>
+            u_id = #{param1}
+        </where>
+    </select>
+</mapper>

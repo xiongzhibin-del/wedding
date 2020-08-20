@@ -19,12 +19,12 @@ public class User implements Serializable {
     private String ucoding;//邮政编码
     private String landine;//座机
     private String petname;//昵称
-    private Photo photos;//持有头像表
+    private List<Cart> cart;
 
     public User() {
     }
 
-    public User(int u_id, String uname, String upassword, String mobile, String e_mail, String realname, String sex, Date udate, String uregion, String usite, String ucoding, String landine, String petname, Photo photos) {
+    public User(int u_id, String uname, String upassword, String mobile, String e_mail, String realname, String sex, Date udate, String uregion, String usite, String ucoding, String landine, String petname, List<Cart> cart) {
         this.u_id = u_id;
         this.uname = uname;
         this.upassword = upassword;
@@ -38,7 +38,7 @@ public class User implements Serializable {
         this.ucoding = ucoding;
         this.landine = landine;
         this.petname = petname;
-        this.photos = photos;
+        this.cart = cart;
     }
 
     public int getU_id() {
@@ -145,12 +145,12 @@ public class User implements Serializable {
         this.petname = petname;
     }
 
-    public Photo getPhotos() {
-        return photos;
+    public List<Cart> getCart() {
+        return cart;
     }
 
-    public void setPhotos(Photo photos) {
-        this.photos = photos;
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
     }
 
     @Override
@@ -169,7 +169,7 @@ public class User implements Serializable {
                 ", ucoding='" + ucoding + '\'' +
                 ", landine='" + landine + '\'' +
                 ", petname='" + petname + '\'' +
-                ", photos=" + photos +
+                ", cart=" + cart +
                 '}';
     }
 }
