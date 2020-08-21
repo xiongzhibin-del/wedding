@@ -1,6 +1,8 @@
 package com.we.mapper;
 
 import com.we.pojo.Commdity;
+import com.we.pojo.Image;
+import com.we.pojo.LIulan;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -18,9 +20,11 @@ public interface CommdityMapper {
     public Commdity liulans(int c_id);
     @Select("select lid from liulan where u_id = #{param1} and c_id = #{param2}")
     public Integer exist(int u_id,int c_id);
-
     @Insert("insert into shoucang values(seq_shoucang_sid.nextval,#{param1},#{param2})")
     public int shoucang (int u_id,int c_id);
     @Select("select sid from shoucang where u_id = #{param1} and c_id = #{param2}")
     public Integer existShou(int u_id,int c_id);
+
+
+
 }

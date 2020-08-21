@@ -45,7 +45,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
-                            <li><a target="black" rel="nofollow" href="avatar/loginphoto">我的DR</a><em>|</em></li>
+                            <li><a target="black" rel="nofollow" href="commdity/detail1">我的DR</a><em>|</em></li>
                             <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
                         </div>
                     </ul>
@@ -190,7 +190,7 @@
                                 <!--我的DR-->
                                 <div class="member_cortleft-tittle">
                                     <i class="mb_home"></i>
-                                    <a rel="nofollow" href="member_index.html">我的DR</a>
+                                    <a rel="nofollow" href="commdity/detail1">我的DR</a>
                                 </div>
                                 <!--我的DR end-->
                                 <ul class="member_cort-ul">
@@ -329,14 +329,13 @@
                                                 <li onClick="getPro(2)">热销产品</li>
                                             </ul>
                                             <ul id="u_history" class="read_ul">
+                                            <c:forEach items="${liulans}" var="liulan">
                                                 <li>
                                                     <div class="read_top">
-                                                        <a target="_blank" href="/darry_ring/87.html" rel="nofollow"> <img src="images/201409011932585de1c2f2a9.jpg" alt="Forever系列 经典款 40分D色" /> </a>
-                                                    </div> <p><a target="_blank" href="/darry_ring/87.html"> Forever系列 经典款 40分D色 </a></p> <p><span>￥15,800</span></p> </li>
-                                                <li>
-                                                    <div class="read_top">
-                                                        <a target="_blank" href="/jewelry/404.html" rel="nofollow"> <img src="images/2015012110590914b2fee4b2.jpg" alt="锁住一生 LOCK套链 0.6分G-I色" /> </a>
-                                                    </div> <p><a target="_blank" href="/jewelry/404.html"> 锁住一生 LOCK套链 0.6分G-I色 </a></p> <p><span>￥5,920</span></p> </li>
+                                                        <a target="_blank" href="/darry_ring/87.html" rel="nofollow"> <img src="images/${liulan.image.filename}" alt="${liulan.cname} ${liulan.minute}分${liulan.colour}" /> </a>
+                                                    </div> <p><a target="_blank" href="/darry_ring/87.html"> ${liulan.cname} ${liulan.minute}分${liulan.colour} </a></p> <p><span>￥${liulan.price}</span></p>
+                                                </li>
+                                            </c:forEach>
                                             </ul>
                                             <ul style="display:none;" id="u_rx" class="read_ul">
                                                 <li>

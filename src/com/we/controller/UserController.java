@@ -50,7 +50,6 @@ public class UserController {
             return "login";
         }else {
             session.setAttribute("login",login);
-            //请求转发跳转index
             return "forward:/commdity/selectFour";
         }
 

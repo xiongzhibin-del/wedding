@@ -89,5 +89,6 @@ public class AvatarController  {
         session.setAttribute("photo1",photo1);
         return "member_index";
     }
+    //查看游览商品的历史记录
 
 }

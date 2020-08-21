@@ -2,6 +2,7 @@ package com.we.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.we.pojo.Commdity;
+import com.we.pojo.LIulan;
 import com.we.pojo.User;
 import com.we.service.CommdityService;
 import com.we.util.Page;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -108,5 +110,13 @@ public class CommdityController {
         }else{
             return "fail";
         }
+    }
+    @RequestMapping(value = "/detail1",produces = "text/html;charset=utf-8")
+    public String detail1(HttpSession session,Model model){
+        User login =(User) session.getAttribute("login");
+        int u_id = login.getU_id();
+        List<Commdity> liulans = commdityService.jilu(u_id);
+        model.addAttribute("liulans",liulans);
+        return "forward:/avatar/loginphoto";
     }
 }

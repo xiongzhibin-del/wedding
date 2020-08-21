@@ -2,6 +2,7 @@ package com.we.service.Impl;
 
 import com.we.mapper.CommdityMapper;
 import com.we.pojo.Commdity;
+import com.we.pojo.LIulan;
 import com.we.service.CommdityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,6 +95,15 @@ public class CommdityServiceImpl implements CommdityService {
         return liulans;
     }
 
+    public List<Commdity> jilu(int u_id) {
+        List<Integer> c_ids = commdityMapper.chaCid(u_id);
+        List<Commdity> liulans = new ArrayList<>();
+        for(Integer i:c_ids){
+            Commdity liulan = commdityMapper.liulans(i);
+            liulans.add(liulan);
+        }
+        return liulans;
+    }
     @Override
     public int shoucang(int u_id, int c_id) {
         int n = 0;

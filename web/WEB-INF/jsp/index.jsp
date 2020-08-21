@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -35,6 +36,7 @@
             <div class="top-right fr">
                 <!--登录注册-->
                 <ul class="tright-ul fl">
+
                     <div id="ucheader1_pllogin1">
                         <c:choose>
                             <c:when test="${login.petname eq null}">
@@ -44,10 +46,11 @@
                                 <li><a><span id="ctl00_ucheader_lit">${login.petname}</span></a></li>
                             </c:otherwise>
                         </c:choose>
-                        <li><a rel="nofollow" href="avatar/loginphoto">我的DR</a><em>|</em></li>
+                        <li><a rel="nofollow" href="commdity/detail1">我的DR</a><em>|</em></li>
                         <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(${login.cart.size()})</i></li>
                         <li><a rel="nofollow" href="javascript:logout()">退出</a></li>
                     </div>
+
                 </ul>
                 <!--语言选择-->
                 <ul class="langruge-ul fr">
@@ -492,7 +495,7 @@
                         <!--左边banner图-->
                         <div class="bkleft_img fl">
                             <ul class="bkleft_banner">
-                                <li style="display: block;"><a target="_blank" href="/news/4827.html"> <img width="280px" height="180px" alt="小时代4剧情揭秘，杨幂戴DR真爱戒指或唯一存活" src="images/20150707185244af94e583ea.jpg" /> </a>
+                                <li style="display: block;"><a target="_blank" href=http://m.ldnews.cn/pcarticle/420412"> <img width="280px" height="180px" alt="小时代4剧情揭秘，杨幂戴DR真爱戒指或唯一存活" src="images/20150707185244af94e583ea.jpg" /> </a>
                                     <!--提示文字-->
                                     <div class="bnhide">
                                         <!--透明块-->
@@ -506,7 +509,7 @@
                                         <!--透明块里的文字end-->
                                     </div>
                                     <!--提示文字end--> </li>
-                                <li style="display: none;"><a target="_blank" href="/news/4825.html"> <img width="280px" height="180px" alt="最浪漫珠宝店Darry Ring7月7日登陆宁波" src="images/20150707184746fa95671549.jpg" /> </a>
+                                <li style="display: none;"><a target="_blank" href="http://www.zb580.tv/news/98160.html"> <img width="280px" height="180px" alt="最浪漫珠宝店Darry Ring7月7日登陆宁波" src="images/20150707184746fa95671549.jpg" /> </a>
                                     <!--提示文字-->
                                     <div class="bnhide">
                                         <!--透明块-->
@@ -520,7 +523,7 @@
                                         <!--透明块里的文字end-->
                                     </div>
                                     <!--提示文字end--> </li>
-                                <li style="display: none;"><a target="_blank" href="/news/4316.html"> <img width="280px" height="180px" alt="戴瑞戒指价格知多少 价值连城的一生承诺" src="images/20150707184853bf1307dd75.jpg" /> </a>
+                                <li style="display: none;"><a target="_blank" href="http://fashion.ifeng.com/a/20150514/40106827_0.shtml"> <img width="280px" height="180px" alt="戴瑞戒指价格知多少 价值连城的一生承诺" src="images/20150707184853bf1307dd75.jpg" /> </a>
                                     <!--提示文字-->
                                     <div class="bnhide">
                                         <!--透明块-->
@@ -546,9 +549,9 @@
                         <!--左边banner图end-->
                         <!--右边列表-->
                         <ul class="bkfirst_ul">
-                            <li class="ts_list"> <h3> <a target="_blank" href="/news/4827.html"> 小时代4剧情揭秘，杨幂戴DR真爱戒指</a></h3> <p> 小时代4剧情即将揭秘!作为《小时代》电影系列大结局的收官之作，《小时代4灵魂...[<a href="/news/4827.html">详情</a>]</p> </li>
-                            <li class=""> <h3> <a target="_blank" href="/news/4825.html"> 最浪漫珠宝店Darry Ring7月7日登陆宁</a></h3> <p> 7月7日，是阳历上和七夕节恰巧对应的日子，代表现代的宁波DR族和牛郎织女一样即...[<a href="/news/4825.html">详情</a>]</p> </li>
-                            <li class=""> <h3> <a target="_blank" href="/news/4316.html"> 戴瑞戒指价格知多少 价值连城的一生</a></h3> <p> 香港戴瑞珠宝被誉为最浪漫珠宝品牌。然而，戴瑞珠宝更为大众所知晓的名字，其实...[<a href="/news/4316.html">详情</a>]</p> </li>
+                            <li class="ts_list"> <h3> <a target="_blank" href="http://m.ldnews.cn/pcarticle/420412"> 小时代4剧情揭秘，杨幂戴DR真爱戒指</a></h3> <p> 小时代4剧情即将揭秘!作为《小时代》电影系列大结局的收官之作，《小时代4灵魂...[<a href="/news/4827.html">详情</a>]</p> </li>
+                            <li class=""> <h3> <a target="_blank" href="http://www.zb580.tv/news/98160.html"> 最浪漫珠宝店Darry Ring7月7日登陆宁</a></h3> <p> 7月7日，是阳历上和七夕节恰巧对应的日子，代表现代的宁波DR族和牛郎织女一样即...[<a href="/news/4825.html">详情</a>]</p> </li>
+                            <li class=""> <h3> <a target="_blank" href="http://fashion.ifeng.com/a/20150514/40106827_0.shtml"> 戴瑞戒指价格知多少 价值连城的一生</a></h3> <p> 香港戴瑞珠宝被誉为最浪漫珠宝品牌。然而，戴瑞珠宝更为大众所知晓的名字，其实...[<a href="/news/4316.html">详情</a>]</p> </li>
                         </ul>
                         <!--右边列表end-->
                     </div>
@@ -557,14 +560,14 @@
                     <div class="bkbook_left-sec">
                         <!--左边ul 求婚相关-->
                         <ul class="bkbook_left-secul">
-                            <li><a class="fl" target="_blank" href="/news/3954.html"> 求婚钻戒第一品牌Darry R...</a> <span class="fr"> 2015/7/7</span> </li>
-                            <li><a class="fl" target="_blank" href="/news/3534.html"> 求婚钻戒Darry Ring贵在...</a> <span class="fr"> 2015/7/7</span> </li>
+                            <li><a class="fl" target="_blank" href="https://www.darryring.com/news"> 求婚钻戒第一品牌Darry R...</a> <span class="fr"> 2020/8/20</span> </li>
+                            <li><a class="fl" target="_blank" href="https://m.darryring.com/news/3534.html"> 求婚钻戒Darry Ring贵在...</a> <span class="fr"> 2020/8/20</span> </li>
                         </ul>
                         <!--左边ul end-->
                         <!--右边ul 求婚相关-->
                         <ul class="bkbook_left-secul bkbook_left-spcul">
-                            <li><a class="fl" target="_blank" href="/news/3042.html"> 2015年求婚告白词</a> <span class="fr"> 2015/7/7</span> </li>
-                            <li><a class="fl" target="_blank" href="/news/2699.html"> 求婚买多大的钻戒合适?</a> <span class="fr"> 2015/7/7</span> </li>
+                            <li><a class="fl" target="_blank" href="https://wenku.baidu.com/view/79ee39596aec0975f46527d3240c844768eaa028.html"> 2020年求婚告白词</a> <span class="fr"> 2020/8/20</span> </li>
+                            <li><a class="fl" target="_blank" href="https://www.darryring.com/news/23930.html"> 求婚买多大的钻戒合适?</a> <span class="fr"> 2020/8/20</span> </li>
                         </ul>
                         <!--右边ul end-->
                     </div>
@@ -577,14 +580,14 @@
                     <div class="bkbook_right-allul">
                         <!--左边图片-->
                         <div class="bkbook_right-fimg fl">
-                            <a target="_blank" href="/news/4293.html"> <img width="120" height="72" alt="网上买dr钻戒可不可靠" src="images/20150527154522510535113e.jpg" /> </a>
+                            <a target="_blank" href="https://www.darryring.com/tag_789"> <img width="120" height="72" alt="网上买dr钻戒可不可靠" src="images/20150527154522510535113e.jpg" /> </a>
                         </div>
                         <!--左边图片end-->
                         <!--右边ul-->
                         <ul class="bkbook_left-secul bkbook_right-spcul">
-                            <li><a href="/news/4293.html"> 网上买dr钻戒可不可靠</a> </li>
-                            <li><a href="/news/4273.html"> 0.9克拉钻石直径多少</a> </li>
-                            <li><a href="/news/4258.html"> 玫瑰金可以做什么用</a> </li>
+                            <li><a href="https://www.darryring.com/tag_789"> 网上买dr钻戒可不可靠</a> </li>
+                            <li><a href="https://zhuanlan.zhihu.com/p/43176587"> 0.9克拉钻石直径多少</a> </li>
+                            <li><a href="https://zhuanlan.zhihu.com/p/32418184"> 玫瑰金可以做什么用</a> </li>
                         </ul>
                         <!--右边ul end-->
                     </div>
@@ -593,12 +596,12 @@
                     <div class="bkbook_right-allul">
                         <!--左边图片-->
                         <div class="bkbook_right-fimg fl">
-                            <a target="_blank" href="/news/3870.html"> <img width="120" height="72" alt="一克拉钻戒保值" src="images/2015042918212650e2902a39.jpg" /> </a>
+                            <a target="_blank" href="https://www.zhihu.com/question/23270595/answer/1236731913"> <img width="120" height="72" alt="一克拉钻戒保值" src="images/2015042918212650e2902a39.jpg" /> </a>
                         </div>
                         <!--左边图片end-->
                         <!--右边ul-->
                         <ul class="bkbook_left-secul bkbook_right-spcul">
-                            <li><a href="/news/3870.html"> 一克拉钻戒保值</a> </li>
+                            <li><a href="https://www.zhihu.com/question/23270595/answer/1236731913"> 一克拉钻戒保值</a> </li>
                             <li><a href="https://www.zhihu.com/question/268289759/answer/1274453598"> 女生如何挑选珠宝首饰?</a> </li>
                             <li><a href="https://zhuanlan.zhihu.com/p/50835993"> 佩戴珠宝首饰注意事项</a> </li>
                         </ul>
