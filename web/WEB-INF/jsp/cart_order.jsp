@@ -247,6 +247,7 @@
                     <h3>收货人信息</h3>
                     <!--填写地址信息-->
                     <div class="shop_cort-adress">
+<%--                        --%>
                         <!--地址-->
                         <div class="shop_adress-top">
                             <input type="radio" checked="checked" name="adress" value="61921" />
