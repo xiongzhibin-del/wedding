@@ -16,7 +16,7 @@
     <mvc:resources mapping="/images/**" location="/WEB-INF/images/"></mvc:resources>
     <mvc:resources mapping="/upload/**" location="/upload/"></mvc:resources>
     <mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/"></mvc:resources>
-<!--    <mvc:resources mapping="/My97DatePicker/**" location="/WEB-INF/My97DatePicker/"></mvc:resources>-->
+    <mvc:resources mapping="/My97DatePicker/**" location="/WEB-INF/My97DatePicker/"></mvc:resources>
 <!--jsp视图解析器，把返回的视图加工-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"></property> <!--前缀-->

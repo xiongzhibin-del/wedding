@@ -1,3 +1,6 @@
+<%@ page import="com.we.pojo.User" %>
+<%@ page import="com.we.pojo.Cart" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -49,27 +52,38 @@
             <script type="text/javascript">
                 function deleteCart(cid) {
                     if (confirm("确认删除？")) {
-                        $.get("/nAPI/Cart.aspx?action=delete&cid=" + cid, function () {
-                            window.location.reload();
-                        });
+                       $.get(
+                           "cart/delete",
+                           {cid:cid},
+                           function (data) {
+                                if(data==="success"){
+                                    alert("删除成功");
+                                    location.reload();
+                                }else{
+                                    alert("删除失败")
+                                }
+                           }
+                       )
                     }
                 }
 
                 function clearCart() {
                     if (confirm("确认清除？")) {
-                        $.get("/nAPI/Cart.aspx?action=clear", function () {
-                            window.location.reload();
-                        });
+                        $.get(
+                            "cart/clear",
+                            function (data) {
+                                if(data==="success"){
+                                    alert("清空成功");
+                                    location.reload();
+                                }else{
+                                    alert("清空失败");
+                                }
+                            }
+                        )
                     }
                 }
                 function toPay() {
-                    var nu = '1';
-
-
-                    window.location = "cart_agreement.html";
-
-
-
+                    window.location = "cart/cart_agreement";
                 }
             </script>
             <!--内容-->
@@ -92,20 +106,29 @@
                             <td class="sp_td"> <a href="/darry_ring/87.html" class="jx_shop"> <img width="85" height="85" src="images/${carts.commdity.image.filename}" /> <span> ${carts.commdity.seres}系列 ${carts.commdity.style}</span></a> </td>
                             <td class="cz_td">${carts.commdity.texture}</td>
                             <td class="sc_td">${carts.chicun}</td>
-                            <td class="kz_td">${carts.kezi}</td>
+                            <td class="kz_td" id="kezi">${carts.kezi}</td>
                             <td style="font-family:微软雅黑" class="gm_td">￥${carts.commdity.price}</td>
-                            <td class="close_td"><span onClick="deleteCart(${carts.commdity.c_id});" class="sicon s_close"></span></td>
+                            <td class="close_td"><span onClick="deleteCart(${carts.cid});" class="sicon s_close"></span></td>
                         </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                     <!--购物车end-->
                     <!--结算-->
+                    <%
+                        User login =(User) session.getAttribute("login");
+                        List<Cart> list = login.getCart();
+                        long total = 0;
+                        for(Cart c:list){
+                            total += c.getCommdity().getPrice();
+                        }
+                        request.setAttribute("total",total);
+                    %>
                     <div class="shop_js">
                         <a class="jx_shop" href="lists.html">继续购物</a>
                         <a class="qk_shop" href="javascript:clearCart();">清空购物车</a>
                         <span>你购买了<i>${login.cart.size()}</i>件商品</span>
-                        <span>总计：<i style="font-family:微软雅黑" class="fw_bold">￥10,800</i></span>
+                        <span>总计：<i style="font-family:微软雅黑" class="fw_bold">￥${total}</i></span>
                         <span onClick="toPay();" class="end_bt"><em>立即结算</em></span>
                     </div>
                     <!--结算end-->
@@ -153,10 +176,15 @@
     </div>
     <script type="text/javascript">
         function logout() {
-            if (window.confirm('确定退出吗？')) {
-                $.get("/nAPI/QuitExit.ashx", function (data) {
-                    window.location.href = "/";
-                });
+            var r = window.confirm('确定退出吗？')
+            if (r == true) {
+                $.get(
+                    "user/exitUser",
+                    function (data) {
+                        if (data == "1") {
+                            window.location.href = "login";
+                        }
+                    });
             }
         }
     </script>

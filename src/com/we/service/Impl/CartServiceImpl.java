@@ -25,4 +25,17 @@ public class CartServiceImpl implements CartService {
     public List<Cart> flash(int u_id) {
         return cartMapper.selectCarts(u_id);
     }
+
+    @Override
+    public int delete(int cid) {
+        return cartMapper.delete(cid);
+    }
+
+    @Override
+    public int clear(int u_id) {
+        int n = 0;
+        cartMapper.clear(u_id);
+        n=1;
+        return n;
+    }
 }
