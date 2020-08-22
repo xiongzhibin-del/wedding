@@ -32,12 +32,13 @@
                 "commdity/deleteshoucang",
                 {"c_id":c_id},
                 function (data) {
-                    if (data == "1") {
-                      location.href = "commdity/detail2";
+                    if (data === "1") {
+                      window.location.href = "commdity/detail2";
                     } else {
-                        location.href = "commdity/detail2";
+                     window.location.href = "commdity/detail2";
                     }
-                });
+                }
+            )
         }
     }
     function GetUrl(pid, myparm, type) {
@@ -273,7 +274,7 @@
                                         </div> </td>
                                     <td class="ollection-table-td2"> ￥${shoucang.price}</td>
                                     <c:forEach items="${shoucang.shoucangs}" var="shoucangs">
-                                    <td class="ollection-table-td3"> <p> ${shoucangs.sdate} 收藏</p> <p> <a href="detail.html">查看评论(${comm.comments.size()})</a> </p> </td>
+                                    <td class="ollection-table-td3"> <p> ${shoucangs.sdate} 收藏</p> <p> <a href="detail.html">查看评论</a> </p> </td>
                                     <td class="ollection-table-td4"> <p> <a class="ollection-join" href="detail.html">加入购物车</a> </p> <p> <a class="ollection-xq" href="detail.html">商品详情</a> </p> <p class="show_hover"> <a href="#" class="tablelink click" onclick="deleteshoucang(${shoucangs.c_id});return false;"> 删除收藏</a> </p> </td>
                                     </c:forEach>
                                 </tr>

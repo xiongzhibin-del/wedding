@@ -132,21 +132,15 @@ public class CommdityController {
     }
     //删除商品的收藏
     @RequestMapping("/deleteshoucang")
+    @ResponseBody
     public String deleteshoucang(int c_id,HttpSession session,Model model){
-        System.out.println("进来了");
         User login =(User) session.getAttribute("login");
         int u_id = login.getU_id();
-        System.out.println(u_id);
-        System.out.println(c_id);
         int n = commdityService.deleteshoucang(u_id, c_id);
         if(n==1){
-            model.addAttribute("msg","删除收藏成功");
             return "1";
         }else {
-            model.addAttribute("msg","删除收藏失败");
             return "0";
         }
-
-
     }
 }
