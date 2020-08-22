@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -54,5 +57,21 @@ public class OrderServiceImpl implements OrderService {
         cartMapper.clear(u_id);
         n = 1;
         return n;
+    }
+
+    @Override
+    public Map<Long,List<Orders>> selectOrders(int u_id) {
+        List<Orders> orders = orderMapper.selectOrders(u_id);
+        Map<Long,List<Orders>> map = new HashMap<>();
+        for(Orders order:orders){
+            if(map.containsKey(order.getRandom())){//有键就在当前键里面加入值
+                map.get(order.getRandom()).add(order);
+            }else{//没有见就创建新的
+                List<Orders> list = new ArrayList<>();
+                list.add(order);
+                map.put(order.getRandom(),list);
+            }
+        }
+        return map;
     }
 }

@@ -42,7 +42,8 @@
             #{logisistics,jdbcType=VARCHAR},
             #{kezi,jdbcType=VARCHAR},
             #{chicun,jdbcType=INTEGER},
-            #{total,jdbcType=BIGINT}
+            #{total,jdbcType=BIGINT},
+            #{orderdate,jdbcType=DATE}
         )
     </insert>
 </mapper>

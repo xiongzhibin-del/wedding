@@ -14,12 +14,13 @@ public class SessionOrder {
     private String logisistics;//物流方式
     private List<Cart> carts;//商品和刻字的总共
     private long total;//总金额
+    private Date orderdate;//订单时间
     private Shipping shipping;//收件地址
 
     public SessionOrder() {
     }
 
-    public SessionOrder(int agid, int u_id, int sid, long random, Date et, String remark, String state, String logisistics, List<Cart> carts, long total, Shipping shipping) {
+    public SessionOrder(int agid, int u_id, int sid, long random, Date et, String remark, String state, String logisistics, List<Cart> carts, long total, Date orderdate, Shipping shipping) {
         this.agid = agid;
         this.u_id = u_id;
         this.sid = sid;
@@ -30,6 +31,7 @@ public class SessionOrder {
         this.logisistics = logisistics;
         this.carts = carts;
         this.total = total;
+        this.orderdate = orderdate;
         this.shipping = shipping;
     }
 
@@ -113,6 +115,14 @@ public class SessionOrder {
         this.total = total;
     }
 
+    public Date getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(Date orderdate) {
+        this.orderdate = orderdate;
+    }
+
     public Shipping getShipping() {
         return shipping;
     }
@@ -134,6 +144,7 @@ public class SessionOrder {
                 ", logisistics='" + logisistics + '\'' +
                 ", carts=" + carts +
                 ", total=" + total +
+                ", orderdate=" + orderdate +
                 ", shipping=" + shipping +
                 '}';
     }

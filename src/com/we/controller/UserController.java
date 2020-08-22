@@ -1,19 +1,22 @@
 package com.we.controller;
 
+import com.we.pojo.SessionOrder;
 import com.we.pojo.User;
 import com.we.service.Impl.UserServiceImpl;
+import com.we.service.OrderService;
 import com.we.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -22,7 +25,8 @@ public class UserController {
     private UserServiceImpl userService;
     @Autowired
     private RegisterService registerService;
-
+    @Autowired
+    private OrderService orderService;
     @RequestMapping(value = "/loginUser")
     public String loginUser( User user, Model model,HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -50,6 +54,9 @@ public class UserController {
             return "login";
         }else {
             session.setAttribute("login",login);
+            List<SessionOrder> orders = (List<SessionOrder>)orderService.selectOrders(login.getU_id());
+//            System.out.println(orders);
+            session.setAttribute("orders",orders);
             return "forward:/commdity/selectFour";
         }
 
@@ -98,6 +105,7 @@ public class UserController {
             if (n == 1) {
                 User newLogin = userService.loginUser(login);
                 session.setAttribute("login",newLogin);
+                List<SessionOrder> orders = new ArrayList<>();
                 return "success";
             } else {
                 return "false";

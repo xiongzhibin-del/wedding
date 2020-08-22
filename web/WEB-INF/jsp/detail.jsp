@@ -461,9 +461,9 @@
                                 <div title="购买darry ring钻戒" class="bt1" id="cartAdd">
                                     <span>加入购物车</span>
                                 </div>
-                                <div title="把darry ring加入购物车" class="bt2" id="buyNow">
-                                    <span>立即购买</span>
-                                </div>
+<%--                                <div title="把darry ring加入购物车" class="bt2" id="buyNow">--%>
+<%--                                    <span>立即购买</span>--%>
+<%--                                </div>--%>
                             </div>
                         </div>
                         <!--购买页中间的右边end-->

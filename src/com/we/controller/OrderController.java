@@ -4,7 +4,6 @@ import com.we.pojo.*;
 import com.we.service.OrderService;
 import com.we.service.ProvinceService;
 import com.we.util.Random;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/order")
@@ -56,6 +53,7 @@ public class OrderController {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE, 20);//计算20天后的时间,预计20天送达
         Date date = new Date(c.getTimeInMillis());
+        Date time = new Date(System.currentTimeMillis());
         //查询真爱协议编号
         int agid = orderService.getAgree(login.getU_id());
         //查询地址
@@ -73,6 +71,7 @@ public class OrderController {
             order.setKezi(login.getCart().get(i).getKezi());
             order.setChicun(login.getCart().get(i).getChicun());
             order.setTotal(total);
+            order.setOrderdate(time);
             orders.add(order);
         }
         int n = orderService.addOrders(orders,login.getU_id());
@@ -86,10 +85,19 @@ public class OrderController {
             sessionOrder.setRemark(remark);
             sessionOrder.setState("未支付");
             sessionOrder.setLogisistics("顺丰");
-            sessionOrder.setCarts(login.getCart());
+            //深度拷贝
+            List<Cart> newCarts = new ArrayList<>(Arrays.asList(new Cart[login.getCart().size()]));
+            Collections.copy(newCarts,login.getCart());
+            sessionOrder.setCarts(newCarts);
             sessionOrder.setTotal(total);
+            sessionOrder.setOrderdate(time);
             sessionOrder.setShipping(orderService.selectMainAddr(login.getU_id()));
+//            System.out.println(sessionOrder);
             session.setAttribute("order",sessionOrder);
+            List<SessionOrder> orderList = (List<SessionOrder>)session.getAttribute("orders");
+            orderList.add(sessionOrder);
+            session.setAttribute("orders",orderList);
+            System.out.println(orderList);
             login.getCart().clear();
             model.addAttribute("msg","订单提交成功，请您尽快完成支付！");
         }else{

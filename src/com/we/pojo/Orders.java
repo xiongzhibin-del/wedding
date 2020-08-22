@@ -18,14 +18,14 @@ public class Orders {
   private String kezi;//刻字
   private int chicun;//尺寸
   private long total;//总金额
-
+  private Date orderdate;//订单时间
   private Commdity commdity;//商品
   private Shipping shipping;//收件地址
 
   public Orders() {
   }
 
-  public Orders(int oid, int agid, int u_id, int c_id, int sid, long random, Date et, String remark, String state, String logisistics, String kezi, int chicun, long total, Commdity commdity, Shipping shipping) {
+  public Orders(int oid, int agid, int u_id, int c_id, int sid, long random, Date et, String remark, String state, String logisistics, String kezi, int chicun, long total, Date orderdate, Commdity commdity, Shipping shipping) {
     this.oid = oid;
     this.agid = agid;
     this.u_id = u_id;
@@ -39,6 +39,7 @@ public class Orders {
     this.kezi = kezi;
     this.chicun = chicun;
     this.total = total;
+    this.orderdate = orderdate;
     this.commdity = commdity;
     this.shipping = shipping;
   }
@@ -147,6 +148,14 @@ public class Orders {
     this.total = total;
   }
 
+  public Date getOrderdate() {
+    return orderdate;
+  }
+
+  public void setOrderdate(Date orderdate) {
+    this.orderdate = orderdate;
+  }
+
   public Commdity getCommdity() {
     return commdity;
   }
@@ -179,6 +188,7 @@ public class Orders {
             ", kezi='" + kezi + '\'' +
             ", chicun=" + chicun +
             ", total=" + total +
+            ", orderdate=" + orderdate +
             ", commdity=" + commdity +
             ", shipping=" + shipping +
             '}';

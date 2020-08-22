@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OrderMapper {
     public int addAgree(Agreement agreement);
@@ -20,4 +22,7 @@ public interface OrderMapper {
     public int getAgree(int u_id);
 
     public int addOrder(Orders order);
+
+    @Select("select * from orders where u_id = #{param1}")
+    public List<Orders> selectOrders(int u_id);
 }
