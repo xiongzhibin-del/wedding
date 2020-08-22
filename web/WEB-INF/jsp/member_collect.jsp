@@ -1,6 +1,3 @@
-<%@ page import="com.we.pojo.Photo" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.we.pojo.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -8,32 +5,51 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" class="hb-loaded">
-<head>
+<meta charset="utf-8"/>
     <base href="<%=basePath%>">
-    <link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
-    <meta charset="utf-8"/>
-    <script src="js/jquery.js" type="text/javascript"></script>
-    <script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
-    <title>个人中心 - 上传头像</title>
-    <link href="css/member.css?v=1.3.6.0" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="js/member.js"></script>
-    <link type="text/css" rel="stylesheet" href="css/uploadify.css" />
-    <script type="text/javascript" src="js/jquery.uploadify.js"></script>
-    <script type="text/javascript" src="js/jquery.Jcrop.js"></script>
-    <script type="text/javascript" src="js/Jcrop_photo.js"></script>
-<%--    <script type="text/javascript">--%>
-<%--        function loadimg(url) {--%>
-<%--            $(".member_person-upload img").attr("src", url);--%>
-<%--        }--%>
+<title>个人中心 - 我的收藏</title>
+<%
+    String msg = (String) request.getAttribute("msg");
+    if(msg!=null){
+%>
+<script>
+    alert("<%=msg%>");
+</script>
+<%
+    }
+%>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/index.js?virsion=1.3.7.2" type="text/javascript"></script>
+<link href="css/same.css?v=1.3.7.2" type="text/css" rel="stylesheet" />
+<link href="css/member.css?v=1.3.6.0" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/member.js"></script>
+<script type="text/javascript">
+    function deleteshoucang(c_id) {
+        var r = window.confirm('确定删除收藏吗？')
+        if (r == true) {
+            x = "您按了确认！";
+            $.get(
+                "commdity/deleteshoucang",
+                {"c_id":c_id},
+                function (data) {
+                    if (data == "1") {
+                      location.href = "commdity/detail2";
+                    } else {
+                        location.href = "commdity/detail2";
+                    }
+                });
+        }
+    }
+    function GetUrl(pid, myparm, type) {
+        $.get("/nAPI/favorites.ashx?action=geturl", { type: type,myparm:myparm, pid: pid }, function (data) {
+            window.location.href = data;
+        });
+    }
+</script>
 
-<%--        $(function () {--%>
-<%--            loadimg("images/mem-big.jpg");--%>
-<%--        });--%>
-
-<%--    </script>--%>
 </head>
-
-
+<body>
+<!--头部-->
 <div class="cmain">
     <div class="headtop">
         <!--头部左边-->
@@ -193,7 +209,7 @@
             <div class="cmain mb_back">
                 <div class="zbk_top spalid">
                     <span>您当前的位置：</span>
-                    <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">Darry Ring</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="member_index.html">我的DR</a> </span><span> <em>&gt;</em> </span><span> <span>修改头像</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
+                    <span id="ctl00_content_website_SiteMapPath1"><a href="#ctl00_content_website_SiteMapPath1_SkipLink"></a><span> <a target="_blank" href="index.html">Darry Ring</a> </span><span> <em>&gt;</em> </span><span> <a target="_blank" href="member_index.html">我的DR</a> </span><span> <em>&gt;</em> </span><span> <span>我的收藏</span> </span><a id="ctl00_content_website_SiteMapPath1_SkipLink"></a></span>
                 </div>
                 <div class="member_cort">
                     <div class="member_cort-left fl">
@@ -209,7 +225,7 @@
                                     <li id="ctl00_content_ucmemberleft_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
                                     <li id="ctl00_content_ucmemberleft_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
                                     <li id="ctl00_content_ucmemberleft_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
-                                    <li id="ctl00_content_ucmemberleft_collect"><a rel="nofollow" href="commdity/detail2">我的收藏</a></li>
+                                    <li class="speacil_color" id="ctl00_content_ucmemberleft_collect"><a rel="nofollow" href="commdity/detail2">我的收藏</a></li>
                                     <li class="no_border" id="ctl00_content_ucmemberleft_yuyue"><a rel="nofollow" href="/member/myappointment.html">我的预约</a></li>
                                 </ul> </li>
                             <li> <h3> -售后服务-</h3>
@@ -229,78 +245,44 @@
                     </div>
                     <!--右边的主要内容-->
                     <div class="member_cort-right fr">
-                        <!--上传头像-->
-                        <div class="member_person">
-                            <div class="member_ask-tittle">
-                                <h4>设置头像</h4>
-                                <p>为了能给您提供个性化服务，请完善您的基本资料。</p>
-                            </div>
-
-                            <!--选择文件上传-->
-                            <form action="avatar/avatarAdd" method="POST" enctype="multipart/form-data" >
-
-                                <input type="file" accept="image/jpg,image/png,image/jpeg,image/gif" required = 'required' name="flashvars">
-
-                                <input id="sub" type="submit" value="上传头像">
-
-                            </form>
-
-
-<%--                            <div class="member_person-upload">--%>
-<%--                                <div id="uploadimg" class="uploadify" style="height: 30px; width: 120px;">--%>
-<%--                                    <object width="120" height="30" class="swfupload" data="/uploadify/uploadify.swf?preventswfcaching=1436277845884" type="application/x-shockwave-flash" id="SWFUpload_0" style="position: absolute; z-index: 1;"><param value="transparent" name="wmode"></param><param value="/uploadify/uploadify.swf?preventswfcaching=1436277845884" name="movie"></param><param value="high" name="quality"></param><param value="false" name="menu"></param><param value="always" name="allowScriptAccess"></param><param value="movieName=SWFUpload_0&amp;uploadURL=%2FnAPI%2Fimgupload.ashx&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;assumeSuccessTimeout=30&amp;params=&amp;filePostName=Filedata&amp;fileTypes=*.gif%3B%20*.jpg%3B%20*.png%3B%20*.jpeg%3B&amp;fileTypesDescription=Image%20Files&amp;fileSizeLimit=200&amp;fileUploadLimit=0&amp;fileQueueLimit=999&amp;debugEnabled=false&amp;buttonImageURL=%2Fmember%2F&amp;buttonWidth=120&amp;buttonHeight=30&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=color%3A%20%23000000%3B%20font-size%3A%2016pt%3B&amp;buttonAction=-110&amp;buttonDisabled=false&amp;buttonCursor=-2" name="flashvars"></param></object>--%>
-<%--                                    <div id="uploadimg-button" class="uploadify-button " style="height: 30px; line-height: 30px; width: 120px;">--%>
-<%--                                        <span class="uploadify-button-text">上传图片</span>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div id="uploadimg-queue" class="uploadify-queue"></div>--%>
-<%--                                <span class="fl">请确保文件为大小不超过200k，格式为jpg,png,gif的图片。</span>--%>
-<%--                            </div>--%>
-                            <div class="member_person-upload">
-                                <img id="bPic" style="width: 300px; height: 300px; display: none;" src="images/mem-big.jpg" />
-                                <div style="width: 300px; height: 300px; position: relative; background-color: rgb(205, 205, 205);" class="jcrop-holder">
-                                    <div style="position: absolute; z-index: 300; width: 90px; height: 90px; top: 10px; left: 10px;">
-                                        <div style="width: 100%; height: 100%; z-index: 310; position: absolute; overflow: hidden;">
-                                            <img src="images/mem-big.jpg" style="position: absolute; width: 300px; height: 300px; top: -10px; left: -10px;" />
-                                            <div style="position: absolute; opacity: 0.4; top: 0px;" class="jcrop-hline"></div>
-                                            <div style="position: absolute; opacity: 0.4; top: 89px;" class="jcrop-hline"></div>
-                                            <div style="position: absolute; opacity: 0.4;" class="jcrop-vline"></div>
-                                            <div style="position: absolute; opacity: 0.4; left: 89px;" class="jcrop-vline"></div>
-                                            <div class="jcrop-tracker" style="cursor: move; position: absolute; z-index: 360;"></div>
-                                        </div>
-                                        <div style="width: 100%; height: 100%; z-index: 320; display: block;">
-                                            <div style="cursor: n-resize; position: absolute; z-index: 370; width: 100%; height: 9px; top: -4px; left: -4px;"></div>
-                                            <div style="cursor: s-resize; position: absolute; z-index: 371; width: 100%; height: 9px; top: 85px; left: -4px;"></div>
-                                            <div style="cursor: e-resize; position: absolute; z-index: 372; width: 9px; height: 100%; top: -4px; left: 85px;"></div>
-                                            <div style="cursor: w-resize; position: absolute; z-index: 373; width: 9px; height: 100%; top: -4px; left: -4px;"></div>
-                                            <div style="cursor: n-resize; position: absolute; z-index: 374; top: -4px; left: 40px; opacity: 0.5;" class="jcrop-handle"></div>
-                                            <div style="cursor: s-resize; position: absolute; z-index: 375; top: 85px; left: 40px; opacity: 0.5;" class="jcrop-handle"></div>
-                                            <div style="cursor: e-resize; position: absolute; z-index: 376; top: 40px; left: 85px; opacity: 0.5;" class="jcrop-handle"></div>
-                                            <div style="cursor: w-resize; position: absolute; z-index: 377; top: 40px; left: -4px; opacity: 0.5;" class="jcrop-handle"></div>
-                                            <div style="cursor: sw-resize; position: absolute; z-index: 378; top: 85px; left: -4px; opacity: 0.5;" class="jcrop-handle"></div>
-                                            <div style="cursor: nw-resize; position: absolute; z-index: 379; top: -4px; left: -4px; opacity: 0.5;" class="jcrop-handle"></div>
-                                            <div style="cursor: ne-resize; position: absolute; z-index: 380; top: -4px; left: 85px; opacity: 0.5;" class="jcrop-handle"></div>
-                                            <div style="cursor: se-resize; position: absolute; z-index: 381; top: 85px; left: 85px; opacity: 0.5;" class="jcrop-handle"></div>
-                                        </div>
-                                    </div>
-                                <div style="position: absolute; overflow: hidden;">
-                                <input type="radio" style="position: absolute; left: -30px;" />
-                                 </div>
-                                <img style="width: 300px; height: 300px; position: absolute; opacity: 0.5;" src="upload/${filename}" />
+                        <!--我的收藏-->
+                        <div class="member_ollection">
+                            <div class="myorder-xq-news_top">
+                                <p class="fl"> 我的收藏</p>
+                                <div class="member_all-nav-right fr">
+                                    <span>遇到感兴趣的商品时，如果还没决定立即购买，您可以先把它放入我的收藏，以便下次的查找与购买。</span>
                                 </div>
-                                <div id="preview_box" class="person-upload-right">
-                                <img id="crop_preview" src="upload/${filename}" style="width: 300px; height: 300px; margin-left: -10px; margin-top: -10px;" />
-                                </div>
-<%--                                <div class="person-upload-rightbt">--%>
-<%--                                    <div onClick="SaveCustomImg()" class="person-upload-button">--%>
-<%--                                        保存头像--%>
-<%--                                    </div>--%>
-<%--                                    <p></p>--%>
-<%--                                </div>--%>
                             </div>
-                            <!--选择文件上传end-->
+                            <!--收藏的table-->
+                            <table cellspacing="0" cellpadding="0" border="0" class="member_ollection-table">
+                                <tbody>
+                                <tr class="ollection-table-trfirst">
+                                    <td class="ollection-table-td1"> 商品信息 </td>
+                                    <td class="ollection-table-td2"> 价格 </td>
+                                    <td class="ollection-table-td3"> 收藏日期 </td>
+                                    <td class="ollection-table-td4"> 操作 </td>
+                                </tr>
+                                <c:forEach items="${shoucangs}" var="shoucang">
+
+                                <tr id="myf29592" class="ollection-table-trsec">
+                                    <td class="ollection-table-td1"> <img width="93" height="93" class="fl" src="images/${shoucang.image.filename}" />
+                                        <div class="ollection-table-word fl">
+                                            <p> ${shoucang.seres} ${shoucang.style}</p>
+                                            <p> ${shoucang.newcid}</p>
+                                            <p> 材质：${shoucang.texture}</p>
+                                        </div> </td>
+                                    <td class="ollection-table-td2"> ￥${shoucang.price}</td>
+                                    <c:forEach items="${shoucang.shoucangs}" var="shoucangs">
+                                    <td class="ollection-table-td3"> <p> ${shoucangs.sdate} 收藏</p> <p> <a href="detail.html">查看评论(${comm.comments.size()})</a> </p> </td>
+                                    <td class="ollection-table-td4"> <p> <a class="ollection-join" href="detail.html">加入购物车</a> </p> <p> <a class="ollection-xq" href="detail.html">商品详情</a> </p> <p class="show_hover"> <a href="#" class="tablelink click" onclick="deleteshoucang(${shoucangs.c_id});return false;"> 删除收藏</a> </p> </td>
+                                    </c:forEach>
+                                </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                            <!--收藏的table end-->
                         </div>
-                        <!--上传头像end-->
+                        <!--我的收藏end-->
                     </div>
                     <!--右边的主要内容end-->
                 </div>
@@ -659,11 +641,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    function x() {
-
-    }
-    
-    
     function showbox(id) {
         getQeestion(id);
         for (var i = 1; i <= 8; i++) {

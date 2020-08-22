@@ -45,6 +45,6 @@ public class MenberController {
         }else {
             model.addAttribute("msg","您输入的密码有误，请重新输入");
         }
-        return "member_pwd";
+        return "login";
     }
 }

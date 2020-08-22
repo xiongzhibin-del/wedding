@@ -359,7 +359,7 @@
                             </c:choose>
                             <li> <a href="javascript:logout()" rel="nofollow">退出</a><em>|</em> </li>
                             <li><a target="black" rel="nofollow" href="commdity/detail1">我的DR</a><em>|</em></li>
-                            <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(0)</i></li>
+                            <li class="headed"><em class="icon shooping"></em><a target="black" rel="nofollow" href="cart.html">购物车</a><i>(${login.cart.size()})</i></li>
                         </div>
                     </ul>
                     <!--语言选择-->
@@ -517,7 +517,7 @@
                                         <li id="ctl00_content_treeId_order"><a rel="nofollow" href="member_order.html">我的订单</a></li>
                                         <li id="ctl00_content_treeId_ask"><a rel="nofollow" href="/member/myevaluate.html">我要评价</a></li>
                                         <li id="ctl00_content_treeId_cart"><a rel="nofollow" href="cart.html" target="_blank">我的购物车</a></li>
-                                        <li id="ctl00_content_treeId_collect"><a rel="nofollow" href="member_collect.html">我的收藏</a></li>
+                                        <li id="ctl00_content_treeId_collect"><a rel="nofollow" href="commdity/detail2">我的收藏</a></li>
                                         <li class="no_border" id="ctl00_content_treeId_yuyue"><a rel="nofollow" href="/member/myappointment.html">我的预约</a></li>
                                     </ul> </li>
                                 <li> <h3> -售后服务-</h3>

@@ -3,6 +3,7 @@ package com.we.mapper;
 import com.we.pojo.Commdity;
 import com.we.pojo.Image;
 import com.we.pojo.LIulan;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,12 @@ public interface CommdityMapper {
     @Select("select sid from shoucang where u_id = #{param1} and c_id = #{param2}")
     public Integer existShou(int u_id,int c_id);
 
+    @Select("select c_id from shoucang where u_id = #{param1}")
+    public List<Integer> chaC_id(int u_id);
 
+
+    public Commdity shoucangs(int sid);
+    @Delete("delete  from shoucang where u_id=#{param1} and c_id=#{param2}")
+    public int deleteshoucang(int u_id,int c_id);
 
 }

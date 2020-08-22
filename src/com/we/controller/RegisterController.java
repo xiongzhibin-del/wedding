@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.rmi.Remote;
+
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
@@ -46,5 +48,21 @@ public class RegisterController {
             model.addAttribute("msg","注册失败");
             return "reg";
         }
+    }
+    //找回密码
+    @RequestMapping("/forget")
+    public String forget(String mobile, String mobile_pwd, Model model){
+        System.out.println(mobile);
+        System.out.println(mobile_pwd);
+
+        int n = registerService.forget(mobile, mobile_pwd);
+        if(n==1){
+            model.addAttribute("msg","重置密码成功");
+            return "login";
+        }else {
+            model.addAttribute("msg","重置密码失败");
+            return "forget";
+        }
+
     }
 }

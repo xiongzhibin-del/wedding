@@ -24,6 +24,7 @@ public class SignController {
             return "0";
         }
     }
+
     //发送验证码
     @RequestMapping(value = "/sendSms",produces = "text/html;charset=utf-8")
     @ResponseBody

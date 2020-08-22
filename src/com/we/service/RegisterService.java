@@ -6,4 +6,5 @@ public interface RegisterService {
     public User selByMobile(String mobile);
     public User selByEmail(String email);
     public int addUser(User user);
+    public  int forget(String mobile, String mobile_pwd);
 }

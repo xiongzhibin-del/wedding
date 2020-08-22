@@ -12,4 +12,6 @@ public interface RegisterMapper {
     @Select("select * from u_ser where e_mail = #{email}")
     public User selByEmail(String email);
     public int addUser(User user);
+    @Insert("update  u_ser set upassword=#{param2} where mobile=#{param1}")
+    public  int forget(String mobile, String mobile_pwd);
 }

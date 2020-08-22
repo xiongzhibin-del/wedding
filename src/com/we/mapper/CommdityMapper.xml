@@ -52,5 +52,12 @@
         </where>
     </select>
 
+    <select id="shoucangs" resultMap="map1">
+        select * from commdity
+        <where>
+            c_id = #{param1}
+        </where>
+    </select>
+
 
 </mapper>

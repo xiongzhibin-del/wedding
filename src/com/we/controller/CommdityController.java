@@ -3,6 +3,7 @@ package com.we.controller;
 import com.github.pagehelper.PageHelper;
 import com.we.pojo.Commdity;
 import com.we.pojo.LIulan;
+import com.we.pojo.Shoucang;
 import com.we.pojo.User;
 import com.we.service.CommdityService;
 import com.we.util.Page;
@@ -118,5 +119,34 @@ public class CommdityController {
         List<Commdity> liulans = commdityService.jilu(u_id);
         model.addAttribute("liulans",liulans);
         return "forward:/avatar/loginphoto";
+    }
+    //查看商品的收藏
+    @RequestMapping(value = "/detail2",produces = "text/html;charset=utf-8")
+    public String detail2(HttpSession session,Model model){
+        User login =(User) session.getAttribute("login");
+        int u_id = login.getU_id();
+        List<Commdity> shoucangs = commdityService.shoucang1(u_id);
+        System.out.println(shoucangs);
+        model.addAttribute("shoucangs",shoucangs);
+        return "member_collect";
+    }
+    //删除商品的收藏
+    @RequestMapping("/deleteshoucang")
+    public String deleteshoucang(int c_id,HttpSession session,Model model){
+        System.out.println("进来了");
+        User login =(User) session.getAttribute("login");
+        int u_id = login.getU_id();
+        System.out.println(u_id);
+        System.out.println(c_id);
+        int n = commdityService.deleteshoucang(u_id, c_id);
+        if(n==1){
+            model.addAttribute("msg","删除收藏成功");
+            return "1";
+        }else {
+            model.addAttribute("msg","删除收藏失败");
+            return "0";
+        }
+
+
     }
 }

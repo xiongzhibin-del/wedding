@@ -104,12 +104,32 @@ public class CommdityServiceImpl implements CommdityService {
         }
         return liulans;
     }
+
+    @Override
+    public List<Commdity> shoucang1(int u_id) {
+        List<Integer> c_ids = commdityMapper.chaC_id(u_id);
+        System.out.println(c_ids);
+        List<Commdity> shoucangs=new ArrayList<>();
+        for (Integer i:c_ids) {
+            Commdity shoucang = commdityMapper.shoucangs(i);
+            shoucangs.add(shoucang);
+        }
+        return shoucangs;
+    }
+
     @Override
     public int shoucang(int u_id, int c_id) {
         int n = 0;
         if(commdityMapper.existShou(u_id, c_id)==null){
             n = commdityMapper.shoucang(u_id, c_id);
         }
+        return n;
+    }
+
+    @Override
+    public int deleteshoucang(int u_id, int c_id) {
+        int n = commdityMapper.deleteshoucang(u_id, c_id);
+        System.out.println(n);
         return n;
     }
 }

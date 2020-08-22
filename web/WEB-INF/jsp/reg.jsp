@@ -4,7 +4,8 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";//basePath是当前项目的根目录
 %>
 
-<html class="hb-loaded"><head>
+<html class="hb-loaded">
+<head>
     <base href="<%=basePath%>">
     <meta charset="utf-8">
     <title>会员注册</title>
@@ -15,6 +16,16 @@
 </head>
 
 <body>
+<%
+    String msg = (String) request.getAttribute("msg");
+    if(msg!=null){
+%>
+<script>
+    alert("<%=msg%>");
+</script>
+<%
+    }
+%>
 <div class="wrap">
     <!-- start of 头部导航-->
     <div class="head_top">
@@ -337,7 +348,7 @@
                         return false;
                     }
 
-                    //检测手机号码是否使用过
+                    //检测手机号是否已经注册
                     $.ajax({
                         type: "POST",
                         url: "sign/validMobile",

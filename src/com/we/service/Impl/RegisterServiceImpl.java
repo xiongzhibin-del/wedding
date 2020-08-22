@@ -24,4 +24,9 @@ public class RegisterServiceImpl implements RegisterService {
     public int addUser(User user) {
         return registerMapper.addUser(user);
     }
+
+    @Override
+    public int forget(String mobile, String mobile_pwd) {
+        return registerMapper.forget(mobile,mobile_pwd);
+    }
 }
