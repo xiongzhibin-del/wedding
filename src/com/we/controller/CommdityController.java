@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -105,7 +106,7 @@ public class CommdityController {
     @ResponseBody
     public String shoucang(@PathVariable int c_id,HttpSession session){
         User login =(User) session.getAttribute("login");
-        int n = commdityService.shoucang(login.getU_id(), c_id);
+        int n = commdityService.shoucang(login.getU_id(), c_id,new Date(System.currentTimeMillis()));
         if(n==1){
             return "success";
         }else{
@@ -126,7 +127,6 @@ public class CommdityController {
         User login =(User) session.getAttribute("login");
         int u_id = login.getU_id();
         List<Commdity> shoucangs = commdityService.shoucang1(u_id);
-        System.out.println(shoucangs);
         model.addAttribute("shoucangs",shoucangs);
         return "member_collect";
     }
@@ -142,5 +142,17 @@ public class CommdityController {
         }else {
             return "0";
         }
+    }
+
+    //查商品，根据c_id
+    @RequestMapping(value = "/amply",produces = "text/html;charset=utf-8")
+    public String amply(int c_id,Model model,HttpSession session){
+        Commdity comm = commdityService.amply(c_id);
+        User login =(User) session.getAttribute("login");
+        int u_id = login.getU_id();
+        List<Commdity> liulans = commdityService.jilu(u_id);
+        model.addAttribute("liulans",liulans);
+        model.addAttribute("comm",comm);
+        return "detail";
     }
 }

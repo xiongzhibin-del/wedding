@@ -38,7 +38,7 @@ public class Commdity implements Comparable{
     private Image image;//图片
     private Sales sales;//销量
     private List<Comments> comments;//评论
-    private List<Shoucang> shoucangs;//收藏
+    private List<Shoucang> shoucangs;//收藏集合
 
 
     public Commdity() {

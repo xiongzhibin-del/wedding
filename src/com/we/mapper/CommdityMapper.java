@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 @Repository
 public interface CommdityMapper {
@@ -21,8 +22,8 @@ public interface CommdityMapper {
     public Commdity liulans(int c_id);
     @Select("select lid from liulan where u_id = #{param1} and c_id = #{param2}")
     public Integer exist(int u_id,int c_id);
-    @Insert("insert into shoucang values(seq_shoucang_sid.nextval,#{param1},#{param2})")
-    public int shoucang (int u_id,int c_id);
+    @Insert("insert into shoucang values(seq_shoucang_sid.nextval,#{param1},#{param2},#{param3})")
+    public int shoucang (int u_id, int c_id, Date date);
     @Select("select sid from shoucang where u_id = #{param1} and c_id = #{param2}")
     public Integer existShou(int u_id,int c_id);
 

@@ -20,8 +20,14 @@
 </head>
 <body>
 <%
-    List<SessionOrder>  orders =(List<SessionOrder>) session.getAttribute("orders");
-    System.out.println(orders);
+    String msg = (String) request.getAttribute("msg");
+    if(msg!=null){
+%>
+<script>
+    alert("<%=msg%>");
+</script>
+<%
+    }
 %>
 <!--头部-->
 <div class="cmain">
@@ -291,9 +297,9 @@
 
                                     <script src="js/orderlist.js" type="text/javascript"></script>
                                     <script type="text/javascript" language="javascript">
-                                        function deleteOrder(orderid) {
+                                        function deleteOrder(random) {
                                             if (confirm("确定要取消订单吗?")) {
-                                                window.location.href = "/member/myorder.aspx?action=delete&orderid=" + orderid;
+                                                window.location.href = "order/cancle/" + random;
                                             }
 
                                         }
@@ -312,7 +318,7 @@
 
                                     <table cellspacing="0" cellpadding="0" border="0" class="member_myorder-table">
                                         <tbody>
-                                        <c:forEach items="${orders}" var="order">
+                                        <c:forEach items="${orders}" var="order" varStatus="code">
                                         <tr class="member_myorder-table-sec">
                                             <td class="myorder-table-sec_td1" colspan="4">订单号：${order.random}</td>
                                             <td class="myorder-table-sec_td2" colspan="2">下单时间：${order.orderdate}</td>
@@ -350,7 +356,7 @@
                                                     ${order.et}
                                                     </c:if>
                                                 </td>
-                                                <td class="myorder-table_td5">
+                                                <td class="myorder-table_td5" id="state_${code.index}">
                                                     <c:if test="${status.last}">
                                                     ${order.state}
                                                     </c:if>
@@ -358,10 +364,10 @@
                                                 <td class="myorder-table_td6">
                                                     <c:if test="${status.last}">
 
-                                                    <a class="myorder-table_pay" href="/nCart/ConfirmOrder.aspx?orderid=20150707888887&process=other">支 付</a>
+                                                    <a class="myorder-table_pay" href="javascript:void(0)" onclick="pay(${order.random},${code.index})">支 付</a>
 
                                                     <p>
-                                                        <a href="member_order_detail.html">查看</a>
+                                                        <a href="member_order_detail?index=${code.index}">查看</a>
                                                     </p>
                                                     <p style="cursor:pointer">
                                                         <a onClick="deleteOrder(${order.random})">取消订单</a>
@@ -380,14 +386,6 @@
                                 <div style="display:none" class="member_news-it">
 
                                     <script src="js/orderlist.js" type="text/javascript"></script>
-                                    <script type="text/javascript" language="javascript">
-                                        function deleteOrder(orderid) {
-                                            if (confirm("确定要取消订单吗?")) {
-                                                window.location.href = "/member/myorder.aspx?action=delete&orderid=" + orderid;
-                                            }
-
-                                        }
-                                    </script>
                                     <table cellspacing="0" cellpadding="0" border="0" class="member_title-table">
                                         <tbody><tr class="member_myorder-table-first">
                                             <td class="myorder-table_td1">订单商品</td>
@@ -931,6 +929,21 @@
         $("#modelsever").fadeOut("slow");
         $("#masks").fadeOut("slow");
         $("#mask").fadeOut("slow");
+    }
+
+    function pay(random,index) {
+        $.get(
+            "order/pay",
+            {random:random},
+            function (data) {
+                if(data==="success"){
+                    alert("支付成功");
+                    $("[id=state_"+index+"]").text("已支付");
+                }else{
+                    alert("支付失败")
+                }
+            }
+        )
     }
 
 </script>

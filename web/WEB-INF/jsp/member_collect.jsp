@@ -273,9 +273,11 @@
                                             <p> 材质：${shoucang.texture}</p>
                                         </div> </td>
                                     <td class="ollection-table-td2"> ￥${shoucang.price}</td>
-                                    <c:forEach items="${shoucang.shoucangs}" var="shoucangs">
-                                    <td class="ollection-table-td3"> <p> ${shoucangs.sdate} 收藏</p> <p> <a href="detail.html">查看评论</a> </p> </td>
-                                    <td class="ollection-table-td4"> <p> <a class="ollection-join" href="detail.html">加入购物车</a> </p> <p> <a class="ollection-xq" href="detail.html">商品详情</a> </p> <p class="show_hover"> <a href="#" class="tablelink click" onclick="deleteshoucang(${shoucangs.c_id});return false;"> 删除收藏</a> </p> </td>
+                                    <c:forEach items="${shoucang.shoucangs}" var="shou">
+                                    <c:if test="${shou.u_id ==login.u_id}">
+                                    <td class="ollection-table-td3"> <p> ${shou.sdate} 收藏</p> <p> <a href="detail.html">查看评论</a> </p> </td>
+                                    <td class="ollection-table-td4"> <p> <a class="ollection-join" href="detail.html">加入购物车</a> </p> <p> <a class="ollection-xq" href="commdity/amply?c_id=${shoucang.c_id}">商品详情</a> </p> <p class="show_hover"> <a href="#" class="tablelink click" onclick="deleteshoucang(${shou.c_id});return false;"> 删除收藏</a> </p> </td>
+                                    </c:if>
                                     </c:forEach>
                                 </tr>
                                 </c:forEach>

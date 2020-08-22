@@ -63,7 +63,7 @@
                     <img width="54" height="67" src="images/right.png" />
                     <h3>${msg}</h3>
                     <h4>请您在24小时内完成付款，超过24小时后系统将自动取消订单。</h4>
-                    <p class="shop_ofor-font"> <span>订单号：${order.random} | 应付总金额：</span> <i style="font-family:微软雅黑;">￥${order.total}</i> <a target="_blank" href="/member/myorder.aspx">查看订单&gt;&gt;</a> </p>
+                    <p class="shop_ofor-font"> <span>订单号：${order.random} | 应付总金额：</span> <i style="font-family:微软雅黑;">￥${order.total}</i> <a target="_blank" href="member_order">查看订单&gt;&gt;</a> </p>
                 </div>
                 <h2>网上支付方式</h2>
                 <!--银行-->

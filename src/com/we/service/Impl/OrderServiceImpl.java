@@ -74,4 +74,20 @@ public class OrderServiceImpl implements OrderService {
         }
         return map;
     }
+
+    @Override
+    public int cancleByRandom(long random) {
+        int n = 0;
+        orderMapper.cancleByRandom(random);
+        n=1;
+        return n;
+    }
+
+    @Override
+    public int pay(long random) {
+        int n = 0;
+        orderMapper.pay(random);
+        n=1;
+        return n;
+    }
 }

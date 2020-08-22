@@ -3,8 +3,10 @@ package com.we.mapper;
 import com.we.pojo.Agreement;
 import com.we.pojo.Orders;
 import com.we.pojo.Shipping;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +27,11 @@ public interface OrderMapper {
 
     @Select("select * from orders where u_id = #{param1}")
     public List<Orders> selectOrders(int u_id);
+
+    @Delete("delete from orders where random = #{param1}")
+    public int cancleByRandom(long random);
+
+    @Update("update orders set state = '已支付' where random = #{param1}")
+    public int pay(long random);
+
 }

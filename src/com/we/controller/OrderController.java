@@ -7,7 +7,9 @@ import com.we.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +23,7 @@ public class OrderController {
     private OrderService orderService;
     @RequestMapping(value = "/agreement",produces = "text/html;charset=utf-8")
     public String agreement(Agreement agreement, HttpSession session, HttpServletRequest request){
-        System.out.println(agreement);
+//        System.out.println(agreement);
         User login = (User)session.getAttribute("login");
         agreement.setU_id(login.getU_id());
         int n = orderService.addAgree(agreement);
@@ -97,13 +99,39 @@ public class OrderController {
             List<SessionOrder> orderList = (List<SessionOrder>)session.getAttribute("orders");
             orderList.add(sessionOrder);
             session.setAttribute("orders",orderList);
-            System.out.println(orderList);
+//            System.out.println(orderList);
             login.getCart().clear();
             model.addAttribute("msg","订单提交成功，请您尽快完成支付！");
         }else{
             model.addAttribute("msg","订单提交失败！");
         }
         return "cart_order_success";
+    }
+
+    @RequestMapping(value = "/cancle/{random}",produces = "text/html;charset=utf-8")
+    public String cancle(@PathVariable long random,HttpSession session,Model model){
+//        System.out.println(random);
+        int n = orderService.cancleByRandom(random);
+        if(n==1){
+            User login = (User)session.getAttribute("login");
+            List<SessionOrder> orders = (List<SessionOrder>)orderService.selectOrders(login.getU_id());
+            session.setAttribute("orders",orders);
+            model.addAttribute("msg","取消订单成功");
+        }else{
+            model.addAttribute("msg","取消订单失败");
+        }
+        return "member_order";
+    }
+
+    @RequestMapping(value = "/pay",produces = "text/html;charset=utf-8")
+    @ResponseBody
+    public String pay(long random){
+        int n = orderService.pay(random);
+        if(n==1) {
+            return "success";
+        }else {
+            return "fail";
+        }
     }
 
 }

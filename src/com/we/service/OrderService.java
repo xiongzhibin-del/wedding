@@ -13,6 +13,7 @@ public interface OrderService {
     public Shipping selectMainAddr(int u_id);
     public int getAgree(int u_id);
     public int addOrders(List<Orders> orders,int u_id);
-
     public Object selectOrders(int u_id);
+    public int cancleByRandom(long random);
+    public int pay(long random);
 }

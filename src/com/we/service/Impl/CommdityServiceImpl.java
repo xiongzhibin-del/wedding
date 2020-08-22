@@ -2,13 +2,13 @@ package com.we.service.Impl;
 
 import com.we.mapper.CommdityMapper;
 import com.we.pojo.Commdity;
-import com.we.pojo.LIulan;
 import com.we.service.CommdityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -108,7 +108,6 @@ public class CommdityServiceImpl implements CommdityService {
     @Override
     public List<Commdity> shoucang1(int u_id) {
         List<Integer> c_ids = commdityMapper.chaC_id(u_id);
-        System.out.println(c_ids);
         List<Commdity> shoucangs=new ArrayList<>();
         for (Integer i:c_ids) {
             Commdity shoucang = commdityMapper.shoucangs(i);
@@ -118,10 +117,10 @@ public class CommdityServiceImpl implements CommdityService {
     }
 
     @Override
-    public int shoucang(int u_id, int c_id) {
+    public int shoucang(int u_id, int c_id, Date date) {
         int n = 0;
         if(commdityMapper.existShou(u_id, c_id)==null){
-            n = commdityMapper.shoucang(u_id, c_id);
+            n = commdityMapper.shoucang(u_id, c_id,date);
         }
         return n;
     }
@@ -131,5 +130,10 @@ public class CommdityServiceImpl implements CommdityService {
         int n = commdityMapper.deleteshoucang(u_id, c_id);
         System.out.println(n);
         return n;
+    }
+
+    @Override
+    public Commdity amply(int c_id) {
+        return commdityMapper.liulans(c_id);
     }
 }

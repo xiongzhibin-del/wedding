@@ -105,7 +105,6 @@ public class UserController {
             if (n == 1) {
                 User newLogin = userService.loginUser(login);
                 session.setAttribute("login",newLogin);
-                List<SessionOrder> orders = new ArrayList<>();
                 return "success";
             } else {
                 return "false";
