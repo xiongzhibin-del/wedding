@@ -15,4 +15,34 @@
             #{birthdate,jdbcType=DATE}
         )
     </insert>
+
+<!--     private int oid;//订单编号
+  private int agid;//真爱协议编号
+  private int u_id;//用户编号
+  private int c_id;//商品编号
+  private int sid;//收货地址编号
+  private long random;//随机码编号
+  private Date et;//预定收货时间
+  private String remark;//订单备注
+  private String state;//状态
+  private String logisistics;//物流方式
+  private String kezi;//刻字
+  private int chicun;//尺寸-->
+    <insert id="addOrder">
+        insert into orders values (
+            seq_orders_oid.nextval,
+            #{agid,jdbcType=INTEGER},
+            #{u_id,jdbcType=INTEGER},
+            #{c_id,jdbcType=INTEGER},
+            #{sid,jdbcType=INTEGER},
+            #{random,jdbcType=BIGINT},
+            #{et,jdbcType=DATE},
+            #{remark,jdbcType=VARCHAR},
+            #{state,jdbcType=VARCHAR},
+            #{logisistics,jdbcType=VARCHAR},
+            #{kezi,jdbcType=VARCHAR},
+            #{chicun,jdbcType=INTEGER},
+            #{total,jdbcType=BIGINT}
+        )
+    </insert>
 </mapper>

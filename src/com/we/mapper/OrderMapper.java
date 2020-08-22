@@ -1,6 +1,7 @@
 package com.we.mapper;
 
 import com.we.pojo.Agreement;
+import com.we.pojo.Orders;
 import com.we.pojo.Shipping;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -14,4 +15,9 @@ public interface OrderMapper {
 
     @Select("select * from shipping where u_id = #{param1} and target = 1")
     public Shipping selectMainAddr(int u_id);
+
+    @Select("select agid from agreement where u_id = #{param1}")
+    public int getAgree(int u_id);
+
+    public int addOrder(Orders order);
 }

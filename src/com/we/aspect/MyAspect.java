@@ -19,15 +19,17 @@ import java.util.List;
 public class MyAspect {
     @Autowired
     private ShippingService shippingService;
-    @Around("execution(* com.we.service.Impl.ShippingServiceImpl.saveShipping(..))")
+    @Around("execution(* com.we.service.Impl.ShippingServiceImpl.saveShipping(..)) ||"+
+    "execution(* com.we.service.Impl.ShippingServiceImpl.addShipping(..))")
     public Object targetChange(ProceedingJoinPoint point) throws Throwable {
         Object[] args = point.getArgs();
         Shipping shipping = (Shipping) args[0];
         int target = shipping.getTarget();
+        //执行插入和更新操作
+        int proceed =(Integer) point.proceed();
         if(target==1){
             shippingService.updateTarget(shipping.getU_id(),shipping.getSid());
         }
-        int proceed =(Integer) point.proceed();
         return proceed;
     }
 

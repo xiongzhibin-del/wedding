@@ -38,7 +38,14 @@
                     <span>求婚钻戒领导品牌</span>
                 </div>
                 <div class="shopt_right fr">
-                    <span id="ctl00_ltlUname">你好！KLNgOk</span>
+                    <c:choose>
+                        <c:when test="${login.petname eq null}">
+                            <span id="ctl00_ltlUname">你好！${login.uname}</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span id="ctl00_ltlUname">你好！${login.petname}</span>
+                        </c:otherwise>
+                    </c:choose>
                     <a class="my_dr" href="member_index.html">我的DR</a>
                     <a onClick="javascript:logout()" class="tc_dr" href="#">退出</a>
                     <a class="help_dr" href="help.html">帮助中心</a>
@@ -147,10 +154,15 @@
     </div>
     <script type="text/javascript">
         function logout() {
-            if (window.confirm('确定退出吗？')) {
-                $.get("/nAPI/QuitExit.ashx", function (data) {
-                    window.location.href = "/";
-                });
+            var r = window.confirm('确定退出吗？')
+            if (r == true) {
+                $.get(
+                    "user/exitUser",
+                    function (data) {
+                        if (data == "1") {
+                            window.location.href = "login";
+                        }
+                    });
             }
         }
     </script>
